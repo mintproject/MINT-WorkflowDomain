@@ -1,0 +1,1 @@
+Component that, given an extracted budget, will create a visualization image of the results

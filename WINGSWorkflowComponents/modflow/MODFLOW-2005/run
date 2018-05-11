@@ -1,0 +1,35 @@
+#!/bin/bash
+
+checkExitCode() {
+ if [ $? -ne 0 ]; then
+     echo "Error"
+     exit 1;
+ fi
+}
+
+BASEDIR=`dirname $0`
+. $BASEDIR/io.sh 1 0 1 "$@"
+
+env
+
+if [ "${WINGS_MODE}" == "dind" ]; then
+set -x
+#instead of creating a local image, we call the dockerhub image
+#    echo "Docker Mode"
+#    if [ -e ${BASEDIR}/Dockerfile ]; then
+#        pushd ${BASEDIR} > /dev/null
+#        docker build --tag modflow-2005 .
+#        popd > /dev/null
+#    fi
+    
+    FILENAME=${INPUTS1%.nam}
+    FOLDER=`dirname $FILENAME`
+    #--volumes-from ${HOSTNAME} 
+    docker run --volumes-from ${HOSTNAME}  -w $FOLDER lucasaugustomcc/modflow-2005:latest mf2005 `basename $FILENAME`
+	mv $FILENAME.cbb $OUTPUTS1
+    checkExitCode
+	exit 0
+fi
+
+
+checkExitCode
