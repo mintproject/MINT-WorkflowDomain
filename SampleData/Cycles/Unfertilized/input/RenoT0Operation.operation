@@ -1,0 +1,192 @@
+TILLAGE
+YEAR                1   
+DOY                 138
+TOOL                Plow_moldboard
+DEPTH               0.2 
+SOIL_DISTURB_RATIO  29  
+MIXING_EFFICIENCY   0.8 
+CROP_NAME           N/A
+FRAC_THERMAL_TIME   0.0
+KILL_EFFICIENCY     0.0
+GRAIN_HARVEST       0
+FORAGE_HARVEST      0.0
+
+TILLAGE
+YEAR                1   
+DOY                 139
+TOOL                Planter_double_disk_opnr
+DEPTH               0.02
+SOIL_DISTURB_RATIO  6   
+MIXING_EFFICIENCY   0.071554
+CROP_NAME           N/A
+FRAC_THERMAL_TIME   0.0
+KILL_EFFICIENCY     0.0
+GRAIN_HARVEST       0
+FORAGE_HARVEST      0.0
+
+PLANTING
+YEAR                1   
+DOY                 139
+CROP                Maize
+USE_AUTO_IRR        0
+USE_AUTO_FERT  	    0
+FRACTION            1.0
+CLIPPING_START      1
+CLIPPING_END        366
+
+FIXED_IRRIGATION
+YEAR                1   
+DOY                 173
+VOLUME              40
+
+FIXED_IRRIGATION
+YEAR                1   
+DOY                 187
+VOLUME              40
+
+FIXED_IRRIGATION
+YEAR                1   
+DOY                 219
+VOLUME              40
+
+
+FIXED_IRRIGATION
+YEAR                1   
+DOY                 220
+VOLUME              40
+
+TILLAGE
+YEAR                1   
+DOY                 265
+TOOL                Harvest_grain
+DEPTH               0.01
+SOIL_DISTURB_RATIO  5  
+MIXING_EFFICIENCY   0.0
+CROP_NAME           Maize
+FRAC_THERMAL_TIME   0.0
+KILL_EFFICIENCY     0.0
+GRAIN_HARVEST       1
+FORAGE_HARVEST      0.0
+
+FIXED_IRRIGATION
+YEAR                2   
+DOY                 149
+VOLUME              40
+
+TILLAGE
+YEAR                2   
+DOY                 155
+TOOL                Plow_moldboard
+DEPTH               0.2 
+SOIL_DISTURB_RATIO  29  
+MIXING_EFFICIENCY   0.8 
+CROP_NAME           N/A
+FRAC_THERMAL_TIME   0.0
+KILL_EFFICIENCY     0.0
+GRAIN_HARVEST       0
+FORAGE_HARVEST      0.0
+
+TILLAGE
+YEAR                2   
+DOY                 155
+TOOL                Planter_double_disk_opnr
+DEPTH               0.02
+SOIL_DISTURB_RATIO  6   
+MIXING_EFFICIENCY   0.071554
+CROP_NAME           N/A
+FRAC_THERMAL_TIME   0.0
+KILL_EFFICIENCY     0.0
+GRAIN_HARVEST       0
+FORAGE_HARVEST      0.0
+
+PLANTING
+YEAR                2   
+DOY                 155
+CROP                Maize
+USE_AUTO_IRR        0
+USE_AUTO_FERT  	    0
+FRACTION            1.0
+CLIPPING_START      1
+CLIPPING_END        366
+
+FIXED_IRRIGATION
+YEAR                2   
+DOY                 200
+VOLUME              20
+
+FIXED_IRRIGATION
+YEAR                2   
+DOY                 212
+VOLUME              40
+
+FIXED_IRRIGATION
+YEAR                2   
+DOY                 225
+VOLUME              40
+
+TILLAGE
+YEAR                2   
+DOY                 283
+TOOL                Harvest_grain
+DEPTH               0.01
+SOIL_DISTURB_RATIO  5  
+MIXING_EFFICIENCY   0.0
+CROP_NAME           Maize
+FRAC_THERMAL_TIME   0.0
+KILL_EFFICIENCY     0.0
+GRAIN_HARVEST       1
+FORAGE_HARVEST      0.0
+
+TILLAGE
+YEAR                3   
+DOY                 139
+TOOL                Plow_moldboard
+DEPTH               0.2 
+SOIL_DISTURB_RATIO  29  
+MIXING_EFFICIENCY   0.8 
+CROP_NAME           N/A
+FRAC_THERMAL_TIME   0.0
+KILL_EFFICIENCY     0.0
+GRAIN_HARVEST       0
+FORAGE_HARVEST      0.0
+
+TILLAGE
+YEAR                3   
+DOY                 139
+TOOL                Planter_double_disk_opnr
+DEPTH               0.02
+SOIL_DISTURB_RATIO  6   
+MIXING_EFFICIENCY   0.071554
+CROP_NAME           N/A
+FRAC_THERMAL_TIME   0.0
+KILL_EFFICIENCY     0.0
+GRAIN_HARVEST       0
+FORAGE_HARVEST      0.0
+
+PLANTING
+YEAR                3   
+DOY                 139
+CROP                Maize
+USE_AUTO_IRR        0
+USE_AUTO_FERT  	    0
+FRACTION            1.0
+CLIPPING_START      1
+CLIPPING_END        366
+
+FIXED_IRRIGATION
+YEAR                3   
+DOY                 240
+VOLUME              40
+
+TILLAGE
+YEAR                3   
+DOY                 272
+TOOL                Harvest_grain
+DEPTH               0.01
+SOIL_DISTURB_RATIO  5  
+MIXING_EFFICIENCY   0.0
+CROP_NAME           Maize
+FRAC_THERMAL_TIME   0.0
+KILL_EFFICIENCY     0.0
+GRAIN_HARVEST       1
+FORAGE_HARVEST      0.0
