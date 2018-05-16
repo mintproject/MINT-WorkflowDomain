@@ -7,4 +7,6 @@ Components used to:
 - Perform one last check
 - Export as text files that can be read by Topoflow.
 
-This is meant as an example of the kind of transformation needed to run the full meteorological component of Topoflow. 
+This is meant as an example of the kind of transformation needed to run the full meteorological component of Topoflow.
+
+Details about each component can be found [here](https://github.com/khider/NetCDFWINGS/blob/master/NetCDF_Wings.ipynb).
