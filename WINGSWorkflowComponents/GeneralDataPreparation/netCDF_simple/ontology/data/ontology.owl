@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+      xml:base="http://localhost:8080/wings-portal/export/users/admin/NetCDF_Simple/data/ontology.owl">
+      <owl:Class rdf:ID="NetCDF">
+            <rdfs:subClassOf>
+                  <owl:Class rdf:about="http://www.wings-workflows.org/ontology/data.owl#DataObject"/>
+            </rdfs:subClassOf>
+      </owl:Class>
+      <owl:Class rdf:ID="textFile">
+            <rdfs:subClassOf rdf:resource="http://www.wings-workflows.org/ontology/data.owl#DataObject"/>
+      </owl:Class>
+      <owl:Class rdf:ID="pickleFile">
+            <rdfs:subClassOf rdf:resource="http://www.wings-workflows.org/ontology/data.owl#DataObject"/>
+      </owl:Class>
+      <owl:DatatypeProperty rdf:ID="hasSize">
+            <rdfs:domain>
+                  <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                              <owl:Class rdf:about="#NetCDF"/>
+                              <owl:Class rdf:about="#pickleFile"/>
+                              <owl:Class rdf:about="#textFile"/>
+                        </owl:unionOf>
+                  </owl:Class>
+            </rdfs:domain>
+            <rdfs:subPropertyOf rdf:resource="http://www.wings-workflows.org/ontology/data.owl#hasDataMetrics"/>
+            <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+      </owl:DatatypeProperty>
+      <owl:DatatypeProperty rdf:ID="hasLanguage">
+            <rdfs:domain>
+                  <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                              <owl:Class rdf:about="#NetCDF"/>
+                              <owl:Class rdf:about="#textFile"/>
+                        </owl:unionOf>
+                  </owl:Class>
+            </rdfs:domain>
+            <rdfs:subPropertyOf rdf:resource="http://www.wings-workflows.org/ontology/data.owl#hasDataMetrics"/>
+            <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+      </owl:DatatypeProperty>
+      <owl:DatatypeProperty rdf:ID="createdOn">
+            <rdfs:domain>
+                  <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                              <owl:Class rdf:about="#NetCDF"/>
+                              <owl:Class rdf:about="#pickleFile"/>
+                              <owl:Class rdf:about="#textFile"/>
+                        </owl:unionOf>
+                  </owl:Class>
+            </rdfs:domain>
+            <rdfs:subPropertyOf rdf:resource="http://www.wings-workflows.org/ontology/data.owl#hasDataMetrics"/>
+            <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+      </owl:DatatypeProperty>
+</rdf:RDF>

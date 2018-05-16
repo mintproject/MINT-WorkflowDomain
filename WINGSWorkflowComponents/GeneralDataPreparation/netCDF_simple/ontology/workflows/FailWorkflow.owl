@@ -1,0 +1,540 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:j.0="http://www.wings-workflows.org/ontology/workflow.owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:j.1="http://localhost:8080/wings-portal/export/users/admin/NetCDF_Simple/data/ontology.owl#"
+      xml:base="http://localhost:8080/wings-portal/export/users/admin/NetCDF_Simple/workflows/FailWorkflow.owl">
+      <owl:Ontology rdf:about="">
+            <owl:imports rdf:resource="http://www.wings-workflows.org/ontology/workflow.owl"/>
+      </owl:Ontology>
+      <j.0:WorkflowTemplate rdf:ID="FailWorkflow">
+            <j.0:hasNode>
+                  <j.0:Node rdf:ID="adjustTime_node">
+                        <j.0:hasComponentSetCreationRule>
+                              <j.0:ComponentSetRule rdf:ID="adjustTime_node_crule">
+                                    <j.0:createSetsOn>
+                                          <rdf:Description rdf:ID="adjustTime_node_comp">
+                                                <j.0:isConcrete
+                                                 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#boolean"
+                                                >true</j.0:isConcrete>
+                                                <j.0:hasComponentBinding rdf:resource="../components/library.owl#adjustTime"/>
+                                          </rdf:Description>
+                                    </j.0:createSetsOn>
+                                    <j.0:createWorkflowSets rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#boolean"
+                                    >true</j.0:createWorkflowSets>
+                              </j.0:ComponentSetRule>
+                        </j.0:hasComponentSetCreationRule>
+                        <j.0:hasInputPort>
+                              <j.0:Port rdf:ID="adjustTime_node_Calendar">
+                                    <j.0:satisfiesRole>
+                                          <rdf:Description rdf:ID="adjustTime_node_Calendar_role">
+                                                <j.0:hasDimensionality
+                                                 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#integer"
+                                                >0</j.0:hasDimensionality>
+                                                <j.0:hasRoleID
+                                                 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#string"
+                                                >Calendar</j.0:hasRoleID>
+                                          </rdf:Description>
+                                    </j.0:satisfiesRole>
+                              </j.0:Port>
+                        </j.0:hasInputPort>
+                        <j.0:hasInputPort>
+                              <j.0:Port rdf:ID="adjustTime_node_PickleInput1">
+                                    <j.0:satisfiesRole>
+                                          <rdf:Description rdf:ID="adjustTime_node_PickleInput1_role">
+                                                <j.0:hasDimensionality
+                                                 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#integer"
+                                                >0</j.0:hasDimensionality>
+                                                <j.0:hasRoleID
+                                                 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#string"
+                                                >PickleInput1</j.0:hasRoleID>
+                                          </rdf:Description>
+                                    </j.0:satisfiesRole>
+                              </j.0:Port>
+                        </j.0:hasInputPort>
+                        <j.0:hasOutputPort>
+                              <j.0:Port rdf:ID="adjustTime_node_PickleOutput1">
+                                    <j.0:satisfiesRole>
+                                          <rdf:Description rdf:ID="adjustTime_node_PickleOutput1_role">
+                                                <j.0:hasDimensionality
+                                                 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#integer"
+                                                >0</j.0:hasDimensionality>
+                                                <j.0:hasRoleID
+                                                 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#string"
+                                                >PickleOutput1</j.0:hasRoleID>
+                                          </rdf:Description>
+                                    </j.0:satisfiesRole>
+                              </j.0:Port>
+                        </j.0:hasOutputPort>
+                        <j.0:hasPortSetCreationRule>
+                              <j.0:PortSetRule rdf:ID="adjustTime_node_prule">
+                                    <j.0:createSetsOn>
+                                          <j.0:XProduct rdf:ID="_xprod-ad905730-9958-402c-ab4f-d7500f39a80b">
+                                                <j.0:hasExpressionArgument rdf:resource="#adjustTime_node_Calendar"/>
+                                                <j.0:hasExpressionArgument rdf:resource="#adjustTime_node_PickleInput1"/>
+                                          </j.0:XProduct>
+                                    </j.0:createSetsOn>
+                                    <j.0:createComponentSets rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#boolean"
+                                    >true</j.0:createComponentSets>
+                              </j.0:PortSetRule>
+                        </j.0:hasPortSetCreationRule>
+                        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >center:x=182.1902618408203,y=184.5973358154297</rdfs:comment>
+                        <j.0:hasComponent rdf:resource="#adjustTime_node_comp"/>
+                  </j.0:Node>
+            </j.0:hasNode>
+            <j.0:hasLink>
+                  <j.0:InOutLink rdf:ID="openNetCDF_node_PickleOutput1_to_adjustTime_node_PickleInput1">
+                        <j.0:hasDestinationNode rdf:resource="#adjustTime_node"/>
+                        <j.0:hasDestinationPort rdf:resource="#adjustTime_node_PickleInput1"/>
+                        <j.0:hasOriginNode>
+                              <j.0:Node rdf:ID="openNetCDF_node">
+                                    <j.0:hasInputPort>
+                                          <j.0:Port rdf:ID="openNetCDF_node_Input1">
+                                                <j.0:satisfiesRole>
+                                                      <rdf:Description rdf:ID="openNetCDF_node_Input1_role">
+                                                            <j.0:hasDimensionality
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#integer"
+                                                            >0</j.0:hasDimensionality>
+                                                            <j.0:hasRoleID
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >Input1</j.0:hasRoleID>
+                                                      </rdf:Description>
+                                                </j.0:satisfiesRole>
+                                          </j.0:Port>
+                                    </j.0:hasInputPort>
+                                    <j.0:hasInputPort>
+                                          <j.0:Port rdf:ID="openNetCDF_node_Input2">
+                                                <j.0:satisfiesRole>
+                                                      <rdf:Description rdf:ID="openNetCDF_node_Input2_role">
+                                                            <j.0:hasDimensionality
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#integer"
+                                                            >0</j.0:hasDimensionality>
+                                                            <j.0:hasRoleID
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >Input2</j.0:hasRoleID>
+                                                      </rdf:Description>
+                                                </j.0:satisfiesRole>
+                                          </j.0:Port>
+                                    </j.0:hasInputPort>
+                                    <j.0:hasInputPort>
+                                          <j.0:Port rdf:ID="openNetCDF_node_Input3">
+                                                <j.0:satisfiesRole>
+                                                      <rdf:Description rdf:ID="openNetCDF_node_Input3_role">
+                                                            <j.0:hasDimensionality
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#integer"
+                                                            >0</j.0:hasDimensionality>
+                                                            <j.0:hasRoleID
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >Input3</j.0:hasRoleID>
+                                                      </rdf:Description>
+                                                </j.0:satisfiesRole>
+                                          </j.0:Port>
+                                    </j.0:hasInputPort>
+                                    <j.0:hasOutputPort>
+                                          <j.0:Port rdf:ID="openNetCDF_node_PickleOutput1">
+                                                <j.0:satisfiesRole>
+                                                      <rdf:Description rdf:ID="openNetCDF_node_PickleOutput1_role">
+                                                            <j.0:hasDimensionality
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#integer"
+                                                            >0</j.0:hasDimensionality>
+                                                            <j.0:hasRoleID
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >PickleOutput1</j.0:hasRoleID>
+                                                      </rdf:Description>
+                                                </j.0:satisfiesRole>
+                                          </j.0:Port>
+                                    </j.0:hasOutputPort>
+                                    <j.0:hasPortSetCreationRule>
+                                          <j.0:PortSetRule rdf:ID="openNetCDF_node_prule">
+                                                <j.0:createSetsOn>
+                                                      <j.0:XProduct rdf:ID="_xprod-56c63e31-1b03-44f3-af87-4e867f45bc8d">
+                                                            <j.0:hasExpressionArgument rdf:resource="#openNetCDF_node_Input3"/>
+                                                            <j.0:hasExpressionArgument rdf:resource="#openNetCDF_node_Input1"/>
+                                                            <j.0:hasExpressionArgument rdf:resource="#openNetCDF_node_Input2"/>
+                                                      </j.0:XProduct>
+                                                </j.0:createSetsOn>
+                                                <j.0:createComponentSets
+                                                 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#boolean"
+                                                >true</j.0:createComponentSets>
+                                          </j.0:PortSetRule>
+                                    </j.0:hasPortSetCreationRule>
+                                    <rdfs:comment rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >center:x=210.8952178955078,y=81.19721984863281</rdfs:comment>
+                                    <j.0:hasComponent>
+                                          <rdf:Description rdf:ID="openNetCDF_node_comp">
+                                                <j.0:isConcrete
+                                                 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#boolean"
+                                                >true</j.0:isConcrete>
+                                                <j.0:hasComponentBinding rdf:resource="../components/library.owl#openNetCDF"/>
+                                          </rdf:Description>
+                                    </j.0:hasComponent>
+                                    <j.0:hasComponentSetCreationRule>
+                                          <j.0:ComponentSetRule rdf:ID="openNetCDF_node_crule">
+                                                <j.0:createSetsOn rdf:resource="#openNetCDF_node_comp"/>
+                                                <j.0:createWorkflowSets
+                                                 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#boolean"
+                                                >true</j.0:createWorkflowSets>
+                                          </j.0:ComponentSetRule>
+                                    </j.0:hasComponentSetCreationRule>
+                              </j.0:Node>
+                        </j.0:hasOriginNode>
+                        <j.0:hasOriginPort rdf:resource="#openNetCDF_node_PickleOutput1"/>
+                        <j.0:hasVariable>
+                              <j.1:pickleFile rdf:ID="PickleOutput1">
+                                    <rdfs:comment rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >center:x=228.3129119873047,y=133.8415985107422</rdfs:comment>
+                                    <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/workflow.owl#DataVariable"/>
+                              </j.1:pickleFile>
+                        </j.0:hasVariable>
+                  </j.0:InOutLink>
+            </j.0:hasLink>
+            <j.0:hasInputRole>
+                  <j.0:Role rdf:ID="Input2_irole">
+                        <j.0:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.0:hasDimensionality>
+                        <j.0:mapsToVariable>
+                              <j.1:NetCDF rdf:ID="Input2">
+                                    <rdfs:comment rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >center:x=214,y=35.1484375</rdfs:comment>
+                                    <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/workflow.owl#DataVariable"/>
+                              </j.1:NetCDF>
+                        </j.0:mapsToVariable>
+                        <j.0:hasRoleID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >openNetCDF_node_Input2</j.0:hasRoleID>
+                  </j.0:Role>
+            </j.0:hasInputRole>
+            <j.0:hasNode rdf:resource="#openNetCDF_node"/>
+            <j.0:hasLink>
+                  <j.0:OutputLink rdf:ID="selectVar_node_PickleOutput1_output">
+                        <j.0:hasVariable>
+                              <j.1:pickleFile rdf:ID="PickleOutput3">
+                                    <rdfs:comment rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >center:x=171.8023223876953,y=373.2240295410156</rdfs:comment>
+                                    <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/workflow.owl#DataVariable"/>
+                              </j.1:pickleFile>
+                        </j.0:hasVariable>
+                        <j.0:hasOriginNode>
+                              <j.0:Node rdf:ID="selectVar_node">
+                                    <j.0:hasInputPort>
+                                          <j.0:Port rdf:ID="selectVar_node_PickleInput1">
+                                                <j.0:satisfiesRole>
+                                                      <rdf:Description rdf:ID="selectVar_node_PickleInput1_role">
+                                                            <j.0:hasDimensionality
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#integer"
+                                                            >0</j.0:hasDimensionality>
+                                                            <j.0:hasRoleID
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >PickleInput1</j.0:hasRoleID>
+                                                      </rdf:Description>
+                                                </j.0:satisfiesRole>
+                                          </j.0:Port>
+                                    </j.0:hasInputPort>
+                                    <j.0:hasInputPort>
+                                          <j.0:Port rdf:ID="selectVar_node_TextInput1">
+                                                <j.0:satisfiesRole>
+                                                      <rdf:Description rdf:ID="selectVar_node_TextInput1_role">
+                                                            <j.0:hasDimensionality
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#integer"
+                                                            >0</j.0:hasDimensionality>
+                                                            <j.0:hasRoleID
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >TextInput1</j.0:hasRoleID>
+                                                      </rdf:Description>
+                                                </j.0:satisfiesRole>
+                                          </j.0:Port>
+                                    </j.0:hasInputPort>
+                                    <j.0:hasOutputPort>
+                                          <j.0:Port rdf:ID="selectVar_node_TextOuput1">
+                                                <j.0:satisfiesRole>
+                                                      <rdf:Description rdf:ID="selectVar_node_TextOuput1_role">
+                                                            <j.0:hasDimensionality
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#integer"
+                                                            >0</j.0:hasDimensionality>
+                                                            <j.0:hasRoleID
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >TextOuput1</j.0:hasRoleID>
+                                                      </rdf:Description>
+                                                </j.0:satisfiesRole>
+                                          </j.0:Port>
+                                    </j.0:hasOutputPort>
+                                    <j.0:hasOutputPort>
+                                          <j.0:Port rdf:ID="selectVar_node_PickleOutput1">
+                                                <j.0:satisfiesRole>
+                                                      <rdf:Description rdf:ID="selectVar_node_PickleOutput1_role">
+                                                            <j.0:hasDimensionality
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#integer"
+                                                            >0</j.0:hasDimensionality>
+                                                            <j.0:hasRoleID
+                                                             rdf:datatype=
+                                                            "http://www.w3.org/2001/XMLSchema#string"
+                                                            >PickleOutput1</j.0:hasRoleID>
+                                                      </rdf:Description>
+                                                </j.0:satisfiesRole>
+                                          </j.0:Port>
+                                    </j.0:hasOutputPort>
+                                    <j.0:hasPortSetCreationRule>
+                                          <j.0:PortSetRule rdf:ID="selectVar_node_prule">
+                                                <j.0:createSetsOn>
+                                                      <j.0:XProduct rdf:ID="_xprod-fcff4654-f606-4d00-9616-38de422be729">
+                                                            <j.0:hasExpressionArgument rdf:resource="#selectVar_node_PickleInput1"/>
+                                                            <j.0:hasExpressionArgument rdf:resource="#selectVar_node_TextInput1"/>
+                                                      </j.0:XProduct>
+                                                </j.0:createSetsOn>
+                                                <j.0:createComponentSets
+                                                 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#boolean"
+                                                >true</j.0:createComponentSets>
+                                          </j.0:PortSetRule>
+                                    </j.0:hasPortSetCreationRule>
+                                    <rdfs:comment rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >center:x=237.20616149902344,y=306.9728088378906</rdfs:comment>
+                                    <j.0:hasComponent>
+                                          <rdf:Description rdf:ID="selectVar_node_comp">
+                                                <j.0:isConcrete
+                                                 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#boolean"
+                                                >true</j.0:isConcrete>
+                                                <j.0:hasComponentBinding rdf:resource="../components/library.owl#selectVar"/>
+                                          </rdf:Description>
+                                    </j.0:hasComponent>
+                                    <j.0:hasComponentSetCreationRule>
+                                          <j.0:ComponentSetRule rdf:ID="selectVar_node_crule">
+                                                <j.0:createSetsOn rdf:resource="#selectVar_node_comp"/>
+                                                <j.0:createWorkflowSets
+                                                 rdf:datatype=
+                                                "http://www.w3.org/2001/XMLSchema#boolean"
+                                                >true</j.0:createWorkflowSets>
+                                          </j.0:ComponentSetRule>
+                                    </j.0:hasComponentSetCreationRule>
+                              </j.0:Node>
+                        </j.0:hasOriginNode>
+                        <j.0:hasOriginPort rdf:resource="#selectVar_node_PickleOutput1"/>
+                  </j.0:OutputLink>
+            </j.0:hasLink>
+            <j.0:hasInputRole>
+                  <j.0:Role rdf:ID="TextInput1_irole">
+                        <j.0:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.0:hasDimensionality>
+                        <j.0:mapsToVariable>
+                              <j.1:textFile rdf:ID="TextInput1">
+                                    <rdfs:comment rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >center:x=303.48931884765625,y=226.3115997314453</rdfs:comment>
+                                    <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/workflow.owl#DataVariable"/>
+                              </j.1:textFile>
+                        </j.0:mapsToVariable>
+                        <j.0:hasRoleID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >selectVar_node_TextInput1</j.0:hasRoleID>
+                  </j.0:Role>
+            </j.0:hasInputRole>
+            <j.0:hasVersion rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+            >3</j.0:hasVersion>
+            <j.0:hasNode rdf:resource="#selectVar_node"/>
+            <j.0:hasOutputRole>
+                  <j.0:Role rdf:ID="TextOuput1_orole">
+                        <j.0:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.0:hasDimensionality>
+                        <j.0:mapsToVariable>
+                              <j.1:textFile rdf:ID="TextOuput1">
+                                    <rdfs:comment rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >center:x=294.7674560546875,y=364.5030822753906</rdfs:comment>
+                                    <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/workflow.owl#DataVariable"/>
+                              </j.1:textFile>
+                        </j.0:mapsToVariable>
+                        <j.0:hasRoleID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >TextOuput1</j.0:hasRoleID>
+                  </j.0:Role>
+            </j.0:hasOutputRole>
+            <j.0:hasLink>
+                  <j.0:InputLink rdf:ID="adjustTime_node_Calendar_input">
+                        <j.0:hasVariable>
+                              <j.0:ParameterVariable rdf:ID="Calendar">
+                                    <rdfs:comment rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >center:x=126.15319061279297,y=130.7875518798828</rdfs:comment>
+                              </j.0:ParameterVariable>
+                        </j.0:hasVariable>
+                        <j.0:hasDestinationNode rdf:resource="#adjustTime_node"/>
+                        <j.0:hasDestinationPort rdf:resource="#adjustTime_node_Calendar"/>
+                  </j.0:InputLink>
+            </j.0:hasLink>
+            <j.0:hasLink>
+                  <j.0:OutputLink rdf:ID="adjustTime_node_PickleOutput1_output">
+                        <j.0:hasVariable>
+                              <j.1:pickleFile rdf:ID="PickleOutput2">
+                                    <rdfs:comment rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >center:x=196.21446228027344,y=236.8859100341797</rdfs:comment>
+                                    <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/workflow.owl#DataVariable"/>
+                              </j.1:pickleFile>
+                        </j.0:hasVariable>
+                        <j.0:hasOriginNode rdf:resource="#adjustTime_node"/>
+                        <j.0:hasOriginPort rdf:resource="#adjustTime_node_PickleOutput1"/>
+                  </j.0:OutputLink>
+            </j.0:hasLink>
+            <j.0:hasLink>
+                  <j.0:InOutLink rdf:ID="adjustTime_node_PickleOutput1_to_selectVar_node_PickleInput1">
+                        <j.0:hasDestinationNode rdf:resource="#selectVar_node"/>
+                        <j.0:hasDestinationPort rdf:resource="#selectVar_node_PickleInput1"/>
+                        <j.0:hasOriginNode rdf:resource="#adjustTime_node"/>
+                        <j.0:hasOriginPort rdf:resource="#adjustTime_node_PickleOutput1"/>
+                        <j.0:hasVariable rdf:resource="#PickleOutput2"/>
+                  </j.0:InOutLink>
+            </j.0:hasLink>
+            <j.0:hasOutputRole>
+                  <j.0:Role rdf:ID="PickleOutput1_orole">
+                        <j.0:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.0:hasDimensionality>
+                        <j.0:mapsToVariable rdf:resource="#PickleOutput1"/>
+                        <j.0:hasRoleID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleOutput1</j.0:hasRoleID>
+                  </j.0:Role>
+            </j.0:hasOutputRole>
+            <j.0:hasInputRole>
+                  <j.0:Role rdf:ID="Input1_irole">
+                        <j.0:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.0:hasDimensionality>
+                        <j.0:mapsToVariable>
+                              <j.1:NetCDF rdf:ID="Input1">
+                                    <rdfs:comment rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >center:x=150,y=37.1484375</rdfs:comment>
+                                    <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/workflow.owl#DataVariable"/>
+                              </j.1:NetCDF>
+                        </j.0:mapsToVariable>
+                        <j.0:hasRoleID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >openNetCDF_node_Input1</j.0:hasRoleID>
+                  </j.0:Role>
+            </j.0:hasInputRole>
+            <j.0:hasLink>
+                  <j.0:InputLink rdf:ID="openNetCDF_node_Input1_input">
+                        <j.0:hasVariable rdf:resource="#Input1"/>
+                        <j.0:hasDestinationNode rdf:resource="#openNetCDF_node"/>
+                        <j.0:hasDestinationPort rdf:resource="#openNetCDF_node_Input1"/>
+                  </j.0:InputLink>
+            </j.0:hasLink>
+            <j.0:hasLink>
+                  <j.0:OutputLink rdf:ID="openNetCDF_node_PickleOutput1_output">
+                        <j.0:hasVariable rdf:resource="#PickleOutput1"/>
+                        <j.0:hasOriginNode rdf:resource="#openNetCDF_node"/>
+                        <j.0:hasOriginPort rdf:resource="#openNetCDF_node_PickleOutput1"/>
+                  </j.0:OutputLink>
+            </j.0:hasLink>
+            <j.0:hasOutputRole>
+                  <j.0:Role rdf:ID="PickleOutput3_orole">
+                        <j.0:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.0:hasDimensionality>
+                        <j.0:mapsToVariable rdf:resource="#PickleOutput3"/>
+                        <j.0:hasRoleID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleOutput3</j.0:hasRoleID>
+                  </j.0:Role>
+            </j.0:hasOutputRole>
+            <j.0:hasLink>
+                  <j.0:InputLink rdf:ID="openNetCDF_node_Input2_input">
+                        <j.0:hasVariable rdf:resource="#Input2"/>
+                        <j.0:hasDestinationNode rdf:resource="#openNetCDF_node"/>
+                        <j.0:hasDestinationPort rdf:resource="#openNetCDF_node_Input2"/>
+                  </j.0:InputLink>
+            </j.0:hasLink>
+            <j.0:hasLink>
+                  <j.0:OutputLink rdf:ID="selectVar_node_TextOuput1_output">
+                        <j.0:hasVariable rdf:resource="#TextOuput1"/>
+                        <j.0:hasOriginNode rdf:resource="#selectVar_node"/>
+                        <j.0:hasOriginPort rdf:resource="#selectVar_node_TextOuput1"/>
+                  </j.0:OutputLink>
+            </j.0:hasLink>
+            <j.0:hasLink>
+                  <j.0:InputLink rdf:ID="openNetCDF_node_Input3_input">
+                        <j.0:hasVariable>
+                              <j.1:NetCDF rdf:ID="Input3">
+                                    <rdfs:comment rdf:datatype=
+                                    "http://www.w3.org/2001/XMLSchema#string"
+                                    >center:x=276,y=38.1484375</rdfs:comment>
+                                    <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/workflow.owl#DataVariable"/>
+                              </j.1:NetCDF>
+                        </j.0:hasVariable>
+                        <j.0:hasDestinationNode rdf:resource="#openNetCDF_node"/>
+                        <j.0:hasDestinationPort rdf:resource="#openNetCDF_node_Input3"/>
+                  </j.0:InputLink>
+            </j.0:hasLink>
+            <j.0:hasInputRole>
+                  <j.0:Role rdf:ID="Input3_irole">
+                        <j.0:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.0:hasDimensionality>
+                        <j.0:mapsToVariable rdf:resource="#Input3"/>
+                        <j.0:hasRoleID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >openNetCDF_node_Input3</j.0:hasRoleID>
+                  </j.0:Role>
+            </j.0:hasInputRole>
+            <j.0:hasMetadata>
+                  <j.0:Metadata rdf:ID="FailWorkflow_meta">
+                        <j.0:hasContributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >admin</j.0:hasContributor>
+                        <j.0:lastUpdateTime rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
+                        >2018-04-25T00:00:00Z</j.0:lastUpdateTime>
+                  </j.0:Metadata>
+            </j.0:hasMetadata>
+            <j.0:hasOutputRole>
+                  <j.0:Role rdf:ID="PickleOutput2_orole">
+                        <j.0:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.0:hasDimensionality>
+                        <j.0:mapsToVariable rdf:resource="#PickleOutput2"/>
+                        <j.0:hasRoleID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleOutput2</j.0:hasRoleID>
+                  </j.0:Role>
+            </j.0:hasOutputRole>
+            <j.0:hasLink>
+                  <j.0:InputLink rdf:ID="selectVar_node_TextInput1_input">
+                        <j.0:hasVariable rdf:resource="#TextInput1"/>
+                        <j.0:hasDestinationNode rdf:resource="#selectVar_node"/>
+                        <j.0:hasDestinationPort rdf:resource="#selectVar_node_TextInput1"/>
+                  </j.0:InputLink>
+            </j.0:hasLink>
+            <j.0:hasInputRole>
+                  <j.0:Role rdf:ID="Calendar_irole">
+                        <j.0:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.0:hasDimensionality>
+                        <j.0:mapsToVariable rdf:resource="#Calendar"/>
+                        <j.0:hasRoleID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >adjustTime_node_Calendar</j.0:hasRoleID>
+                  </j.0:Role>
+            </j.0:hasInputRole>
+      </j.0:WorkflowTemplate>
+</rdf:RDF>
