@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://www.wings-workflows.org/ontology/data.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:j.1="http://localhost:8080/wings-portal/export/users/admin/NetCDF_Simple/data/ontology.owl#"
+      xml:base="http://localhost:8080/wings-portal/export/users/admin/NetCDF_Simple/data/library.owl">
+      <j.1:NetCDF rdf:ID="Dec2010.nc">
+            <j.0:hasLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >/tmp/tomcat8-tomcat8-tmp/domain-2229220689300602564-temp/NetCDF_Simple/data/Dec2010.nc</j.0:hasLocation>
+      </j.1:NetCDF>
+      <j.1:textFile rdf:ID="modelVar.txt">
+            <j.0:hasLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >/tmp/tomcat8-tomcat8-tmp/domain-2229220689300602564-temp/NetCDF_Simple/data/modelVar.txt</j.0:hasLocation>
+      </j.1:textFile>
+      <j.1:NetCDF rdf:ID="Nov2010.nc">
+            <j.0:hasLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >/tmp/tomcat8-tomcat8-tmp/domain-2229220689300602564-temp/NetCDF_Simple/data/Nov2010.nc</j.0:hasLocation>
+      </j.1:NetCDF>
+      <j.1:NetCDF rdf:ID="Oct2010.nc">
+            <j.0:hasLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >/tmp/tomcat8-tomcat8-tmp/domain-2229220689300602564-temp/NetCDF_Simple/data/Oct2010.nc</j.0:hasLocation>
+      </j.1:NetCDF>
+      <j.1:textFile rdf:ID="modelVarUnits.txt">
+            <j.0:hasLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >/tmp/tomcat8-tomcat8-tmp/domain-2229220689300602564-temp/NetCDF_Simple/data/modelVarUnits.txt</j.0:hasLocation>
+      </j.1:textFile>
+</rdf:RDF>

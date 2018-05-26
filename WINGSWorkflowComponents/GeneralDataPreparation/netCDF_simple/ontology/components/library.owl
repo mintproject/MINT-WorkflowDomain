@@ -1,0 +1,569 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://www.wings-workflows.org/ontology/resource.owl#"
+    xmlns:j.1="http://localhost:8080/wings-portal/export/users/admin/NetCDF_Simple/components/library.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:j.2="http://www.wings-workflows.org/ontology/component.owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:j.3="http://localhost:8080/wings-portal/export/users/admin/NetCDF_Simple/data/ontology.owl#"
+      xml:base="http://localhost:8080/wings-portal/export/users/admin/NetCDF_Simple/components/library.owl">
+      <owl:Class rdf:ID="adjustFormatClass">
+            <rdfs:subClassOf rdf:resource="#FormatClass"/>
+      </owl:Class>
+      <owl:Class rdf:ID="selectVarClass">
+            <rdfs:subClassOf rdf:resource="#SelectClass"/>
+      </owl:Class>
+      <owl:Class rdf:ID="amountToRateClass">
+            <rdfs:subClassOf rdf:resource="#CalculateClass"/>
+      </owl:Class>
+      <owl:Class rdf:ID="adjustTimeClass">
+            <rdfs:subClassOf rdf:resource="#TimeClass"/>
+      </owl:Class>
+      <owl:Class rdf:ID="calculateWindClass">
+            <rdfs:subClassOf rdf:resource="#CalculateClass"/>
+      </owl:Class>
+      <owl:Class rdf:ID="calculateRHClass">
+            <rdfs:subClassOf rdf:resource="#CalculateClass"/>
+      </owl:Class>
+      <owl:Class rdf:ID="adjustUnitsClass">
+            <rdfs:subClassOf rdf:resource="#AdjustClass"/>
+      </owl:Class>
+      <owl:Class rdf:ID="completeCheckClass">
+            <rdfs:subClassOf rdf:resource="#CheckClass"/>
+      </owl:Class>
+      <owl:Class rdf:ID="openNetCDFClass">
+            <rdfs:subClassOf rdf:resource="#openClass"/>
+      </owl:Class>
+      <j.1:calculateWindClass rdf:ID="calculateWind">
+            <j.2:isConcrete rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+            >true</j.2:isConcrete>
+            <j.0:hasHardwareDependency>
+                  <j.0:HardwareDependency>
+                        <j.0:needs64bit rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+                        >false</j.0:needs64bit>
+                        <j.0:requiresStorageGB rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0</j.0:requiresStorageGB>
+                        <j.0:requiresMemoryGB rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0</j.0:requiresMemoryGB>
+                  </j.0:HardwareDependency>
+            </j.0:hasHardwareDependency>
+            <j.2:hasOutput>
+                  <j.3:pickleFile rdf:ID="calculateWind_PickleOutput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-o1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleOutput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:pickleFile>
+            </j.2:hasOutput>
+            <j.2:hasInput>
+                  <j.3:pickleFile rdf:ID="calculateWind_PickleInput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-i1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleInput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:pickleFile>
+            </j.2:hasInput>
+            <j.2:hasLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >/tmp/tomcat8-tomcat8-tmp/domain-2229220689300602564-temp/NetCDF_Simple/code/library/calculateWind</j.2:hasLocation>
+      </j.1:calculateWindClass>
+      <j.1:calculateRHClass rdf:ID="calculateRH">
+            <j.2:isConcrete rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+            >true</j.2:isConcrete>
+            <j.0:hasHardwareDependency>
+                  <j.0:HardwareDependency>
+                        <j.0:needs64bit rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+                        >false</j.0:needs64bit>
+                        <j.0:requiresStorageGB rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0</j.0:requiresStorageGB>
+                        <j.0:requiresMemoryGB rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0</j.0:requiresMemoryGB>
+                  </j.0:HardwareDependency>
+            </j.0:hasHardwareDependency>
+            <j.2:hasOutput>
+                  <j.3:pickleFile rdf:ID="calculateRH_PickleOutput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-o1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleOutput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:pickleFile>
+            </j.2:hasOutput>
+            <j.2:hasInput>
+                  <j.3:pickleFile rdf:ID="calculateRH_PickleInput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-i1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleInput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:pickleFile>
+            </j.2:hasInput>
+            <j.2:hasLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >/tmp/tomcat8-tomcat8-tmp/domain-2229220689300602564-temp/NetCDF_Simple/code/library/calculateRH</j.2:hasLocation>
+      </j.1:calculateRHClass>
+      <j.1:openNetCDFClass rdf:ID="openNetCDF">
+            <j.2:hasOutput>
+                  <j.3:pickleFile rdf:ID="openNetCDF_PickleOutput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-o1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleOutput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:pickleFile>
+            </j.2:hasOutput>
+            <j.2:hasInput>
+                  <j.3:NetCDF rdf:ID="openNetCDF_Input3">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-i3</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >Input3</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:NetCDF>
+            </j.2:hasInput>
+            <j.2:hasInput>
+                  <j.3:NetCDF rdf:ID="openNetCDF_Input2">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-i2</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >Input2</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:NetCDF>
+            </j.2:hasInput>
+            <j.2:hasInput>
+                  <j.3:NetCDF rdf:ID="openNetCDF_Input1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-i1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >Input1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:NetCDF>
+            </j.2:hasInput>
+            <j.2:hasLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >/tmp/tomcat8-tomcat8-tmp/domain-2229220689300602564-temp/NetCDF_Simple/code/library/openNetCDF</j.2:hasLocation>
+            <j.2:isConcrete rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+            >true</j.2:isConcrete>
+            <j.0:hasHardwareDependency>
+                  <j.0:HardwareDependency>
+                        <j.0:needs64bit rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+                        >false</j.0:needs64bit>
+                        <j.0:requiresStorageGB rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0</j.0:requiresStorageGB>
+                        <j.0:requiresMemoryGB rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0</j.0:requiresMemoryGB>
+                  </j.0:HardwareDependency>
+            </j.0:hasHardwareDependency>
+      </j.1:openNetCDFClass>
+      <j.1:adjustUnitsClass rdf:ID="adjustUnits">
+            <j.2:hasOutput>
+                  <j.3:pickleFile rdf:ID="adjustUnits_PickleOutput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-o1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleOutput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:pickleFile>
+            </j.2:hasOutput>
+            <j.2:hasInput>
+                  <j.3:pickleFile rdf:ID="adjustUnits_PickleInput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-i1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleInput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:pickleFile>
+            </j.2:hasInput>
+            <j.2:hasInput>
+                  <j.3:textFile rdf:ID="adjustUnits_TextInput2">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-i3</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >TextInput2</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:textFile>
+            </j.2:hasInput>
+            <j.2:hasInput>
+                  <j.3:textFile rdf:ID="adjustUnits_TextInput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-i2</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >TextInput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:textFile>
+            </j.2:hasInput>
+            <j.2:hasLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >/tmp/tomcat8-tomcat8-tmp/domain-2229220689300602564-temp/NetCDF_Simple/code/library/adjustUnits</j.2:hasLocation>
+            <j.2:isConcrete rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+            >true</j.2:isConcrete>
+            <j.0:hasHardwareDependency>
+                  <j.0:HardwareDependency>
+                        <j.0:needs64bit rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+                        >false</j.0:needs64bit>
+                        <j.0:requiresStorageGB rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0</j.0:requiresStorageGB>
+                        <j.0:requiresMemoryGB rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0</j.0:requiresMemoryGB>
+                  </j.0:HardwareDependency>
+            </j.0:hasHardwareDependency>
+      </j.1:adjustUnitsClass>
+      <j.1:adjustFormatClass rdf:ID="adjustFormat">
+            <j.2:hasOutput>
+                  <j.3:textFile rdf:ID="adjustFormat_TextOutput9">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-o9</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >TextOutput9</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:textFile>
+            </j.2:hasOutput>
+            <j.0:hasHardwareDependency>
+                  <j.0:HardwareDependency>
+                        <j.0:needs64bit rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+                        >false</j.0:needs64bit>
+                        <j.0:requiresStorageGB rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0</j.0:requiresStorageGB>
+                        <j.0:requiresMemoryGB rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0</j.0:requiresMemoryGB>
+                  </j.0:HardwareDependency>
+            </j.0:hasHardwareDependency>
+            <j.2:hasOutput>
+                  <j.3:textFile rdf:ID="adjustFormat_TextOuput7">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-o7</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >TextOuput7</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:textFile>
+            </j.2:hasOutput>
+            <j.2:hasOutput>
+                  <j.3:textFile rdf:ID="adjustFormat_TextOutput6">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-o6</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >TextOutput6</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:textFile>
+            </j.2:hasOutput>
+            <j.2:hasOutput>
+                  <j.3:textFile rdf:ID="adjustFormat_TextOutput2">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-o2</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >TextOutput2</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:textFile>
+            </j.2:hasOutput>
+            <j.2:hasOutput>
+                  <j.3:textFile rdf:ID="adjustFormat_TextOutput8">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-o8</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >TextOutput8</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:textFile>
+            </j.2:hasOutput>
+            <j.2:hasOutput>
+                  <j.3:textFile rdf:ID="adjustFormat_TextOutput4">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-o4</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >TextOutput4</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:textFile>
+            </j.2:hasOutput>
+            <j.2:hasInput>
+                  <j.3:pickleFile rdf:ID="adjustFormat_PickleInput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-i1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleInput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:pickleFile>
+            </j.2:hasInput>
+            <j.2:hasOutput>
+                  <j.3:textFile rdf:ID="adjustFormat_TextOutput5">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-o5</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >TextOutput5</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:textFile>
+            </j.2:hasOutput>
+            <j.2:hasOutput>
+                  <j.3:textFile rdf:ID="adjustFormat_TextOutput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-o1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >TextOutput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:textFile>
+            </j.2:hasOutput>
+            <j.2:isConcrete rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+            >true</j.2:isConcrete>
+            <j.2:hasLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >/tmp/tomcat8-tomcat8-tmp/domain-2229220689300602564-temp/NetCDF_Simple/code/library/adjustFormat</j.2:hasLocation>
+            <j.2:hasInput>
+                  <j.3:textFile rdf:ID="adjustFormat_TextInput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-i2</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >TextInput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:textFile>
+            </j.2:hasInput>
+            <j.2:hasOutput>
+                  <j.3:textFile rdf:ID="adjustFormat_TextOutput3">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-o3</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >TextOutput3</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:textFile>
+            </j.2:hasOutput>
+      </j.1:adjustFormatClass>
+      <j.1:amountToRateClass rdf:ID="amountToRate">
+            <j.2:isConcrete rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+            >true</j.2:isConcrete>
+            <j.0:hasHardwareDependency>
+                  <j.0:HardwareDependency>
+                        <j.0:needs64bit rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+                        >false</j.0:needs64bit>
+                        <j.0:requiresStorageGB rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0</j.0:requiresStorageGB>
+                        <j.0:requiresMemoryGB rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0</j.0:requiresMemoryGB>
+                  </j.0:HardwareDependency>
+            </j.0:hasHardwareDependency>
+            <j.2:hasOutput>
+                  <j.3:pickleFile rdf:ID="amountToRate_PickleOutput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-o1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleOutput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:pickleFile>
+            </j.2:hasOutput>
+            <j.2:hasInput>
+                  <j.3:pickleFile rdf:ID="amountToRate_PickleInput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-i1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleInput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:pickleFile>
+            </j.2:hasInput>
+            <j.2:hasLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >/tmp/tomcat8-tomcat8-tmp/domain-2229220689300602564-temp/NetCDF_Simple/code/library/amountToRate</j.2:hasLocation>
+      </j.1:amountToRateClass>
+      <j.1:adjustTimeClass rdf:ID="adjustTime">
+            <j.0:hasHardwareDependency>
+                  <j.0:HardwareDependency>
+                        <j.0:needs64bit rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+                        >false</j.0:needs64bit>
+                        <j.0:requiresStorageGB rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0</j.0:requiresStorageGB>
+                        <j.0:requiresMemoryGB rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0</j.0:requiresMemoryGB>
+                  </j.0:HardwareDependency>
+            </j.0:hasHardwareDependency>
+            <j.2:hasOutput>
+                  <j.3:pickleFile rdf:ID="adjustTime_PickleOutput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-o1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleOutput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:pickleFile>
+            </j.2:hasOutput>
+            <j.2:hasInput>
+                  <j.3:pickleFile rdf:ID="adjustTime_PickleInput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-i1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleInput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:pickleFile>
+            </j.2:hasInput>
+            <j.2:hasInput>
+                  <j.2:ParameterArgument rdf:ID="adjustTime_Calendar">
+                        <j.2:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >standard</j.2:hasValue>
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-p1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >Calendar</j.2:hasArgumentID>
+                  </j.2:ParameterArgument>
+            </j.2:hasInput>
+            <j.2:hasLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >/tmp/tomcat8-tomcat8-tmp/domain-2229220689300602564-temp/NetCDF_Simple/code/library/adjustTime</j.2:hasLocation>
+            <j.2:isConcrete rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+            >true</j.2:isConcrete>
+      </j.1:adjustTimeClass>
+      <j.1:completeCheckClass rdf:ID="completeCheck">
+            <j.0:hasHardwareDependency>
+                  <j.0:HardwareDependency>
+                        <j.0:needs64bit rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+                        >false</j.0:needs64bit>
+                        <j.0:requiresStorageGB rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0</j.0:requiresStorageGB>
+                        <j.0:requiresMemoryGB rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0</j.0:requiresMemoryGB>
+                  </j.0:HardwareDependency>
+            </j.0:hasHardwareDependency>
+            <j.2:hasOutput>
+                  <j.3:pickleFile rdf:ID="completeCheck_PickleOutput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-o1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleOutput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:pickleFile>
+            </j.2:hasOutput>
+            <j.2:hasInput>
+                  <j.3:textFile rdf:ID="completeCheck_TextInput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-i2</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >TextInput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:textFile>
+            </j.2:hasInput>
+            <j.2:hasInput>
+                  <j.3:pickleFile rdf:ID="completeCheck_PickleInput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-i1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleInput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:pickleFile>
+            </j.2:hasInput>
+            <j.2:hasLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >/tmp/tomcat8-tomcat8-tmp/domain-2229220689300602564-temp/NetCDF_Simple/code/library/completeCheck</j.2:hasLocation>
+            <j.2:isConcrete rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+            >true</j.2:isConcrete>
+      </j.1:completeCheckClass>
+      <j.1:selectVarClass rdf:ID="selectVar">
+            <j.2:hasOutput>
+                  <j.3:textFile rdf:ID="selectVar_TextOuput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-o2</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >TextOuput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:textFile>
+            </j.2:hasOutput>
+            <j.2:hasOutput>
+                  <j.3:pickleFile rdf:ID="selectVar_PickleOutput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-o1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleOutput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:pickleFile>
+            </j.2:hasOutput>
+            <j.2:hasInput>
+                  <j.3:textFile rdf:ID="selectVar_TextInput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-i2</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >TextInput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:textFile>
+            </j.2:hasInput>
+            <j.2:hasInput>
+                  <j.3:pickleFile rdf:ID="selectVar_PickleInput1">
+                        <j.2:hasDimensionality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+                        >0</j.2:hasDimensionality>
+                        <j.2:hasArgumentName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >-i1</j.2:hasArgumentName>
+                        <j.2:hasArgumentID rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                        >PickleInput1</j.2:hasArgumentID>
+                        <rdf:type rdf:resource="http://www.wings-workflows.org/ontology/component.owl#DataArgument"/>
+                  </j.3:pickleFile>
+            </j.2:hasInput>
+            <j.2:hasLocation rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >/tmp/tomcat8-tomcat8-tmp/domain-2229220689300602564-temp/NetCDF_Simple/code/library/selectVar</j.2:hasLocation>
+            <j.2:isConcrete rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+            >true</j.2:isConcrete>
+            <j.0:hasHardwareDependency>
+                  <j.0:HardwareDependency>
+                        <j.0:needs64bit rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean"
+                        >false</j.0:needs64bit>
+                        <j.0:requiresStorageGB rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0</j.0:requiresStorageGB>
+                        <j.0:requiresMemoryGB rdf:datatype="http://www.w3.org/2001/XMLSchema#float"
+                        >0.0</j.0:requiresMemoryGB>
+                  </j.0:HardwareDependency>
+            </j.0:hasHardwareDependency>
+      </j.1:selectVarClass>
+</rdf:RDF>

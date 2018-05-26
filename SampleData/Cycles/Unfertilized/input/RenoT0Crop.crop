@@ -1,0 +1,43 @@
+
+####################################################
+# CROP DESCRIPTION  Maize                          #
+####################################################
+NAME                                        Maize
+FLOWERING_TT                                850
+MATURITY_TT                                 1850
+MAXIMUM_SOIL_COVERAGE                       100
+MAXIMUM_ROOTING_DEPTH                       2.00  
+AVERAGE_EXPECTED_YIELD                      20.00
+MAXIMUM_EXPECTED_YIELD                      30.00
+MINIMUM_EXPECTED_YIELD                      10.00
+COMMERCIAL_YIELD_MOISTURE                   0.00  
+STANDING_RESIDUE_AT_HARVEST                 50.00 
+RESIDUE_REMOVED                             100.00 
+CLIPPING_BIOMASS_THRESHOLD_UPPER            40.00
+CLIPPING_BIOMASS_THRESHOLD_LOWER	    30.00
+HARVEST_TIMING                              -999  
+CLIPPING_BIOMASS_DESTINY		    REMOVE
+MIN_TEMPERATURE_FOR_TRANSPIRATION           3.00 
+THRESHOLD_TEMPERATURE_FOR_TRANPIRATION      15.00  
+MIN_TEMPERATURE_FOR_COLD_DAMAGE             -1.00
+THRESHOLD_TEMPERATURE_FOR_COLD_DAMAGE       0.00  
+BASE_TEMPERATURE_FOR_DEVELOPMENT            5.00  
+OPTIMUM_TEMPERATURE_FOR_DEVELOPEMENT        28.00 
+MAX_TEMPERATURE_FOR_DEVELOPMENT             46.00 
+INITIAL_PARTITIONING_TO_SHOOT               0.45  
+FINAL_PARTITIONING_TO_SHOOT                 0.95  
+RADIATION_USE_EFFICIENCY                    2.20  
+TRANSPIRATION_USE_EFFICIENCY                7.90  
+MAXIMUM_HARVEST_INDEX                       0.80  
+MINIMUM_HARVEST_INDEX                       0.15  
+HARVEST_INDEX                               1.20  
+THERMAL_TIME_TO_EMERGENCE                   100.00
+N_MAX_CONCENTRATION                         0.055 
+N_DILUTION_SLOPE                            0.40  
+KC                                          1.20  
+ANNUAL                                      1
+LEGUME                                      0
+C3                                          0
+LWP_STRESS_ONSET                            -1200.0
+LWP_WILTING_POINT                           -1500.0
+TRANSPIRATION_MAX                           10.00

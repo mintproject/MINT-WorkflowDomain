@@ -1,0 +1,18 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 2 0 9 "$@"
+
+echo $BASEDIR
+
+docker run --volumes-from ${HOSTNAME} dgarijo/ananconda-netcdf python $BASEDIR/adjustFormat.py $INPUTS1 $INPUTS2 $OUTPUTS1 $OUTPUTS2 $OUTPUTS3 $OUTPUTS4 $OUTPUTS5 $OUTPUTS6 $OUTPUTS7 $OUTPUTS8 $OUTPUTS9
+
+checkExitCode
