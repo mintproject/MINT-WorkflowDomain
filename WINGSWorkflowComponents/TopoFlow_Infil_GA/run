@@ -1,0 +1,30 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+	echo "Error"
+	exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+if [ $# -lt 1 ]; then echo "Error No inputs provided" && exit 1; fi
+
+. $BASEDIR/io.sh 51 0 6 "$@"
+
+mkdir -p /app/data/
+
+for ((i=1; i<=51; i++)); do
+cp ${INPUTS[$i]} /app/data
+done
+
+ls  /app/data
+
+python -m topoflow --cfg_prefix="June_20_67" --cfg_directory="/app/data/" --driver_comp_name=tf_infil_green_ampt
+
+rm -rf /app/data
+
+ls /root/TF_Output/Treynor
+
+checkExitCode
