@@ -1,5 +1,29 @@
-FROM ubuntu
+FROM ubuntu:16.04
+
 MAINTAINER add Lucas Carvalho lucas.carvalho@ic.unicamp.br
+
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && \
+    apt-get upgrade -y --allow-unauthenticated && \
+    apt-get install -y --allow-unauthenticated \
+        build-essential \
+        cmake \
+        curl \
+        git \
+        pkg-config \
+        python \
+        python-dev \
+        software-properties-common \
+        unzip \
+        zip \
+        zlib1g-dev \
+        openjdk-8-jdk \
+        openjdk-8-jre-headless \
+        vim \
+        wget \
+        && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
