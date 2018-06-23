@@ -8,3 +8,5 @@ The executable will be on: /opt/gams/gams25.1_linux_x64_64_sfx/gams
 
 Sample usage: /opt/gams/gams25.1_linux_x64_64_sfx/gams MINT_landusesimple.gms
 
+Attached to the docker file is a sample model that can be executed by the image.
+
