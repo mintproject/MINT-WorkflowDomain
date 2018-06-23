@@ -12,6 +12,9 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         git \
         pkg-config \
         python \
+        python2-netcdf4 \
+        python2-requests \
+        python2-simplejson \
         python-dev \
         software-properties-common \
         unzip \
