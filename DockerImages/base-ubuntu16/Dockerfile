@@ -12,13 +12,17 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         gsfonts \
         libfreetype6-dev \
         libgdal-dev \
+        libgdal-dev \
         libpng12-dev \
         libssl-dev \
+        libxpm-dev \
         libzmq3-dev \
         module-init-tools \
         openjdk-8-jdk \
         openjdk-8-jre-headless \
         pkg-config \
+        proj-bin \
+        proj-data \
         python \
         python3 \
         python3-dev \
@@ -40,7 +44,6 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         wget \
         zip \
         zlib1g-dev \
-        libxpm-dev \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*

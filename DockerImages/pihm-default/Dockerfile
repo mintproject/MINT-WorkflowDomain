@@ -1,11 +1,28 @@
 FROM mintproject/base-ubuntu16
 
-WORKDIR /app
+# newer R
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
+    add-apt-repository 'deb [arch=amd64,i386] http://cran.rstudio.com/bin/linux/ubuntu xenial/' && \
+    apt-get -y update && \
+    apt-get -y install r-base
 
-ADD . /app
+# R packages for data transforms and helpers
+COPY Rprofile /root/.Rprofile
+RUN Rscript -e 'install.packages("rgeos"); install.packages("rgdal"); install.packages("ncdf4");'
 
-RUN wget https://computation.llnl.gov/projects/sundials/download/sundials-2.2.0.tar.gz && tar xvf sundials-2.2.0.tar.gz && cd sundials && ./configure && make && make install
-RUN wget http://www.pihm.psu.edu/PIHM_v2.2.tar && tar xvf PIHM_v2.2.tar && cd PIHM_v2.2 && make clean
-RUN cd PIHM_v2.2 && grep -rl Makefile . | xargs sed -i 's/\/Users\/xxy113\/software/\/app/g'
-RUN cd PIHM_v2.2 && make pihm && mv pihm /usr/bin
+#RUN wget -nv https://computation.llnl.gov/projects/sundials/download/sundials-2.2.0.tar.gz && \
+#    tar xvf sundials-2.2.0.tar.gz && \
+#    cd sundials && \
+#    ./configure && \
+#    make && \
+#    make install
+
+#RUN wget -nv http://www.pihm.psu.edu/PIHM_v2.2.tar && \
+#    tar xvf PIHM_v2.2.tar && \
+#    cd PIHM_v2.2 && \
+#    make clean && \
+#    grep -rl Makefile . | xargs sed -i 's/\/Users\/xxy113\/software/\/opt/g' && \
+#    make pihm && \
+#    mv pihm /usr/bin
 
