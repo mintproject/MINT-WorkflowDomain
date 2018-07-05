@@ -25,11 +25,13 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         proj-data \
         python \
         python3 \
+        python3-dateutil \
         python3-dev \
         python3-netcdf4 \
         python3-pip \
         python3-requests \
         python3-simplejson \
+        python-dateutil \
         python-dev \
         python-netcdf4 \
         python-pip \

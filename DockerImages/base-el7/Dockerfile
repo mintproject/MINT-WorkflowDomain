@@ -52,10 +52,16 @@ RUN yum -y install \
            octave-devel \
            p7zip \
            p7zip-plugins \
+           python2-dateutil \
            python2-netcdf4 \
            python2-requests \
            python2-simplejson \
+           python34-dateutil \
+           python34-netcdf4 \
+           python34-requests \
+           python34-simplejson \
            python-devel \
+           python34-devel \
            R-devel \
            redhat-lsb-core \
            rsync \
