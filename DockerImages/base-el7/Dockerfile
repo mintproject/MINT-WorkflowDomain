@@ -54,14 +54,18 @@ RUN yum -y install \
            p7zip-plugins \
            python2-dateutil \
            python2-netcdf4 \
+           python2-numpy \
+           python2-pip \
            python2-requests \
            python2-simplejson \
            python34-dateutil \
+           python34-devel \
            python34-netcdf4 \
+           python34-numpy \
+           python34-pip \
            python34-requests \
            python34-simplejson \
            python-devel \
-           python34-devel \
            R-devel \
            redhat-lsb-core \
            rsync \
@@ -72,4 +76,7 @@ RUN yum -y install \
            wget \
            which
 
+# some more python modules
+RUN pip2 install pandas &&\
+    pip3 install pandas
 

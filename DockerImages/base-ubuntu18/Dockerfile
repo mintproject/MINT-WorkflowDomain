@@ -30,12 +30,16 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         python3-dateutil \
         python3-dev \
         python3-netcdf4 \
+        python3-numpy \
+        python3-pandas \
         python3-pip \
         python3-requests \
         python3-simplejson \
         python-dateutil \
         python-dev \
         python-netcdf4 \
+        python-numpy \
+        python-pandas \
         python-pip \
         python-requests \
         python-simplejson \
