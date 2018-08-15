@@ -1,0 +1,94 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+
+export TMPDIRORIG="$TMPDIR"
+export TMPDIR='/opt/wings/'
+TEMPDIR=$(mktemp -d "${TMPDIR:-/tmp/}$(basename $0).XXXXXXXXXXXX")
+
+#TEMPDIR='/opt/wings/test'
+#mkdir ${TEMPDIR}
+
+NAM=$TEMPDIR/B.nam
+export TMPDIR="$TMPDIRORIG"
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 9 0 4 "$@"
+
+cp $INPUTS1 $TEMPDIR
+cp $INPUTS2 $TEMPDIR
+cp $INPUTS3 $TEMPDIR
+cp $INPUTS4 $TEMPDIR
+cp $INPUTS5 $TEMPDIR
+cp $INPUTS6 $TEMPDIR
+cp $INPUTS7 $TEMPDIR
+cp $INPUTS8 $TEMPDIR
+cp $INPUTS9 $TEMPDIR
+
+BAS6=$(basename $INPUTS1)
+BCF6=$(basename $INPUTS2)
+DIS=$(basename $INPUTS3)
+DRN=$(basename $INPUTS4)
+HFB6=$(basename $INPUTS5)
+OC=$(basename $INPUTS6)
+RCH=$(basename $INPUTS7)
+SIP=$(basename $INPUTS8)
+WEL=$(basename $INPUTS9)
+
+LST=$(basename $OUTPUTS1)
+DDN=$(basename $OUTPUTS2)
+CBB=$(basename $OUTPUTS3)
+HDS=$(basename $OUTPUTS4)
+
+echo "## MODFLOW-2005 name-file" >> $NAM
+echo "LIST    7    $LST" >> $NAM
+echo "BAS6    1    $BAS6" >> ${NAM} 
+#echo "RIV    14    $RIV" >> ${NAM} 
+#echo "PCG    23    $PCG" >> ${NAM}
+#echo "GHB    17    $GHB" >> ${NAM} 
+echo "DIS    10    $DIS" >> ${NAM} 
+echo "BCF6    11   $BCF6" >> ${NAM} 
+echo "DRN    13    $DRN" >> ${NAM} 
+echo "RCH    18    $RCH" >> ${NAM} 
+echo "HFB6   26    $HFB6" >> ${NAM}
+echo "SIP   19    $SIP" >> ${NAM}
+echo "OC    22    $OC" >> ${NAM} 
+echo "WEL    12    $WEL" >> ${NAM} 
+echo "DATA(BINARY)  51 $HDS" >> ${NAM} 
+echo "DATA(BINARY)  52 $DDN" >> ${NAM} 
+echo "DATA(BINARY)    50    $CBB" >> ${NAM} 
+
+env
+
+if [ "${WINGS_MODE}" == "dind" ]; then
+set -x
+    
+    #FILENAME=${INPUTS1%.nam}
+    #FOLDER=`dirname $FILENAME`
+    #docker run --volumes-from ${HOSTNAME} -w $FOLDER lucasaugustomcc/modflow-2005:latest mf2005 $(basename $FILENAME)
+
+    #-w $FOLDER
+    docker run --volumes-from ${HOSTNAME} -w $TEMPDIR lucasaugustomcc/modflow-2005:latest mf2005 $NAM
+	
+    #mv $FILENAME.cbb $OUTPUTS1
+    #tail $NAM
+    
+    checkExitCode
+    
+    mv $TEMPDIR/$LST $OUTPUTS1
+    mv $TEMPDIR/$CBB $OUTPUTS3
+    mv $TEMPDIR/$HDS $OUTPUTS4
+    mv $TEMPDIR/$DDN $OUTPUTS2
+	
+    checkExitCode
+	
+    rm -rf $TEMPDIR
+    exit 0
+fi
