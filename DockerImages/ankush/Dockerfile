@@ -1,6 +1,6 @@
 FROM mintproject/base-ubuntu16
 
-RUN wget -nv -O ~/miniconda.sh http://repo.continuum.io/miniconda/Miniconda3-4.5.1-Linux-x86_64.sh && \
+RUN wget -nv -O ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh && \
     bash ~/miniconda.sh -b -f -p /opt/conda && \
     export PATH=/opt/conda/bin:$PATH && \
     conda install --yes anaconda && \
