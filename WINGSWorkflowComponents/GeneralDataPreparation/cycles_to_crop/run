@@ -1,0 +1,25 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 1 0 1 "$@"
+
+# starting container
+docker run -d -t -v $PWD:/mint --name=mint-cycles-crop mintproject/base-ubuntu18:latest bash
+
+# executing the code
+docker exec -w /mint mint-cycles-crop python3 Cycles-to-crop.py $INPUTS1 $OUTPUTS1
+docker exec -w /mint mint-cycles-crop chown -R `id -u $USER`:`id -g $GROUP` .
+
+# stopping and removing the container
+docker stop mint-cycles-crop
+docker rm mint-cycles-crop
+
+checkExitCode
