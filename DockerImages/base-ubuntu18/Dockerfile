@@ -35,6 +35,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         python3-pip \
         python3-requests \
         python3-simplejson \
+        python3-xarray \
         python-dateutil \
         python-dev \
         python-netcdf4 \
@@ -55,4 +56,3 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
