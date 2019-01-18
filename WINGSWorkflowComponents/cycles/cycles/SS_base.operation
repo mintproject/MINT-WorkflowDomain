@@ -1,0 +1,137 @@
+#########################################################################################################
+
+TILLAGE
+YEAR                1   #2001
+DOY                 90
+TOOL                Kill_Crop
+DEPTH               0   
+SOIL_DISTURB_RATIO  0   
+MIXING_EFFICIENCY   0   
+CROP_NAME           N/A
+FRAC_THERMAL_TIME   0.0
+KILL_EFFICIENCY     0.0
+GRAIN_HARVEST       0
+FORAGE_HARVEST      0.0
+
+FIXED_FERTILIZATION
+YEAR                1   
+DOY                 90
+SOURCE              25-25-00
+MASS                200  
+FORM                Solid
+METHOD              Broadcast
+LAYER               1     
+C_Organic           0     
+C_Charcoal          0     
+N_Organic           0     
+N_Charcoal          0     
+N_NH4               0.25  
+N_NO3               0     
+P_Organic           0     
+P_CHARCOAL          0     
+P_INORGANIC         0.25
+K                   0     
+S                   0     
+
+TILLAGE
+YEAR                1   
+DOY                 90
+TOOL                Hand_hoeing
+DEPTH               0.11
+SOIL_DISTURB_RATIO  25   
+MIXING_EFFICIENCY   0.85
+CROP_NAME           N/A
+FRAC_THERMAL_TIME   0.0
+KILL_EFFICIENCY     0.0
+GRAIN_HARVEST       0
+FORAGE_HARVEST      0.0
+
+PLANTING
+YEAR                1   
+DOY                 100
+END_DOY             110
+MIN_SMC             0.10
+MIN_SOIL_TEMP       10
+CROP                Corn
+USE_AUTO_IRR        0
+USE_AUTO_FERT       0
+FRACTION            0.67
+CLIPPING_START      1
+CLIPPING_END        366
+
+TILLAGE
+YEAR                1   
+DOY                 120
+TOOL                Hand_hoeing_weeding
+DEPTH               0.06
+SOIL_DISTURB_RATIO  15   
+MIXING_EFFICIENCY   0.25
+CROP_NAME           N/A
+FRAC_THERMAL_TIME   0.0
+KILL_EFFICIENCY     0.0
+GRAIN_HARVEST       0
+FORAGE_HARVEST      0.0
+
+###
+
+FIXED_FERTILIZATION
+YEAR                1   
+DOY                 220
+SOURCE              25-25-00
+MASS                200  
+FORM                Solid
+METHOD              Broadcast
+LAYER               1     
+C_Organic           0     
+C_Charcoal          0     
+N_Organic           0     
+N_Charcoal          0     
+N_NH4               0.25  
+N_NO3               0     
+P_Organic           0     
+P_CHARCOAL          0     
+P_INORGANIC         0.25
+K                   0     
+S                   0     
+
+TILLAGE
+YEAR                1   
+DOY                 221
+TOOL                Hand_hoeing
+DEPTH               0.11
+SOIL_DISTURB_RATIO  25   
+MIXING_EFFICIENCY   0.85
+CROP_NAME           N/A
+FRAC_THERMAL_TIME   0.0
+KILL_EFFICIENCY     0.0
+GRAIN_HARVEST       0
+FORAGE_HARVEST      0.0
+
+PLANTING
+YEAR                1   
+DOY                 225
+END_DOY             235
+MIN_SMC             0.10
+MIN_SOIL_TEMP       10
+CROP                Corn
+USE_AUTO_IRR        0
+USE_AUTO_FERT       0
+FRACTION            0.67
+CLIPPING_START      1
+CLIPPING_END        366
+
+TILLAGE
+YEAR                1   
+DOY                 240
+TOOL                Hand_hoeing_weeding
+DEPTH               0.06
+SOIL_DISTURB_RATIO  15   
+MIXING_EFFICIENCY   0.25
+CROP_NAME           N/A
+FRAC_THERMAL_TIME   0.0
+KILL_EFFICIENCY     0.0
+GRAIN_HARVEST       0
+FORAGE_HARVEST      0.0
+
+
+
