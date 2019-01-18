@@ -52,5 +52,15 @@ RUN wget -nv -O ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-la
     bash ~/miniconda.sh -b -f -p /opt/conda && \
     export PATH=/opt/conda/bin:$PATH && \
     conda install --yes anaconda && \
-    pip install descarteslabs &&\
+    conda install --yes pytorch-cpu torchvision-cpu -c pytorch && \
+    conda install --yes -c conda-forge imageio && \
+    pip install tifffile && \
+    pip install opencv-python && \
+    pip install matplotlib && \
+    pip install Shapely && \
+    pip install requests && \
+    pip install numpy && \
+    pip install idna && \
+    pip install descarteslabs && \
+    pip install scikit-image && \
     conda create --yes -n gdaltest gdal
