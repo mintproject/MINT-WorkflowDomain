@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -x
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+mvInput() {
+if [ ! -f "$1" ]; then
+    mv $1 $2
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 5 0 1 "$@"
+
+# prepare input data
+mvInput $INPUTS1 cyclesdata2016.csv
+mvInput $INPUTS2 calibdata2016.csv
+mvInput $INPUTS3 econdata2016.csv
+mvInput $INPUTS4 simdata2016.csv
+
+# read subsidy
+SUBSIDY=`cat $INPUTS5`
+python ./update-subsidy.py ./simdata2016.csv $SUBSIDY
+
+# run economic model
+/opt/gams/gams25.1_linux_x64_64_sfx/gams MINT_cropsimple_v2.gms 
+
+#cat MINT_cropsimple_v2.lst
+
+#exit 1
+#checkExitCode
+
+# renaming output data
+mv MINTcropsimple.txt $OUTPUTS1
+checkExitCode
