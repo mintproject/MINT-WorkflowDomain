@@ -15,12 +15,15 @@ import numpy as np
 import pandas as pd
 from itertools import islice
 
-# select the year. In its present configuration only one year is allowed
-year = 2017
+# configuration parameters
+config_file = sys.argv[1]
+config = configparser.ConfigParser()
+config.read(config_file)
+year = int(config.get('mint', 'end_year')) # in its present configuration only one year is allowed
 
 data = {}
 
-for f in sys.argv[1:-1]:
+for f in sys.argv[2:-1]:
     with open(f) as configfile:
         config_string = ''.join([next(configfile) for x in range(3)])
         config = configparser.ConfigParser()
@@ -77,6 +80,6 @@ with open(csv_file, 'w', newline='') as csvfile:
             tt = crop_econ
             if crop_econ == "corn":
                 tt = "maize"
-            yieldwriter.writerow([tt, data[crop_econ.capitalize()]['elasticity']])
+            yieldwriter.writerow([tt, "%.2f" % data[crop_econ.capitalize()]['elasticity']])
         else:
             yieldwriter.writerow([crop_econ, default_value[idx]])
