@@ -1,0 +1,15 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 4 0 1 "$@"
+
+python3 $BASEDIR/pihm_forcing_to_cycles_weather.py $INPUTS1 $INPUTS2 $INPUTS3 $INPUTS4 $OUTPUTS1
+checkExitCode
