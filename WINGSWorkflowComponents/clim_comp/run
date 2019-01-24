@@ -1,0 +1,43 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 1 9 2 "$@"
+
+# weather.tar.gz | $INPUTS1 
+
+# dataset_source | $PARAMS1 The source of the dataset.Possible values include 'FLDAS'
+# flagP | $PARAMS2 | Name of the variable of interest as declared in the file
+# min_lon | $PARAMS3 | Minimum longitude for the bounding box
+# max_lon | $PARAMS4 | Maximum longitude for the bounding box
+# min_lat | $PARAMS5 | Minimum latitude for the bounding box
+# max_lat | $PARAMS6 | Maximum latitude for the bounding box
+# min_month | $PARAMS7 | The first month of the season of interest
+# max_month | $PARAMS8 | The last month of the season of interest
+# year | $PARAMS9 | The year of interest for the comparison
+
+# summary.txt | $OUTPUTS1
+# climatology.csv | $OUTPUTS2
+
+# Pongo Bounding Box
+# min_lon = 24.15234 max_lon = 27.74012
+# min_lat = 6.700375 max_lat = 9.335303
+
+wget "http://workflow.isi.edu/MINT/FLDAS/FLDAS_NOAH01_C_EA_M.001.tar.gz"
+
+# Uncompress weather.tar.gz, which is hardcoded :( to uncompress in FLDAS_NOAH01_A_EA_D.001/
+tar xzf FLDAS_NOAH01_C_EA_M.001.tar.gz
+
+python3 ClimComp.py FLDAS_NOAH01_C_EA_M.001/ FLDAS $PARAMS2 $PARAMS3 $PARAMS4 $PARAMS5 $PARAMS6 $PARAMS7 $PARAMS8 $PARAMS9
+
+mv summary.txt     $OUTPUTS1
+mv climatology.csv $OUTPUTS2
+
+checkExitCode

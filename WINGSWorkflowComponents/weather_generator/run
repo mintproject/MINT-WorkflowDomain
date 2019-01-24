@@ -1,0 +1,53 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 2 8 1 "$@"
+
+# monthly-weather.tar.gz | $INPUTS1 
+# daily-weather.tar.gz | $INPUTS1 
+
+# flagP | $PARAMS1 | Name of the variable of interest as declared in the file
+# min_lon | $PARAMS2 | Minimum longitude for the bounding box
+# max_lon | $PARAMS3 | Maximum longitude for the bounding box
+# min_lat | $PARAMS4 | Minimum latitude for the bounding box
+# max_lat | $PARAMS5 | Maximum latitude for the bounding box
+# min_month | $PARAMS6 | The first month of the season of interest
+# max_month | $PARAMS7 | The last month of the season of interest
+# level | $PARAMS8 | The year of interest for the comparison
+
+# output.csv | $OUTPUTS1
+
+# Pongo Bounding Box
+# min_lon = 24.15234 max_lon = 27.74012
+# min_lat = 6.700375 max_lat = 9.335303
+
+# Fetch monthly data
+wget "http://workflow.isi.edu/MINT/FLDAS/FLDAS_NOAH01_C_EA_M.001.tar.gz"
+tar xzf FLDAS_NOAH01_C_EA_M.001.tar.gz
+
+# Fetch daily data
+wget "http://workflow.isi.edu/MINT/FLDAS/FLDAS_NOAH01_A_EA_D.001.tar.gz"
+tar xzf FLDAS_NOAH01_A_EA_D.001.tar.gz
+
+
+# Step 1
+./FLDAS_to_WGEN.py FLDAS_NOAH01_C_EA_M.001 FLDAS_NOAH01_A_EA_D.001 $PARAMS1 $PARAMS2 $PARAMS3 $PARAMS4 $PARAMS5 $PARAMS6 $PARAMS7 $PARAMS8
+
+# Step 2
+weathergen FLDAS_WGEN.csv WGEN_out.csv
+
+# Step 3
+mkdir FLDAS_WGEN
+./WGEN_to_FLDAS.py WGEN_out.csv FLDAS_WGEN.csv FLDAS_WGEN FLDAS_NOAH01_A_EA_D.001
+
+tar zcvf $OUTPUTS1 FLDAS_WGEN
+
+checkExitCode
