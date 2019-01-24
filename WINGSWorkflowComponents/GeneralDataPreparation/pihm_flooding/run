@@ -1,0 +1,18 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 1 1 1 "$@"
+
+# running docker container
+docker run -v $PWD:/mint --name=mint-pihm-flooding mintproject/pihm2cycles:1.2 pihm_flooding /mint/$INPUTS1 $PARAMS1 /mint/$OUTPUTS1
+checkExitCode
+
+docker rm mint-pihm-flooding
