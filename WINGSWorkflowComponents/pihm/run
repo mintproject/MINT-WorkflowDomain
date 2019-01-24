@@ -1,0 +1,57 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 10 0 23 "$@"
+
+# untar PIHM-base
+tar -zxvf $INPUTS10
+
+# move input data into PIHM-base folder
+mv $INPUTS2 PIHM-base/
+mv $INPUTS3 PIHM-base/
+mv $INPUTS5 PIHM-base/
+mv $INPUTS6 PIHM-base/
+mv $INPUTS7 PIHM-base/
+mv $INPUTS8 PIHM-base/
+mv $INPUTS9 PIHM-base/
+
+# untar Model Info and move into PIHM-base folder
+tar -zxvf $INPUTS4
+mv ModelInfo PIHM-base/
+
+# run the model
+python3 pihm-wrapper.py $INPUTS1
+checkExitCode
+
+# prepare output data
+mv PIHM-base/*.GW       $OUTPUTS1
+mv PIHM-base/*.infil    $OUTPUTS2
+mv PIHM-base/*.is       $OUTPUTS3
+mv PIHM-base/*.snow     $OUTPUTS4
+mv PIHM-base/*.surf     $OUTPUTS5
+mv PIHM-base/*.unsat    $OUTPUTS6
+mv PIHM-base/*.et0      $OUTPUTS7
+mv PIHM-base/*.et1      $OUTPUTS8
+mv PIHM-base/*.et2      $OUTPUTS9
+mv PIHM-base/*.Rech     $OUTPUTS10
+mv PIHM-base/*.stage    $OUTPUTS11
+mv PIHM-base/*.rbed     $OUTPUTS12
+mv PIHM-base/*.rivFlx0  $OUTPUTS13
+mv PIHM-base/*.rivFlx1  $OUTPUTS14
+mv PIHM-base/*.rivFlx2  $OUTPUTS15
+mv PIHM-base/*.rivFlx3  $OUTPUTS16
+mv PIHM-base/*.rivFlx4  $OUTPUTS17
+mv PIHM-base/*.rivFlx5  $OUTPUTS18
+mv PIHM-base/*.rivFlx6  $OUTPUTS19
+mv PIHM-base/*.rivFlx7  $OUTPUTS20
+mv PIHM-base/*.rivFlx8  $OUTPUTS21
+mv PIHM-base/*.rivFlx9  $OUTPUTS22
+mv PIHM-base/*.rivFlx10 $OUTPUTS23
