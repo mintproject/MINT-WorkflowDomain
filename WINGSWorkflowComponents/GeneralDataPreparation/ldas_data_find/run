@@ -1,0 +1,31 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 2 0 1 "$@"
+
+chmod 755 $INPUTS2
+
+IDX=`echo $((1 + RANDOM % 100))`
+
+# starting container
+#docker run -d -t -v $PWD:/mint --name=mint-ldas-data-find-$IDX mintproject/base-ubuntu18:latest bash
+
+# executing the code
+#docker exec -w /mint mint-ldas-data-find-$IDX python3 $INPUTS1 $INPUTS2 $OUTPUTS1
+#docker exec -w /mint mint-ldas-data-find-$IDX chown -R `id -u $USER`:`id -g $GROUP` .
+
+python3 $INPUTS1 $INPUTS2 $OUTPUTS1
+
+# stopping and removing the container
+#docker stop mint-ldas-data-find-$IDX
+#docker rm mint-ldas-data-find-$IDX
+
+checkExitCode
