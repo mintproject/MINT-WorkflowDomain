@@ -1,0 +1,18 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 1 0 1 "$@"
+
+# untar ModelInfo
+tar zxvf $INPUTS1
+
+Rscript PatchID.R $OUTPUTS1
+checkExitCode
