@@ -1,0 +1,48 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 3 0 1 "$@"
+
+
+TEMP=`uuidgen`
+mkdir $TEMP
+
+maizeFile=$(basename "$INPUTS1")
+
+set -e
+set -x
+
+cp $INPUTS1 $TEMP
+cp $INPUTS2 $TEMP
+cp $INPUTS3 $TEMP
+
+cd $TEMP
+
+# starting container
+#docker run -d -t -v $TEMP:/mint --name=mint-dssat-wrapper mintproject/dssat:latest bash
+
+# executing the code
+#docker exec -w /mint mint-dssat-wrapper bash /opt/dssat/dscsm047 A maize.MZX 
+#docker exec -w /mint mint-dssat-wrapper chown -R `id -u $USER`:`id -g $GROUP` .
+
+# stopping and removing the container
+#docker stop mint-dssat-wrapper
+#docker rm mint-dssat-wrapper
+
+/opt/dssat/dscsm047 A $maizeFile
+
+cd ..
+
+mv $TEMP/summary.csv $OUTPUTS1
+
+rm -rf $TEMP
+
+checkExitCode
