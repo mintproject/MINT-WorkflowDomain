@@ -1,5 +1,7 @@
 #!/bin/bash
 
+unset http_proxy
+
 checkExitCode() {
 if [ $? -ne 0 ]; then
     echo "Error"
@@ -11,47 +13,51 @@ BASEDIR=`dirname $0`
 
 . $BASEDIR/io.sh 10 0 23 "$@"
 
+# project name
+PROJECT_NAME=`grep ^project_name $INPUTS1 | sed 's/.*= *//'`
+
 # untar PIHM-base
 tar -zxvf $INPUTS10
 
 # move input data into PIHM-base folder
-mv $INPUTS2 PIHM-base/
-mv $INPUTS3 PIHM-base/
-mv $INPUTS5 PIHM-base/
-mv $INPUTS6 PIHM-base/
-mv $INPUTS7 PIHM-base/
-mv $INPUTS8 PIHM-base/
-mv $INPUTS9 PIHM-base/
+mv $INPUTS2 PIHM-base/$PROJECT_NAME.att
+mv $INPUTS3 PIHM-base/$PROJECT_NAME.forc
+mv $INPUTS5 PIHM-base/$PROJECT_NAME.soil
+mv $INPUTS6 PIHM-base/$PROJECT_NAME.riv
+mv $INPUTS7 PIHM-base/$PROJECT_NAME.geol
+mv $INPUTS8 PIHM-base/$PROJECT_NAME.ibc
+mv $INPUTS9 PIHM-base/$PROJECT_NAME.lc
 
 # untar Model Info and move into PIHM-base folder
 tar -zxvf $INPUTS4
 mv ModelInfo PIHM-base/
 
 # run the model
-python3 pihm-wrapper.py $INPUTS1
+cd PIHM-base &&/usr/bin/pihm $PROJECT_NAME 2>&1
 checkExitCode
 
 # prepare output data
-mv PIHM-base/*.GW       $OUTPUTS1
-mv PIHM-base/*.infil    $OUTPUTS2
-mv PIHM-base/*.is       $OUTPUTS3
-mv PIHM-base/*.snow     $OUTPUTS4
-mv PIHM-base/*.surf     $OUTPUTS5
-mv PIHM-base/*.unsat    $OUTPUTS6
-mv PIHM-base/*.et0      $OUTPUTS7
-mv PIHM-base/*.et1      $OUTPUTS8
-mv PIHM-base/*.et2      $OUTPUTS9
-mv PIHM-base/*.Rech     $OUTPUTS10
-mv PIHM-base/*.stage    $OUTPUTS11
-mv PIHM-base/*.rbed     $OUTPUTS12
-mv PIHM-base/*.rivFlx0  $OUTPUTS13
-mv PIHM-base/*.rivFlx1  $OUTPUTS14
-mv PIHM-base/*.rivFlx2  $OUTPUTS15
-mv PIHM-base/*.rivFlx3  $OUTPUTS16
-mv PIHM-base/*.rivFlx4  $OUTPUTS17
-mv PIHM-base/*.rivFlx5  $OUTPUTS18
-mv PIHM-base/*.rivFlx6  $OUTPUTS19
-mv PIHM-base/*.rivFlx7  $OUTPUTS20
-mv PIHM-base/*.rivFlx8  $OUTPUTS21
-mv PIHM-base/*.rivFlx9  $OUTPUTS22
-mv PIHM-base/*.rivFlx10 $OUTPUTS23
+cd ..
+mv PIHM-base/$PROJECT_NAME.GW       $OUTPUTS1
+mv PIHM-base/$PROJECT_NAME.infil    $OUTPUTS2
+mv PIHM-base/$PROJECT_NAME.is       $OUTPUTS3
+mv PIHM-base/$PROJECT_NAME.snow     $OUTPUTS4
+mv PIHM-base/$PROJECT_NAME.surf     $OUTPUTS5
+mv PIHM-base/$PROJECT_NAME.unsat    $OUTPUTS6
+mv PIHM-base/$PROJECT_NAME.et0      $OUTPUTS7
+mv PIHM-base/$PROJECT_NAME.et1      $OUTPUTS8
+mv PIHM-base/$PROJECT_NAME.et2      $OUTPUTS9
+mv PIHM-base/$PROJECT_NAME.Rech     $OUTPUTS10
+mv PIHM-base/$PROJECT_NAME.stage    $OUTPUTS11
+mv PIHM-base/$PROJECT_NAME.rbed     $OUTPUTS12
+mv PIHM-base/$PROJECT_NAME.rivFlx0  $OUTPUTS13
+mv PIHM-base/$PROJECT_NAME.rivFlx1  $OUTPUTS14
+mv PIHM-base/$PROJECT_NAME.rivFlx2  $OUTPUTS15
+mv PIHM-base/$PROJECT_NAME.rivFlx3  $OUTPUTS16
+mv PIHM-base/$PROJECT_NAME.rivFlx4  $OUTPUTS17
+mv PIHM-base/$PROJECT_NAME.rivFlx5  $OUTPUTS18
+mv PIHM-base/$PROJECT_NAME.rivFlx6  $OUTPUTS19
+mv PIHM-base/$PROJECT_NAME.rivFlx7  $OUTPUTS20
+mv PIHM-base/$PROJECT_NAME.rivFlx8  $OUTPUTS21
+mv PIHM-base/$PROJECT_NAME.rivFlx9  $OUTPUTS22
+mv PIHM-base/$PROJECT_NAME.rivFlx10 $OUTPUTS23

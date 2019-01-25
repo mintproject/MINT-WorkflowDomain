@@ -14,15 +14,15 @@ args = commandArgs(trailingOnly=TRUE)
 
 readnc<-function(fn, xyid=c(1,1), vns=NULL){
   fid= nc_open(fn)
-  
+
   if(is.null(vns)){
     vns = names(fid$var)
     vns = vns[!(vns %in% 'time_bnds')] # don't need the time_bnds
   }
-  
+
   nv = length(vns)
   x.mat = matrix(0, ncol=nv, nrow=ns)
-  
+
   for(i in 1:nv){  #reading file
     vn=vns[i]
     mat=ncvar_get(fid, vn)
@@ -44,7 +44,7 @@ writeshape <- function(shp, file=NULL){
     if(!dir.exists(path)){
       dir.create(path, showWarnings = T, recursive = T)
     }
-    
+
     prj = sp::proj4string(shp)
     writeOGR(obj=shp, driver = 'ESRI Shapefile',
              layer=fn,
@@ -58,7 +58,7 @@ writeshape <- function(shp, file=NULL){
   }
 }
 add.df <- function(x){
-  df=data.frame('ID'=1:length(x)); 
+  df=data.frame('ID'=1:length(x));
   row.names(df) = row.names(x)
   xx=SpatialPolygonsDataFrame(x,  data=df)
   xx
@@ -162,10 +162,8 @@ fun.toForc <- function (x,lxy,years = 2001:2017,
   mettab = data.frame(1:length(vnames), vnames)
   colnames(mettab) = c('INDEX', 'NLDAS_ID')
   write.table(file='NLDAS_ID.csv',x=mettab, quote=FALSE, row.names=FALSE, col.names=TRUE)
-
   message('Writing Forcing')
   #writeforc(Forcing, path=path, filename=forc.name)
-
   ns = ncol(prcp)
   nlc=length(lc)
   lr=fun.LaiRf(lc=lc, years=years)
@@ -174,7 +172,7 @@ fun.toForc <- function (x,lxy,years = 2001:2017,
   forcnames = c( "Precip", "Temp", "RH", "Wind", "RN",
                  "G","LW", "LAI", "MF", "SS" )
   Forc<-list(   prcp * 86400/1000   , #mm/m2/s(FLDAS daily) to m/day (PIHM).
-                temp -273.15   , # C
+                temp - t0   , # C
                 rh/100  ,  # PERCENTAGE
                 abs(winds) * 86400  , #m/s to m/day
                 solar *24 *3600  , #
@@ -201,9 +199,9 @@ fun.toForc <- function (x,lxy,years = 2001:2017,
     t0 = t[-(length(t) )]
     t1 = t[-1];
     dt = as.numeric(difftime(t1, t0, units='days'))
-    #    dt1 = as.numeric(difftime(round(t[1], units='hours'), 
+    #    dt1 = as.numeric(difftime(round(t[1], units='hours'),
     #                              round(t[1], units='days'),
-    #                              , units='days')) 
+    #                              , units='days'))
 
     dt=c(dt[1], dt)
     tt=cumsum( dt)
@@ -281,11 +279,11 @@ fun.toForc <- function (x,lxy,years = 2001:2017,
 }
 
 
-cfun <- function (x,tab, type=1) {                                                                  
-  #Source: http://www.pihm.psu.edu/EstimationofVegitationParameters.htm                             
-  dlai=rbind(c( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),                                                
-             c(   8.76,  9.16,  9.827,  10.093,  10.36,  10.76,  10.493,  10.227,  10.093,  9.827,  9.16,  8.76),                                                                                       
-             c(   5.117,  5.117,  5.117,  5.117,  5.117,  5.117,  5.117,  5.117,  5.117,  5.117,  5.117,  5.117),                                                                                       
+cfun <- function (x,tab, type=1) {
+  #Source: http://www.pihm.psu.edu/EstimationofVegitationParameters.htm
+  dlai=rbind(c( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+             c(   8.76,  9.16,  9.827,  10.093,  10.36,  10.76,  10.493,  10.227,  10.093,  9.827,  9.16,  8.76),
+             c(   5.117,  5.117,  5.117,  5.117,  5.117,  5.117,  5.117,  5.117,  5.117,  5.117,  5.117,  5.117),
              c(    8.76,  9.16,  9.827,  10.093,  10.36,  10.76,  10.493,  10.227,  10.093,  9.827,  9.16,  8.76),
              c(    0.52,  0.52,  0.867,  2.107,  4.507,  6.773,  7.173,  6.507,  5.04,  2.173,  0.867,  0.52),
              c(    4.64,  4.84,  5.347,  6.1,  7.4335,  8.7665,  8.833,  8.367,  7.5665,  6,  5.0135,  4.64),
@@ -388,7 +386,7 @@ fun.vegtable <- function (lc, file){
 wdir = 'FLDAS_NOAH01_A_EA_D.001/'
 fl=read.csv('PIHM-base/GISdata/Forcing/FLDAS_grids.csv')
 
-years=2017
+years=args[1]:args[2]
 dirs = file.path(wdir, years)
 
 ndir = length(dirs)
@@ -402,8 +400,8 @@ nx=length(xloc)
 ny = length(yloc)
 
 #===================================================
-xc = fl[,'xcenter']
-yc = fl[,'ycenter']
+xc = round(fl[,'xcenter'], 2)
+yc = round(fl[,'ycenter'], 2)
 
 xid = match(xc, xloc)
 yid = match(yc, yloc)
@@ -427,24 +425,18 @@ for(idd  in 1:ndir){ # for each year dir
     message(j, '/', nf, '\t', t)
     x.mat = readnc(fn, xyid=xyid, vns=vns)
     x.t[j] = t
-    x.arr[,,j ] = x.mat 
+    x.arr[,,j ] = x.mat
   }
   dimnames(x.arr) = list(sn, vns,  x.t)
-  
+
   fn.rds = file.path('./', paste0('weather-', basename(cdir), '.RDS'))
   saveRDS(x.arr, file=fn.rds)
 }
 
-
 ddir = '.'
-dem = raster('PIHM-base/GISdata/DEM/dem.asc')
 cns = c('Rainf_f_tavg', 'Tair_f_tavg','Qair_f_tavg',
         'Wind_f_tavg', 'Swnet_tavg','Lwnet_tavg',
         'Psurf_f_tavg')
-forcnames = c( "Precip", "Temp", "RH",
-               "Wind", "RN","G",
-               "VP", "LAI", "MF",
-               "SS" )
 fns = list.files(ddir, pattern=glob2rx('*.RDS'), full.names = T )
 nf=length(fns)
 i=1
@@ -470,5 +462,3 @@ for(i in 1:nd[1]){
 
 names(xl) = dn[[1]]
 fun.toForc(xl, years=years, cns=cns)
-
-
