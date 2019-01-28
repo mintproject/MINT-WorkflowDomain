@@ -6,7 +6,7 @@ RUN wget -nv -O ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda2-la
     conda install --yes anaconda && \
     conda install --yes -c conda-forge -c digitalglobe gbdxtools && \
     conda install --yes -c conda-forge numpy pandas tensorflow keras shapely descarteslabs google-api-python-client oauth2client earthengine-api && \
-    conda create --yes -n gdalenv -c conda-forge python=2.7 numpy gdal=2.2.4 urllib3=1.23 rasterio
+    conda create --yes -n gdalenv -c conda-forge python=2.7 numpy gdal=2.4.0 urllib3=1.23 rasterio
 
 
 
