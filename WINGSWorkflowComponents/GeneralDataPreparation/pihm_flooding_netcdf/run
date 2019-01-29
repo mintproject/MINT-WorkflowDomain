@@ -1,0 +1,26 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 2 2 1 "$@"
+
+START_YEAR=`date +"%Y" -d "$PARAMS1"`
+
+# untar cells file
+tar zxvf $INPUTS1
+
+# running docker container
+docker run --rm -v $PWD:/mint mintproject/isi-dtran:2.0 python3 -m dtran.main pihm2netcdf_flooding $START_YEAR /mint/ModelInfo/GISlayer/Cells.shp /mint/$INPUTS2 $PARAMS2 /mint/pihm-flooding-netcdf
+checkExitCode
+
+ls -lh
+
+#generate output file
+tar czf $OUTPUTS1 pihm-flooding-netcdf
