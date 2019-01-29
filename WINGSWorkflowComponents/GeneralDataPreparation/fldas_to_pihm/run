@@ -9,18 +9,14 @@ fi
 
 BASEDIR=`dirname $0`
 
-. $BASEDIR/io.sh 3 0 1 "$@"
+. $BASEDIR/io.sh 2 2 1 "$@"
 
 # untar FLDAS data
+tar zxvf $INPUTS1
+
+# untar PIHMGISdata
 tar zxvf $INPUTS2
 
-# untar PIHM-base
-tar zxvf $INPUTS3
-
-# get start/end years
-START_YEAR=`grep ^start_year $INPUTS1 | sed 's/.*= *//'`
-END_YEAR=`grep ^end_year $INPUTS1 | sed 's/.*= *//'`
-
 #execute the transformation
-Rscript FLDAS-to-PIHM.R $START_YEAR $END_YEAR $OUTPUTS1
+Rscript FLDAS-to-PIHM.R $PARAMS1 $PARAMS2 $OUTPUTS1
 checkExitCode

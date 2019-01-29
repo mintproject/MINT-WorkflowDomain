@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import configparser
 import datetime
 import math
 import subprocess
@@ -65,20 +64,13 @@ def process_day(forcing_file, index, dt):
 
 
 def main():
-    config_file = sys.argv[1]
-    forcing_file = sys.argv[2]
-    attribute_file = sys.argv[3]
-    cropland_file = sys.argv[4]
-    weather_file = sys.argv[5]
-
-    # get the general configuration from the global mint_run.config
-    run_config = configparser.ConfigParser()
-    run_config.read(config_file)
-
-    start_year = run_config.get('mint', 'start_year')
-    start_dt = parser.parse(start_year + '-01-01T00:00:00')
-    end_year = run_config.get('mint', 'end_year')
-    end_dt = parser.parse(end_year + '-12-31T23:59:59')
+    forcing_file = sys.argv[1]
+    attribute_file = sys.argv[2]
+    cropland_file = sys.argv[3]
+    # start and end dates
+    start_dt = parser.parse(sys.argv[4] + 'T00:00:00')
+    end_dt = parser.parse(sys.argv[5] + '-T23:59:59')
+    weather_file = sys.argv[6]
 
     # TEMP: counter
     count = 0

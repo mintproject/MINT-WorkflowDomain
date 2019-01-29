@@ -101,12 +101,6 @@ fun.toForc <- function (x,lxy,years = 2001:2017,
                        cns
 
 ){
-  #    x
-  #    years = 1979:2015
-  #    path='./'
-  #    forc.name ='PIHM.forc'
-  #    pihmver=2.2
-  #
   require(xts)
   if( !dir.exists(path)){
     dir.create(path, recursive = T, showWarnings = F)
@@ -119,7 +113,6 @@ fun.toForc <- function (x,lxy,years = 2001:2017,
   print(range(ts))
   pb <- txtProgressBar(min=0, max=nsites)
   for (i in 1:nsites){
-    #    message(i, '/', nsites, '\t', vnames[i]);
     setTxtProgressBar(pb, i)
     if (i==1){
       prcp = x[[i]][ts,cns[1]]
@@ -150,20 +143,10 @@ fun.toForc <- function (x,lxy,years = 2001:2017,
   names(press ) = vnames
   t0=273.15
   rh = 0.263*press*SH/exp(17.67 * (temp - t0) /(temp - 29.65) ) # specific hum to relative hum
-  #  Forcing<-list('PRCP'  =    prcp / 3600   , #hourly to per second
-  #                'SFCTMP'=    temp    ,
-  #                'RH'    =    rh  ,
-  #                'SFCSPD'=    winds   ,
-  #                'SOLAR' =    solar   ,
-  #                'LONGWV'=    longw   ,
-  #                'PRES'  =    press ,
-  #                'NumMeteoTS'=nsites);
-  #
   mettab = data.frame(1:length(vnames), vnames)
   colnames(mettab) = c('INDEX', 'NLDAS_ID')
   write.table(file='NLDAS_ID.csv',x=mettab, quote=FALSE, row.names=FALSE, col.names=TRUE)
   message('Writing Forcing')
-  #writeforc(Forcing, path=path, filename=forc.name)
   ns = ncol(prcp)
   nlc=length(lc)
   lr=fun.LaiRf(lc=lc, years=years)
@@ -199,9 +182,6 @@ fun.toForc <- function (x,lxy,years = 2001:2017,
     t0 = t[-(length(t) )]
     t1 = t[-1];
     dt = as.numeric(difftime(t1, t0, units='days'))
-    #    dt1 = as.numeric(difftime(round(t[1], units='hours'),
-    #                              round(t[1], units='days'),
-    #                              , units='days'))
 
     dt=c(dt[1], dt)
     tt=cumsum( dt)
@@ -318,9 +298,7 @@ cfun <- function (x,tab, type=1) {
 }
 
 
-
 fun.LaiRf <- function(lc,years=2000+1:2, if.daily=FALSE){
-  #years=2000:(2010+1);
   years=sort(c(years,max(years)+1))
   yrlim=range(years);
   ny = length(years)
@@ -330,7 +308,6 @@ fun.LaiRf <- function(lc,years=2000+1:2, if.daily=FALSE){
   DataDaily=xts::as.xts(numeric(length(tdaily)),order.by=tdaily)
   DataMon=xts::apply.monthly(DataDaily,FUN=sum)
   tmon =as.Date( format(time(DataMon), "%Y-%m-01"))
-  #tmon = time(DataMon)- days_in_month(time(DataMon))+1
   nlc=length(lc)
   l = matrix(0, nrow=12, ncol=nlc)
   r = matrix(0, nrow=12, ncol=nlc)
@@ -384,13 +361,76 @@ fun.vegtable <- function (lc, file){
 
 
 wdir = 'FLDAS_NOAH01_A_EA_D.001/'
-fl=read.csv('PIHM-base/GISdata/Forcing/FLDAS_grids.csv')
+fl=read.csv('GISdata/Forcing/FLDAS_grids.csv')
 
-years=args[1]:args[2]
-dirs = file.path(wdir, years)
+years=2016:2017
 
-ndir = length(dirs)
-fn=list.files(wdir, pattern=glob2rx('*.nc'), recursive = T, full.names = T)[1]
+# Read files based on date
+date.start = as.Date(args[1])
+date.end = as.Date(args[2])
+
+date.start.year = as.numeric(format(date.start, "%Y"))
+date.start.month = as.numeric(format(date.start, "%m"))
+date.start.day = as.numeric(format(date.start, "%d"))
+date.end.year = as.numeric(format(date.end, "%Y"))
+date.end.month = as.numeric(format(date.end, "%m"))
+date.end.day = as.numeric(format(date.end, "%d"))
+
+wdir = normalizePath('FLDAS_NOAH01_A_EA_D.001')
+
+fun.processDay <- function(path, year, month, day) {
+  dayfile = paste(path, '/FLDAS_NOAH01_A_EA_D.A', year, sprintf("%02d", month), sprintf("%02d", day), '.001.nc', sep='')
+}
+
+fn = c()
+
+for (year in date.start.year:date.end.year) {
+  if (date.start.year == date.end.year) {
+    for (month in date.start.month:date.end.month) {
+      if (date.start.month == date.end.month) {
+        for (day in date.start.day:date.end.day) {
+          fn = c(fn, fun.processDay(paste(wdir, year, sprintf("%02d", month), sep='/'), year, month, day))
+        }
+      } else if (month == date.start.month) {
+        for (day in date.start.day:as.numeric(format(as.Date(paste(year,(month + 1),'01',sep='-'))-1, "%d"))) {
+          fn = c(fn, fun.processDay(paste(wdir, year, sprintf("%02d", month), sep='/'), year, month, day))
+        }
+      } else if (month == date.end.month) {
+        for (day in 1:date.end.day) {
+          fn = c(fn, fun.processDay(paste(wdir, year, sprintf("%02d", month), sep='/'), year, month, day))
+        }
+      } else {
+        for (day in 1:as.numeric(format(as.Date(paste(year,(month + 1),'01',sep='-'))-1, "%d"))) {
+          fn = c(fn, fun.processDay(paste(wdir, year, sprintf("%02d", month), sep='/'), year, month, day))
+        }
+      }
+    }
+  } else if (year == date.start.year) {
+    for (month in date.start.month:12) {
+      if (month == date.start.month) {
+        for (day in date.start.day:ifelse(month < 12, as.numeric(format(as.Date(paste(year,(month + 1),'01',sep='-'))-1, "%d")), 31)) {
+          fn = c(fn, fun.processDay(paste(wdir, year, sprintf("%02d", month), sep='/'), year, month, day))
+        }
+      } else {
+        for (day in 1:ifelse(month < 12, as.numeric(format(as.Date(paste(year,(month + 1),'01',sep='-'))-1, "%d")), 31)) {
+          fn = c(fn, fun.processDay(paste(wdir, year, sprintf("%02d", month), sep='/'), year, month, day))
+        }
+      }
+    }
+  } else if (year == date.end.year) {
+    for (month in 1:date.end.month) {
+      if (month == date.end.month) {
+        for (day in 1:date.end.day) {
+          fn = c(fn, fun.processDay(paste(wdir, year, sprintf("%02d", month), sep='/'), year, month, day))
+        }
+      } else {
+        for (day in 1:ifelse(month < 12, as.numeric(format(as.Date(paste(year,(month + 1),'01',sep='-'))-1, "%d")), 31)) {
+          fn = c(fn, fun.processDay(paste(wdir, year, sprintf("%02d", month), sep='/'), year, month, day))
+        }
+      }
+    }
+  }
+}
 
 
 fid=nc_open(fn)
@@ -413,25 +453,24 @@ ns = length(sn)
 vns = names(fid$var)
 vns = vns[!(vns %in% 'time_bnds')] # don't need the time_bnds
 nv=length(vns)
-for(idd  in 1:ndir){ # for each year dir
-  cdir <- dirs[idd]
-  fns = list.files(cdir, pattern=glob2rx('*.nc'), recursive = T, full.names = T)
-  nf = length(fns)
-  x.arr = array(0, dim=c(ns, nv, nf) )
-  x.t= character(nf)
-  for(j  in 1:nf){  # files in each year
-    fn=fns[j]
-    t=substr(basename(fn), 22, 29)
-    message(j, '/', nf, '\t', t)
-    x.mat = readnc(fn, xyid=xyid, vns=vns)
-    x.t[j] = t
-    x.arr[,,j ] = x.mat
-  }
-  dimnames(x.arr) = list(sn, vns,  x.t)
 
-  fn.rds = file.path('./', paste0('weather-', basename(cdir), '.RDS'))
-  saveRDS(x.arr, file=fn.rds)
+# Generate RDS
+fns = fn
+nf = length(fns)
+x.arr = array(0, dim=c(ns, nv, nf) )
+x.t= character(nf)
+for(j  in 1:nf){  # files in each year
+  fn=fns[j]
+  t=substr(basename(fn), 22, 29)
+  message(j, '/', nf, '\t', t)
+  x.mat = readnc(fn, xyid=xyid, vns=vns)
+  x.t[j] = t
+  x.arr[,,j ] = x.mat
 }
+dimnames(x.arr) = list(sn, vns,  x.t)
+
+fn.rds = file.path('./weather.RDS')
+saveRDS(x.arr, file=fn.rds)
 
 ddir = '.'
 cns = c('Rainf_f_tavg', 'Tair_f_tavg','Qair_f_tavg',

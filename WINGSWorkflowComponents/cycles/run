@@ -1,8 +1,5 @@
 #!/bin/bash
 
-set -e
-set -x
-
 unset http_proxy
 
 checkExitCode() {
@@ -14,7 +11,7 @@ fi
 
 BASEDIR=`dirname $0`
 
-. $BASEDIR/io.sh 4 0 9 "$@"
+. $BASEDIR/io.sh 4 4 9 "$@"
 
 ##################################################################
 
@@ -48,6 +45,38 @@ perl -p -i -e "s/REINIT_FILE.*/REINIT_FILE             $INPUTS4/" input/SS_$CROP
 perl -p -i -e "s/AUTOMATIC_NITROGEN.*/AUTOMATIC_NITROGEN      0/" input/SS_$CROP_NAME.ctrl
 perl -p -i -e "s/CROP .*/CROP                $CROP_NAME/" input/SS_$CROP_NAME.operation
 perl -p -i -e "s/MASS.*/MASS                $NEW_MASS/" input/SS_$CROP_NAME.operation
+
+# adding planting dates to operation file
+PLANTING_END_DAY_1=$(($PARAMS1 + $PARAMS2))
+PLANTING_END_DAY_2=$(($PARAMS3 + $PARAMS4))
+
+cat <<EOT >> input/SS_$CROP_NAME.operation
+PLANTING
+YEAR                1   
+DOY                 $PARAMS1
+END_DOY             $PLANTING_END_DAY_1
+MIN_SMC             0.10
+MIN_SOIL_TEMP       10
+CROP                $CROP_NAME
+USE_AUTO_IRR        0
+USE_AUTO_FERT       0
+FRACTION            0.67
+CLIPPING_START      1
+CLIPPING_END        366
+
+PLANTING
+YEAR                1   
+DOY                 $PARAMS3
+END_DOY             $PLANTING_END_DAY_2
+MIN_SMC             0.10
+MIN_SOIL_TEMP       10
+CROP                $CROP_NAME
+USE_AUTO_IRR        0
+USE_AUTO_FERT       0
+FRACTION            0.67
+CLIPPING_START      1
+CLIPPING_END        366
+EOT
 
 # run cycles
 Cycles SS_${CROP_NAME}

@@ -11,26 +11,30 @@ fi
 
 BASEDIR=`dirname $0`
 
-. $BASEDIR/io.sh 10 0 23 "$@"
+. $BASEDIR/io.sh 9 3 23 "$@"
 
 # project name
-PROJECT_NAME=`grep ^project_name $INPUTS1 | sed 's/.*= *//'`
+PROJECT_NAME=$PARAMS3
 
 # untar PIHM-base
-tar -zxvf $INPUTS10
+tar -zxvf $INPUTS9
 
 # move input data into PIHM-base folder
-mv $INPUTS2 PIHM-base/$PROJECT_NAME.att
-mv $INPUTS3 PIHM-base/$PROJECT_NAME.forc
-mv $INPUTS5 PIHM-base/$PROJECT_NAME.soil
-mv $INPUTS6 PIHM-base/$PROJECT_NAME.riv
-mv $INPUTS7 PIHM-base/$PROJECT_NAME.geol
-mv $INPUTS8 PIHM-base/$PROJECT_NAME.ibc
-mv $INPUTS9 PIHM-base/$PROJECT_NAME.lc
+mv $INPUTS1 PIHM-base/$PROJECT_NAME.att
+mv $INPUTS2 PIHM-base/$PROJECT_NAME.forc
+mv $INPUTS4 PIHM-base/$PROJECT_NAME.soil
+mv $INPUTS5 PIHM-base/$PROJECT_NAME.riv
+mv $INPUTS6 PIHM-base/$PROJECT_NAME.geol
+mv $INPUTS7 PIHM-base/$PROJECT_NAME.ibc
+mv $INPUTS8 PIHM-base/$PROJECT_NAME.lc
 
 # untar Model Info and move into PIHM-base folder
-tar -zxvf $INPUTS4
+tar -zxvf $INPUTS3
 mv ModelInfo PIHM-base/
+
+# set total number of days
+DAYS=$(( (($(date -d $PARAMS2 +%s) - $(date -d $PARAMS1 +%s)) / (24*3600) + 1 ) * 1440 ))
+perl -p -i -e "s/0	525600	0/0	$DAYS	0/" PIHM-base/$PROJECT_NAME.para
 
 # run the model
 cd PIHM-base &&/usr/bin/pihm $PROJECT_NAME 2>&1
