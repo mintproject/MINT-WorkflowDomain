@@ -6,15 +6,12 @@ import sys
 import tempfile
 from shutil import copyfile
 
-config_file = sys.argv[1]
-economic_files = sys.argv[2:-1]
+economic_files = sys.argv[3:-1]
 output_file = sys.argv[-1:][0]
 
 # configuration parameters
-config = configparser.ConfigParser()
-config.read(config_file)
-year = config.get('mint', 'end_year')
-region = config.get('mint', 'region')
+year = int(sys.argv[1]) # in its present configuration only one year is allowed
+region = sys.argv[2]
 
 # base dictionary
 subsidies = {

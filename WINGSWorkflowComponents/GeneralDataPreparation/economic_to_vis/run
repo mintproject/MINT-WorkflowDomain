@@ -9,7 +9,9 @@ fi
 
 BASEDIR=`dirname $0`
 
-. $BASEDIR/io.sh 2 0 1 "$@"
+. $BASEDIR/io.sh 1 2 1 "$@"
 
-python3 $BASEDIR/economic_to_vis.py $INPUTS1 $INPUTS2 $OUTPUTS1
+START_YEAR=`date +"%Y" -d "$PARAMS1"`
+
+python3 $BASEDIR/economic_to_vis.py $START_YEAR $PARAMS2 $INPUTS1 $OUTPUTS1
 checkExitCode
