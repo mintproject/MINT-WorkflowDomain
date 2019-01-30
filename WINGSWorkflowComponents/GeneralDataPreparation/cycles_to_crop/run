@@ -9,8 +9,9 @@ fi
 
 BASEDIR=`dirname $0`
 
-. $BASEDIR/io.sh 3 0 1 "$@"
+. $BASEDIR/io.sh 2 1 1 "$@"
 
-python3 cycles-to-crop.py $INPUTS1 $INPUTS2 $OUTPUTS1
+START_YEAR=`date +"%Y" -d "$PARAMS1"`
+
+python3 cycles-to-crop.py $START_YEAR $INPUTS1 $OUTPUTS1
 checkExitCode
-

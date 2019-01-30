@@ -16,10 +16,7 @@ import pandas as pd
 from itertools import islice
 
 # configuration parameters
-config_file = sys.argv[1]
-config = configparser.ConfigParser()
-config.read(config_file)
-year = int(config.get('mint', 'end_year')) # in its present configuration only one year is allowed
+year = int(sys.argv[1]) # in its present configuration only one year is allowed
 
 data = {}
 
