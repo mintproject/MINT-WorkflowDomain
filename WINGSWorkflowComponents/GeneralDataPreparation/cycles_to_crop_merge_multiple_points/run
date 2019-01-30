@@ -1,0 +1,15 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 1 0 1 "$@"
+
+python3 $BASEDIR/cycles_to_crop_merge_multiple_points.py $INPUTS1 $OUTPUTS1
+checkExitCode
