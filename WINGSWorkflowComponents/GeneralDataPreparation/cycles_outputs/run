@@ -1,0 +1,15 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 2 0 1 "$@"
+
+tar zcvf $OUTPUTS1 $INPUTS1 $INPUTS2
+checkExitCode
