@@ -8,8 +8,7 @@ ENV PIHM_VERSION 4.0
 # --------
 
 COPY Rprofile /root/.Rprofile
-RUN Rscript -e 'install.packages("rgeos"); install.packages("ncdf4"); install.packages("rgdal"); install.packages("raster"); install.packages("zoo"); install.packages("abind"); install.packages("xts"); install.packages("devtools"); library("devtools"); install_github("shulele/PIHMgisR");'
-
+RUN Rscript -e 'install.packages("rgeos"); install.packages("ncdf4"); install.packages("rgdal"); install.packages("raster"); install.packages("zoo"); install.packages("abind"); install.packages("xts"); install.packages("GGally"); install.packages("devtools"); library("devtools"); install_github("shulele/PIHMgisR");'
 
 # ------
 # PIHM++
