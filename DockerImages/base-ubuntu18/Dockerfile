@@ -16,6 +16,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         libpng-dev \
         libssl-dev \
         libsundials-dev \
+        libomp-dev \
         libopenmpi-dev \
         libxpm-dev \
         libzmq3-dev \
