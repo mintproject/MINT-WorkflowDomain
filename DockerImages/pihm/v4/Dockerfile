@@ -8,7 +8,7 @@ ENV PIHM_VERSION 4.0
 # --------
 
 COPY Rprofile /root/.Rprofile
-RUN Rscript -e 'install.packages("rgeos"); install.packages("ncdf4"); install.packages("rgdal"); install.packages("raster"); install.packages("zoo"); install.packages("abind"); install.packages("xts"); install.packages("GGally"); install.packages("devtools"); library("devtools"); install_github("shulele/PIHMgisR");'
+RUN Rscript -e 'install.packages("GGally"); install.packages("ncdf4"); install.packages("devtools"); library("devtools"); install_github("mayani/PIHMgisR");'
 
 # ------
 # PIHM++
@@ -19,7 +19,7 @@ RUN wget -nv https://computation.llnl.gov/projects/sundials/download/sundials-${
     cd sundials-${SUNDIALS_VERSION} && \
     mkdir build-dir && \
     cd build-dir && \
-    cmake -DCMAKE_INSTALL_PREFIX=/usr/local/sundials .. && \
+    cmake -DCMAKE_INSTALL_PREFIX=/usr/local/sundials -DOPENMP_ENABLE=1 -DMPI_ENABLE=1 .. && \
     make && \
     make install && \
     cd ../.. && \
@@ -27,9 +27,10 @@ RUN wget -nv https://computation.llnl.gov/projects/sundials/download/sundials-${
 
 ENV LD_LIBRARY_PATH /usr/local/sundials/lib
 
-RUN git clone https://github.com/shulele/PIHM-4.0.git && \
-    cd PIHM-4.0 && \
-    make pihm && \
-    mv pihm++ /usr/bin && \
+RUN wget "https://github.com/shulele/PIHM-${PIHM_VERSION}/archive/master.zip" && \
+    unzip master.zip && \
+    cd PIHM-${PIHM_VERSION}-master && \
+    make pihm pihm_omp calib_omp && \
+    mv pihm++ pihm_omp calib_omp /usr/bin && \
     cd .. && \
-    rm -rf PIHM*
+    rm -rf master.zip PIHM*
