@@ -23,7 +23,7 @@ RUN git clone --branch v${TAUDEM_VERSION} https://github.com/dtarb/TauDEM && \
 # --------
 
 COPY Rprofile /root/.Rprofile
-RUN Rscript -e 'install.packages("GGally"); install.packages("ncdf4"); install.packages("devtools"); library("devtools"); install_github("mayani/PIHMgisR");'
+RUN Rscript -e 'install.packages("devtools"); library("devtools"); install_github("mayani/PIHMgisR", ref="patch-1");'
 
 # ------
 # PIHM++
