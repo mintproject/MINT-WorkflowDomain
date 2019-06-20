@@ -1,7 +1,22 @@
 FROM mintproject/base-ubuntu18
 
+ENV TAUDEM_VERSION 5.3.7
 ENV SUNDIALS_VERSION 3.2.1
 ENV PIHM_VERSION 4.0
+
+
+# ------
+# TauDEM
+# ------
+
+RUN git clone --branch v${TAUDEM_VERSION} https://github.com/dtarb/TauDEM && \
+    cd TauDEM/src && \
+    mkdir build && \
+    cd build && \
+    cmake .. && \
+    make && make install && \
+    cd ../../.. && \
+    rm -rf TauDEM
 
 # --------
 # PIHMgisR
