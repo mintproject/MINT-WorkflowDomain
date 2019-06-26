@@ -45,7 +45,16 @@ ENV LD_LIBRARY_PATH /usr/local/sundials/lib
 RUN wget "https://github.com/shulele/PIHM-${PIHM_VERSION}/archive/master.zip" && \
     unzip master.zip && \
     cd PIHM-${PIHM_VERSION}-master && \
-    make pihm pihm_omp calib_omp && \
-    mv pihm++ pihm_omp calib_omp /usr/bin && \
+    make pihm pihm_omp && \
+    mv pihm++ pihm_omp /usr/bin && \
     cd .. && \
     rm -rf master.zip PIHM*
+
+# --------
+# AutoPIHM
+# --------
+
+RUN wget "https://github.com/shulele/AutoPIHM/archive/master.zip" && \
+    unzip master.zip && \
+    mv AutoPIHM-master AutoPIHM && \
+    rm -rf master.zip
