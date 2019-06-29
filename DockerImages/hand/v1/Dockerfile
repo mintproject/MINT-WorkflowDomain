@@ -1,6 +1,6 @@
 FROM mintproject/base-ubuntu18
 
-ENV TAUDEM_VERSION 5.3.7
+ENV TAUDEM_VERSION 5.3.8
 
 
 # ------
@@ -15,3 +15,6 @@ RUN git clone --branch v${TAUDEM_VERSION} https://github.com/dtarb/TauDEM && \
     make && make install && \
     cd ../../.. && \
     rm -rf TauDEM
+
+
+RUN Rscript -e 'install.packages("rgdal"); install.packages("raster"); install.packages("shapefiles");'
