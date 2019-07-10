@@ -17,4 +17,4 @@ RUN git clone --branch v${TAUDEM_VERSION} https://github.com/dtarb/TauDEM && \
     rm -rf TauDEM
 
 
-RUN Rscript -e 'install.packages("rgdal"); install.packages("raster"); install.packages("shapefiles");'
+RUN Rscript -e 'install.packages("rgdal"); install.packages("raster"); install.packages("shapefiles"); install.packages("optparse");'
