@@ -13,6 +13,7 @@ repository:
   type : git
   url : https://github.com/npm/cli.git
 wings:
+  source: https://w3id.org/okn/i/mint/economic-v6.1
   componentType: Economic
   files:
     - src/*
