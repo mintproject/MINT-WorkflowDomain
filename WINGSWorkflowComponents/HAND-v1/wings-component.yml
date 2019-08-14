@@ -17,6 +17,7 @@ repository:
   url : https://github.com/dtarb/TauDEM
 wings:
   componentType: Hydrological
+  source: https://w3id.org/okn/i/mint/hand_v1_simple
   files:
     - src/*
   inputs:
