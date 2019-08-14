@@ -9,7 +9,10 @@ bugs:
   url: https://
   email: a@a.com
 license: Apache
-author: "Kelly Cobourn <kellyc13@vt.edu> (https://frec.vt.edu/people/Cobourn.html)"
+author: 
+  - name: Kelly Cobourn
+    email: kellyc13@vt.edu
+    url: https://frec.vt.edu/people/Cobourn.html
 contributors:
   - name: Zeya Zhang
     email: zzeya7@vt.edu
