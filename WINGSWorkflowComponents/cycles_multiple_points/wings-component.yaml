@@ -148,3 +148,4 @@ wings:
     CyclesAnnualSOM:
       files:
       - data/placeholder.tif
+  source: https://w3id.org/okn/i/mint/cycles_multiple_points

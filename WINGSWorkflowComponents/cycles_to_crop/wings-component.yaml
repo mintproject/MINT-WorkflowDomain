@@ -42,3 +42,4 @@ wings:
     CropYield:
       files:
       - data/placeholder.tif
+  source: https://w3id.org/okn/i/mint/cycles_to_crop

@@ -56,3 +56,4 @@ wings:
     CyclesWeather:
       files:
       - data/placeholder.tif
+  source: https://w3id.org/okn/i/mint/pihm_forcing_to_cycles_weather

@@ -44,3 +44,4 @@ wings:
     CyclesREINIT:
       files:
       - data/placeholder.tif
+  source: https://w3id.org/okn/i/mint/pihm_to_cycles_reinit

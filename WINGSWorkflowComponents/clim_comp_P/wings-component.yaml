@@ -159,3 +159,4 @@ wings:
     ClimCompClimatology:
       files:
       - data/placeholder.tif
+  source: https://w3id.org/okn/i/mint/clim_comp_P

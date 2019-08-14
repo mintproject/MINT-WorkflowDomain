@@ -48,3 +48,4 @@ wings:
     PIHMForcing:
       files:
       - data/placeholder.tif
+  source: https://w3id.org/okn/i/mint/fldas_to_pihm

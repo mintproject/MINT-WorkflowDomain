@@ -60,3 +60,4 @@ wings:
     PIHMFloodingNetCDF:
       files:
       - data/placeholder.tif
+  source: ''

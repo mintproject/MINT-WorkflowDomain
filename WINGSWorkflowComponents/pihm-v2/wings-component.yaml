@@ -286,3 +286,4 @@ wings:
     PIHMRivFlx7:
       files:
       - data/placeholder.tif
+  source: https://w3id.org/okn/i/mint/pihm-v2

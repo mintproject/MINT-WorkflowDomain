@@ -35,3 +35,4 @@ wings:
     PIHMCropland:
       files:
       - data/placeholder.tif
+  source: https://w3id.org/okn/i/mint/pihm_cropland_to_points

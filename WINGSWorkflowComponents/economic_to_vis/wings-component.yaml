@@ -40,3 +40,4 @@ wings:
     EconomicCrop:
       files:
       - data/placeholder.tif
+  source: https://w3id.org/okn/i/mint/economic_to_vis

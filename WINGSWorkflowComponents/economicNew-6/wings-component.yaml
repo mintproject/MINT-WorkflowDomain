@@ -149,3 +149,4 @@ wings:
     EconomicLandUse:
       files:
       - data/placeholder.tif
+  source: https://w3id.org/okn/i/mint/economic-v6
