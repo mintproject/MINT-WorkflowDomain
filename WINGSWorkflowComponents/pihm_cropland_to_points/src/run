@@ -1,0 +1,33 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 1 0 1 "$@"
+
+HEADER=`sed '1!d' $INPUTS1`
+
+count=1
+sed 1d $INPUTS1 | while read line
+do
+  echo $HEADER > outfile-$count
+  echo $line >> outfile-$count
+  count=$((count+1))
+done
+
+ls -lh
+
+count=1
+for i in $OUTPUTS1
+do
+  mv outfile-$count $i
+  count=$((count+1))
+done
+
+checkExitCode

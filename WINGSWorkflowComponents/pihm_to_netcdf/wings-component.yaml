@@ -1,0 +1,64 @@
+name: pihm_to_netcdf
+version: ''
+wings:
+  inputs:
+  - role: pihm_infil
+    prefix: -i3
+    isParam: false
+    type: dcdom:PIHMInfiltration
+    dimensionality: 0
+  - role: output-end-date-range
+    prefix: -p2
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '2017-08-31'
+  - role: grid-space
+    prefix: -p3
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 0.05
+  - role: pihm_surf
+    prefix: -i2
+    isParam: false
+    type: dcdom:PIHMSurfaceWater
+    dimensionality: 0
+  - role: output-start-date-range
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '2017-05-01'
+  - role: pihm_modelinfo
+    prefix: -i1
+    isParam: false
+    type: dcdom:PIHMModelInfo
+    dimensionality: 0
+  outputs:
+  - role: pihm_netcdf
+    prefix: -o1
+    isParam: false
+    type: dcdom:PIHMNetCDF
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: PIHMNetCDF
+  data:
+    PIHMInfiltration:
+      files:
+      - data/placeholder.tif
+    PIHMSurfaceWater:
+      files:
+      - data/placeholder.tif
+    PIHMModelInfo:
+      files:
+      - data/placeholder.tif
+    PIHMNetCDF:
+      files:
+      - data/placeholder.tif

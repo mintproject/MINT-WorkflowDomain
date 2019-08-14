@@ -1,0 +1,148 @@
+name: economic
+version: v6
+wings:
+  inputs:
+  - role: cycles-data
+    prefix: -i1
+    isParam: false
+    type: dcdom:economic-cycles-data
+    dimensionality: 0
+  - role: land-input
+    prefix: -i2
+    isParam: false
+    type: dcdom:economic-land-input
+    dimensionality: 0
+  - role: price
+    prefix: -i3
+    isParam: false
+    type: dcdom:economic-price
+    dimensionality: 0
+  - role: production-cost
+    prefix: -i4
+    isParam: false
+    type: dcdom:economic-production-cost
+    dimensionality: 0
+  - role: cassava-crop-price-adjustment
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 0
+  - role: cassava-land-cost-adjustment
+    prefix: -p2
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 0
+  - role: cassava-fertilizer-cost-adjustment
+    prefix: -p3
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 0
+  - role: groundnuts-crop-price-adjustment
+    prefix: -p4
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 0
+  - role: groundnuts-land-cost-adjustment
+    prefix: -p5
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 0
+  - role: groundnuts-fertilizer-cost-adjustment
+    prefix: -p6
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 0
+  - role: maize-crop-price-adjustment
+    prefix: -p7
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 0
+  - role: maize-land-cost-adjustment
+    prefix: -p8
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 0
+  - role: maize-fertilizer-cost-adjustment
+    prefix: -p9
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 0
+  - role: sesame-crop-price-adjustment
+    prefix: -p10
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 0
+  - role: sesame-land-cost-adjustment
+    prefix: -p11
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 0
+  - role: sesame-fertilizer-cost-adjustment
+    prefix: -p12
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 0
+  - role: sorghum-crop-price-adjustment
+    prefix: -p13
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 0
+  - role: sorghum-land-cost-adjustment
+    prefix: -p14
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 0
+  - role: sorghum-fertilizer-cost-adjustment
+    prefix: -p15
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 0
+  outputs:
+  - role: economic-land-use
+    prefix: -o1
+    isParam: false
+    type: dcdom:EconomicLandUse
+    dimensionality: 0
+  - role: calibration-output
+    prefix: -o2
+    isParam: false
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: Economic
+  data:
+    economic-cycles-data:
+      files:
+      - data/placeholder.tif
+    economic-land-input:
+      files:
+      - data/placeholder.tif
+    economic-price:
+      files:
+      - data/placeholder.tif
+    economic-production-cost:
+      files:
+      - data/placeholder.tif
+    EconomicLandUse:
+      files:
+      - data/placeholder.tif

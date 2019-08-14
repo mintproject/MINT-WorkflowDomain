@@ -1,0 +1,42 @@
+name: economic_to_vis
+version: ''
+wings:
+  inputs:
+  - role: start-date
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '2017-01-01'
+  - role: region-name
+    prefix: -p2
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: pg
+  - role: economic-land-use
+    prefix: -i1
+    isParam: false
+    type: dcdom:EconomicLandUse
+    dimensionality: 1
+  outputs:
+  - role: economic-crop
+    prefix: -o1
+    isParam: false
+    type: dcdom:EconomicCrop
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: EconomicToVis
+  data:
+    EconomicLandUse:
+      files:
+      - data/placeholder.tif
+    EconomicCrop:
+      files:
+      - data/placeholder.tif

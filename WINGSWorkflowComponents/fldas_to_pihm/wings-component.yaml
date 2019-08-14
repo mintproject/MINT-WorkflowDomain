@@ -1,0 +1,50 @@
+name: fldas_to_pihm
+version: ''
+wings:
+  inputs:
+  - role: fldas_to_pihm_start-date
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '2017-01-01'
+  - role: fldas_to_pihm_end-date
+    prefix: -p2
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '2017-12-31'
+  - role: pihm-gisdata
+    prefix: -i2
+    isParam: false
+    type: dcdom:PIHMGISData
+    dimensionality: 0
+  - role: fldas-weather-data
+    prefix: -i1
+    isParam: false
+    type: dcdom:FLDAS
+    dimensionality: 0
+  outputs:
+  - role: pihm-forc
+    prefix: -o1
+    isParam: false
+    type: dcdom:PIHMForcing
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: FLDASToPIHM
+  data:
+    PIHMGISData:
+      files:
+      - data/placeholder.tif
+    FLDAS:
+      files:
+      - data/placeholder.tif
+    PIHMForcing:
+      files:
+      - data/placeholder.tif

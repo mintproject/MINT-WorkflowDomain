@@ -1,0 +1,22 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 2 2 1 "$@"
+
+# untar FLDAS data
+tar zxvf $INPUTS1
+
+# untar PIHMGISdata
+tar zxvf $INPUTS2
+
+#execute the transformation
+Rscript FLDAS-to-PIHM.R $PARAMS1 $PARAMS2 $OUTPUTS1
+checkExitCode

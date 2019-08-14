@@ -1,0 +1,100 @@
+#!/bin/bash
+
+unset http_proxy
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 5 4 9 "$@"
+
+##################################################################
+
+# get crop name and increase percent fertilizer
+CROP_NAME=`cat $INPUTS1`
+PERCENT_INCREASE_FERTILIZER=`cat $INPUTS2`
+FERTILIZER_MASS=$(awk '/MASS.*/{print $2;exit;}' SS_base.operation | tr -d '[:space:]')
+NEW_MASS=$(($FERTILIZER_MASS + $FERTILIZER_MASS * $PERCENT_INCREASE_FERTILIZER / 100))
+
+# create Cycles input folder and move base files
+mkdir -p input
+mv SS_base.ctrl input/SS_$CROP_NAME.ctrl
+mv SS_base.operation input/SS_$CROP_NAME.operation
+mv SS_crops.crop input/
+
+# moving weather, soil, and reinit files into input folder
+mv $INPUTS3 input/
+mv $INPUTS4 input/
+mv $INPUTS5 input/
+
+# enabling reinitialization
+perl -p -i -e "s/USE_REINITIALIZATION.*/USE_REINITIALIZATION    1/" input/SS_$CROP_NAME.ctrl
+
+# renaming operation, weather, soild, and reinit files
+perl -p -i -e "s/OPERATION_FILE.*/OPERATION_FILE          SS_$CROP_NAME.operation/" input/SS_$CROP_NAME.ctrl
+perl -p -i -e "s/WEATHER_FILE.*/WEATHER_FILE            $INPUTS3/" input/SS_$CROP_NAME.ctrl
+perl -p -i -e "s/SOIL_FILE.*/SOIL_FILE               $INPUTS4/" input/SS_$CROP_NAME.ctrl
+perl -p -i -e "s/REINIT_FILE.*/REINIT_FILE             $INPUTS5/" input/SS_$CROP_NAME.ctrl
+
+# other configurations
+perl -p -i -e "s/AUTOMATIC_NITROGEN.*/AUTOMATIC_NITROGEN      0/" input/SS_$CROP_NAME.ctrl
+perl -p -i -e "s/CROP .*/CROP                $CROP_NAME/" input/SS_$CROP_NAME.operation
+perl -p -i -e "s/MASS.*/MASS                $NEW_MASS/" input/SS_$CROP_NAME.operation
+
+# adding planting dates to operation file
+PLANTING_END_DAY_1=$(($PARAMS1 + $PARAMS2))
+PLANTING_END_DAY_2=$(($PARAMS3 + $PARAMS4))
+
+cat <<EOT >> input/SS_$CROP_NAME.operation
+PLANTING
+YEAR                1   
+DOY                 $PARAMS1
+END_DOY             $PLANTING_END_DAY_1
+MIN_SMC             0.10
+MIN_SOIL_TEMP       10
+CROP                $CROP_NAME
+USE_AUTO_IRR        0
+USE_AUTO_FERT       0
+FRACTION            0.67
+CLIPPING_START      1
+CLIPPING_END        366
+
+PLANTING
+YEAR                1   
+DOY                 $PARAMS3
+END_DOY             $PLANTING_END_DAY_2
+MIN_SMC             0.10
+MIN_SOIL_TEMP       10
+CROP                $CROP_NAME
+USE_AUTO_IRR        0
+USE_AUTO_FERT       0
+FRACTION            0.67
+CLIPPING_START      1
+CLIPPING_END        366
+EOT
+
+# run cycles
+Cycles SS_${CROP_NAME}
+checkExitCode
+
+# moving and renaming output data
+mv output/SS_${CROP_NAME}/annualSoilProfileC.dat $OUTPUTS1
+mv output/SS_${CROP_NAME}/annualSOM.dat $OUTPUTS2
+mv output/SS_${CROP_NAME}/$CROP_NAME.dat $OUTPUTS3
+mv output/SS_${CROP_NAME}/N.dat $OUTPUTS4
+mv output/SS_${CROP_NAME}/season.dat $OUTPUTS5
+mv output/SS_${CROP_NAME}/summary.dat $OUTPUTS6
+mv output/SS_${CROP_NAME}/weather.dat $OUTPUTS7
+mv output/SS_${CROP_NAME}/water.dat $OUTPUTS8
+
+# TMP: adding configuration information to seasonConfig file
+echo "[DEFAULT]" > "${OUTPUTS9}"
+echo "crop-name = ${CROP_NAME}" >> "${OUTPUTS9}"
+echo "percent-increase-fertilizer = ${PERCENT_INCREASE_FERTILIZER}" >> "${OUTPUTS9}"
+echo "[END CONFIGURATION]" >> "${OUTPUTS9}"
+cat "${OUTPUTS5}" >> "${OUTPUTS9}"

@@ -1,0 +1,294 @@
+name: pihm
+version: ''
+wings:
+  inputs:
+  - role: pihm-riv
+    prefix: -i5
+    isParam: false
+    type: dcdom:PIHMRiverSegments
+    dimensionality: 0
+  - role: pihm-geol
+    prefix: -i6
+    isParam: false
+    type: dcdom:PIHMGeologic
+    dimensionality: 0
+  - role: pihm-modelinfo
+    prefix: -i3
+    isParam: false
+    type: dcdom:PIHMModelInfo
+    dimensionality: 0
+  - role: pihm-ibc
+    prefix: -i7
+    isParam: false
+    type: dcdom:PIHMBoundaryCondition
+    dimensionality: 0
+  - role: pihm-base
+    prefix: -i9
+    isParam: false
+    type: dcdom:PIHMBase
+    dimensionality: 0
+  - role: pihm-soil
+    prefix: -i4
+    isParam: false
+    type: dcdom:PIHMSoil
+    dimensionality: 0
+  - role: pihm-lc
+    prefix: -i8
+    isParam: false
+    type: dcdom:PIHMLandCover
+    dimensionality: 0
+  - role: pihm_start-date
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '2017-01-01'
+  - role: pihm-forc
+    prefix: -i2
+    isParam: false
+    type: dcdom:PIHMForcing
+    dimensionality: 0
+  - role: pihm-att
+    prefix: -i1
+    isParam: false
+    type: dcdom:PIHMAttribute
+    dimensionality: 0
+  - role: pihm_region-name
+    prefix: -p3
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: pg
+  - role: pihm_end-date
+    prefix: -p2
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: ' 2017-12-31'
+  outputs:
+  - role: pihm-rivFlx0
+    prefix: -o13
+    isParam: false
+    type: dcdom:PIHMRivFlx0
+    dimensionality: 0
+  - role: pihm-groundwater
+    prefix: -o1
+    isParam: false
+    type: dcdom:PIHMGroundwaterHead
+    dimensionality: 0
+  - role: pihm-rivFlx8
+    prefix: -o21
+    isParam: false
+    type: dcdom:PIHMRivFlx8
+    dimensionality: 0
+  - role: pihm-rivFlx10
+    prefix: -o23
+    isParam: false
+    type: dcdom:PIHMRivFlx10
+    dimensionality: 0
+  - role: pihm-rivFlx1
+    prefix: -o14
+    isParam: false
+    type: dcdom:PIHMRivFlx1
+    dimensionality: 0
+  - role: pihm-rivFlx3
+    prefix: -o16
+    isParam: false
+    type: dcdom:PIHMRivFlx3
+    dimensionality: 0
+  - role: pihm-is
+    prefix: -o3
+    isParam: false
+    type: dcdom:PIHMInterceptionStorage
+    dimensionality: 0
+  - role: pihm-unsat
+    prefix: -o6
+    isParam: false
+    type: dcdom:PIHMSoilMoisture
+    dimensionality: 0
+  - role: pihm-rivFlx9
+    prefix: -o22
+    isParam: false
+    type: dcdom:PIHMRivFlx9
+    dimensionality: 0
+  - role: pihm-stage
+    prefix: -o11
+    isParam: false
+    type: dcdom:PIHMRiverStage
+    dimensionality: 0
+  - role: pihm-rech
+    prefix: -o10
+    isParam: false
+    type: dcdom:PIHMRechargeRate
+    dimensionality: 0
+  - role: pihm-rivFlx4
+    prefix: -o17
+    isParam: false
+    type: dcdom:PIHMRivFlx4
+    dimensionality: 0
+  - role: pihm-rbed
+    prefix: -o12
+    isParam: false
+    type: dcdom:PIHMRiverBedStorage
+    dimensionality: 0
+  - role: pihm-et0
+    prefix: -o7
+    isParam: false
+    type: dcdom:PIHMEvaporationCanopy
+    dimensionality: 0
+  - role: pihm-rivFlx6
+    prefix: -o19
+    isParam: false
+    type: dcdom:PIHMRivFlx6
+    dimensionality: 0
+  - role: pihm-et2
+    prefix: -o9
+    isParam: false
+    type: dcdom:PIHMEvaporationGroundSurface
+    dimensionality: 0
+  - role: pihm-snow
+    prefix: -o4
+    isParam: false
+    type: dcdom:PIHMSnowAccumulation
+    dimensionality: 0
+  - role: pihm-infiltration
+    prefix: -o2
+    isParam: false
+    type: dcdom:PIHMInfiltration
+    dimensionality: 0
+  - role: pihm-rivFlx2
+    prefix: -o15
+    isParam: false
+    type: dcdom:PIHMRivFlx2
+    dimensionality: 0
+  - role: pihm-surf
+    prefix: -o5
+    isParam: false
+    type: dcdom:PIHMSurfaceWater
+    dimensionality: 0
+  - role: pihm-rivFlx5
+    prefix: -o18
+    isParam: false
+    type: dcdom:PIHMRivFlx5
+    dimensionality: 0
+  - role: pihm-et1
+    prefix: -o8
+    isParam: false
+    type: dcdom:PIHMTranspiration
+    dimensionality: 0
+  - role: pihm-rivFlx7
+    prefix: -o20
+    isParam: false
+    type: dcdom:PIHMRivFlx7
+    dimensionality: 0
+  rules:
+  - '[ backwardPIHMInputsDataHaveSameRegion: (?c rdf:type acdom:pihmClass) (?c ac:hasInput
+    ?in1) (?c ac:hasInput ?in2) (?c ac:hasInput ?in4) noValue(?in1 dcdom:region) noValue(?in2
+    dcdom:region) noValue(?in4 dcdom:region) uriConcat(?c ''_region'' ?location) ->
+    (?in1 dcdom:region ?location) (?in2 dcdom:region ?location) (?in4 dcdom:region
+    ?location) print(''Setting domain of ?in1 and ?in2 to ?location because both inputs
+    to PIHM should be from the same region'') ]'
+  inheritedRules: []
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: PIHM
+  data:
+    PIHMRiverSegments:
+      files:
+      - data/placeholder.tif
+    PIHMGeologic:
+      files:
+      - data/placeholder.tif
+    PIHMModelInfo:
+      files:
+      - data/placeholder.tif
+    PIHMBoundaryCondition:
+      files:
+      - data/placeholder.tif
+    PIHMBase:
+      files:
+      - data/placeholder.tif
+    PIHMSoil:
+      files:
+      - data/placeholder.tif
+    PIHMLandCover:
+      files:
+      - data/placeholder.tif
+    PIHMForcing:
+      files:
+      - data/placeholder.tif
+    PIHMAttribute:
+      files:
+      - data/placeholder.tif
+    PIHMRivFlx0:
+      files:
+      - data/placeholder.tif
+    PIHMGroundwaterHead:
+      files:
+      - data/placeholder.tif
+    PIHMRivFlx8:
+      files:
+      - data/placeholder.tif
+    PIHMRivFlx10:
+      files:
+      - data/placeholder.tif
+    PIHMRivFlx1:
+      files:
+      - data/placeholder.tif
+    PIHMRivFlx3:
+      files:
+      - data/placeholder.tif
+    PIHMInterceptionStorage:
+      files:
+      - data/placeholder.tif
+    PIHMSoilMoisture:
+      files:
+      - data/placeholder.tif
+    PIHMRivFlx9:
+      files:
+      - data/placeholder.tif
+    PIHMRiverStage:
+      files:
+      - data/placeholder.tif
+    PIHMRechargeRate:
+      files:
+      - data/placeholder.tif
+    PIHMRivFlx4:
+      files:
+      - data/placeholder.tif
+    PIHMRiverBedStorage:
+      files:
+      - data/placeholder.tif
+    PIHMEvaporationCanopy:
+      files:
+      - data/placeholder.tif
+    PIHMRivFlx6:
+      files:
+      - data/placeholder.tif
+    PIHMEvaporationGroundSurface:
+      files:
+      - data/placeholder.tif
+    PIHMSnowAccumulation:
+      files:
+      - data/placeholder.tif
+    PIHMInfiltration:
+      files:
+      - data/placeholder.tif
+    PIHMRivFlx2:
+      files:
+      - data/placeholder.tif
+    PIHMSurfaceWater:
+      files:
+      - data/placeholder.tif
+    PIHMRivFlx5:
+      files:
+      - data/placeholder.tif
+    PIHMTranspiration:
+      files:
+      - data/placeholder.tif
+    PIHMRivFlx7:
+      files:
+      - data/placeholder.tif

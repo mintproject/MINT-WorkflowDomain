@@ -1,0 +1,83 @@
+name: economic
+version: v6
+wings:
+  inputs:
+  - role: cycles-data
+    prefix: -i1
+    isParam: false
+    type: dcdom:economic-cycles-data
+    dimensionality: 0
+  - role: land-input
+    prefix: -i2
+    isParam: false
+    type: dcdom:economic-land-input
+    dimensionality: 0
+  - role: price
+    prefix: -i3
+    isParam: false
+    type: dcdom:economic-price
+    dimensionality: 0
+  - role: production-cost
+    prefix: -i4
+    isParam: false
+    type: dcdom:economic-production-cost
+    dimensionality: 0
+  - role: crop-price-adjustment
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '0.0'
+  - role: land-cost-adjustment
+    prefix: -p2
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '0'
+  - role: fertilizer-cost-adjustment
+    prefix: -p3
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '0.0'
+  outputs:
+  - role: economic-land-use
+    prefix: -o1
+    isParam: false
+    type: dcdom:EconomicLandUse
+    dimensionality: 0
+  - role: calibration-output
+    prefix: -o2
+    isParam: false
+    type: dcdom:EconomicLandUseCalibration
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  documentation: <div style=""><br></div>
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: Economic
+  files:
+  - src\*
+  data:
+    economic-cycles-data:
+      files:
+      - data/placeholder.tif
+    economic-land-input:
+      files:
+      - data/placeholder.tif
+    economic-price:
+      files:
+      - data/placeholder.tif
+    economic-production-cost:
+      files:
+      - data/placeholder.tif
+    EconomicLandUse:
+      files:
+      - data/placeholder.tif
+    EconomicLandUseCalibration:
+      files:
+      - data/placeholder.tif

@@ -1,0 +1,36 @@
+name: pihm_flooding
+version: ''
+wings:
+  inputs:
+  - role: pihm-surf
+    prefix: -i1
+    isParam: false
+    type: dcdom:PIHMSurfaceWater
+    dimensionality: 0
+  - role: flooding-threshold
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 0.1
+  outputs:
+  - role: pihm-flooding
+    prefix: -o1
+    isParam: false
+    type: dcdom:PIHMFlooding
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: PIHMFlooding
+  data:
+    PIHMSurfaceWater:
+      files:
+      - data/placeholder.tif
+    PIHMFlooding:
+      files:
+      - data/placeholder.tif

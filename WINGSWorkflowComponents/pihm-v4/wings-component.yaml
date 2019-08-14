@@ -1,0 +1,139 @@
+name: pihm
+version: v4
+wings:
+  inputs:
+  - role: weather
+    prefix: -i12
+    isParam: false
+    type: dcdom:FLDAS
+    dimensionality: 0
+  - role: start-date
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '2017-01-01'
+  - role: end-date
+    prefix: -p2
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '2017-12-31'
+  - role: region-name
+    prefix: -p3
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: pongo
+  - role: elevation
+    prefix: -i1
+    isParam: false
+    type: dcdom:ASTER
+    dimensionality: 0
+  - role: waterbed-delineation-shp
+    prefix: -i6
+    isParam: false
+    type: dcdom:pihm-waterbed-delineation-shp
+    dimensionality: 0
+  - role: waterbed-delineation-shx
+    prefix: -i7
+    isParam: false
+    type: dcdom:pihm-waterbed-delineation-shx
+    dimensionality: 0
+  - role: waterbed-delineation-dbf
+    prefix: -i8
+    isParam: false
+    type: dcdom:pihm-waterbed-delineation-dbf
+    dimensionality: 0
+  - role: waterbed-delineation-prj
+    prefix: -i9
+    isParam: false
+    type: dcdom:pihm-waterbed-delineation-prj
+    dimensionality: 0
+  - role: stream-delineation-shp
+    prefix: -i2
+    isParam: false
+    type: dcdom:pihm-stream-delineation-shp
+    dimensionality: 0
+  - role: stream-delineation-shx
+    prefix: -i3
+    isParam: false
+    type: dcdom:pihm-stream-delineation-shx
+    dimensionality: 0
+  - role: stream-delineation-dbf
+    prefix: -i4
+    isParam: false
+    type: dcdom:pihm-stream-delineation-dbf
+    dimensionality: 0
+  - role: stream-delineation-prj
+    prefix: -i5
+    isParam: false
+    type: dcdom:pihm-stream-delineation-prj
+    dimensionality: 0
+  - role: landuse
+    prefix: -i10
+    isParam: false
+    type: dcdom:USGS-LCI
+    dimensionality: 0
+  - role: soil
+    prefix: -i11
+    isParam: false
+    type: dcdom:pihm-soil
+    dimensionality: 0
+  outputs:
+  - role: targz
+    prefix: -o1
+    isParam: false
+    type: dcdom:targz
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  documentation: Penn State Integrated Hydrologic Modeling System
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: PIHM
+  files:
+  - src\*
+  data:
+    FLDAS:
+      files:
+      - data/placeholder.tif
+    ASTER:
+      files:
+      - data/placeholder.tif
+    pihm-waterbed-delineation-shp:
+      files:
+      - data/placeholder.tif
+    pihm-waterbed-delineation-shx:
+      files:
+      - data/placeholder.tif
+    pihm-waterbed-delineation-dbf:
+      files:
+      - data/placeholder.tif
+    pihm-waterbed-delineation-prj:
+      files:
+      - data/placeholder.tif
+    pihm-stream-delineation-shp:
+      files:
+      - data/placeholder.tif
+    pihm-stream-delineation-shx:
+      files:
+      - data/placeholder.tif
+    pihm-stream-delineation-dbf:
+      files:
+      - data/placeholder.tif
+    pihm-stream-delineation-prj:
+      files:
+      - data/placeholder.tif
+    USGS-LCI:
+      files:
+      - data/placeholder.tif
+    pihm-soil:
+      files:
+      - data/placeholder.tif
+    targz:
+      files:
+      - data/placeholder.tif

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -e
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 1 1 1 "$@"
+
+set -x
+$BASEDIR/HAND-1.sh -d $INPUTS1 -t $PARAMS1 -h $OUTPUTS1
+
+checkExitCode

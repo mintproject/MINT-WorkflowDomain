@@ -1,0 +1,142 @@
+name: cycles
+version: ''
+wings:
+  inputs:
+  - role: cycles_config
+    prefix: -i1
+    isParam: false
+    type: dcdom:CyclesConfig
+    dimensionality: 0
+  - role: cycles_soil
+    prefix: -i3
+    isParam: false
+    type: dcdom:CyclesSoil
+    dimensionality: 0
+  - role: cycles_planting-day-2-duration
+    prefix: -p4
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 10
+  - role: cycles_weather
+    prefix: -i2
+    isParam: false
+    type: dcdom:CyclesWeather
+    dimensionality: 0
+  - role: cycles_reinit
+    prefix: -i4
+    isParam: false
+    type: dcdom:CyclesREINIT
+    dimensionality: 0
+  - role: cycles_planting-day-1-duration
+    prefix: -p2
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 10
+  - role: cycles_planting-day-1
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 100
+  - role: cycles_planting-day-2
+    prefix: -p3
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 225
+  outputs:
+  - role: cycles_soilProfile
+    prefix: -o1
+    isParam: false
+    type: dcdom:CyclesAnnualSoilProfile
+    dimensionality: 0
+  - role: cycles_seasonConfig
+    prefix: -o9
+    isParam: false
+    type: dcdom:CyclesSeasonConfig
+    dimensionality: 0
+  - role: cycles_crop
+    prefix: -o3
+    isParam: false
+    type: dcdom:CyclesCropOutput
+    dimensionality: 0
+  - role: cycles_water
+    prefix: -o8
+    isParam: false
+    type: dcdom:CyclesWaterOutput
+    dimensionality: 0
+  - role: cycles_som
+    prefix: -o2
+    isParam: false
+    type: dcdom:CyclesAnnualSOM
+    dimensionality: 0
+  - role: cycles_summary
+    prefix: -o6
+    isParam: false
+    type: dcdom:CyclesSummary
+    dimensionality: 0
+  - role: cycles_nitrogen
+    prefix: -o4
+    isParam: false
+    type: dcdom:CyclesNitrogen
+    dimensionality: 0
+  - role: cycles_weatherOutput
+    prefix: -o7
+    isParam: false
+    type: dcdom:CyclesWeatherOutput
+    dimensionality: 0
+  - role: cycles_season
+    prefix: -o5
+    isParam: false
+    type: dcdom:CyclesSeason
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: Cycles
+  data:
+    CyclesConfig:
+      files:
+      - data/placeholder.tif
+    CyclesSoil:
+      files:
+      - data/placeholder.tif
+    CyclesWeather:
+      files:
+      - data/placeholder.tif
+    CyclesREINIT:
+      files:
+      - data/placeholder.tif
+    CyclesAnnualSoilProfile:
+      files:
+      - data/placeholder.tif
+    CyclesSeasonConfig:
+      files:
+      - data/placeholder.tif
+    CyclesCropOutput:
+      files:
+      - data/placeholder.tif
+    CyclesWaterOutput:
+      files:
+      - data/placeholder.tif
+    CyclesAnnualSOM:
+      files:
+      - data/placeholder.tif
+    CyclesSummary:
+      files:
+      - data/placeholder.tif
+    CyclesNitrogen:
+      files:
+      - data/placeholder.tif
+    CyclesWeatherOutput:
+      files:
+      - data/placeholder.tif
+    CyclesSeason:
+      files:
+      - data/placeholder.tif

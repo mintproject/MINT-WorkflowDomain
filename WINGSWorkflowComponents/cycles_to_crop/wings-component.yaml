@@ -1,0 +1,44 @@
+name: cycles_to_crop
+version: ''
+wings:
+  inputs:
+  - role: start-date
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '2017-01-01'
+  - role: cycles-season
+    prefix: -i2
+    isParam: false
+    type: dcdom:CyclesSeason
+    dimensionality: 1
+  - role: cycles-seasonConfig
+    prefix: -i1
+    isParam: false
+    type: dcdom:CyclesSeasonConfig
+    dimensionality: 1
+  outputs:
+  - role: crop-yield
+    prefix: -o1
+    isParam: false
+    type: dcdom:CropYield
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: CyclesToCrop
+  data:
+    CyclesSeason:
+      files:
+      - data/placeholder.tif
+    CyclesSeasonConfig:
+      files:
+      - data/placeholder.tif
+    CropYield:
+      files:
+      - data/placeholder.tif

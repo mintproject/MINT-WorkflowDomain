@@ -1,0 +1,30 @@
+name: pihm_cropland
+version: ''
+wings:
+  inputs:
+  - role: pihm-modelinfo
+    prefix: -i1
+    isParam: false
+    type: dcdom:PIHMModelInfo
+    dimensionality: 0
+  outputs:
+  - role: pihm-cropland
+    prefix: -o1
+    isParam: false
+    type: dcdom:PIHMCropland
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: PIHMCropland
+  data:
+    PIHMModelInfo:
+      files:
+      - data/placeholder.tif
+    PIHMCropland:
+      files:
+      - data/placeholder.tif

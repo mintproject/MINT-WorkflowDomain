@@ -1,0 +1,21 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 3 0 1 "$@"
+
+# temporary extracting a single cell index
+CELL_INDEX=`sed '2!d' $INPUTS1 | awk -F "\"*,\"*" '{print $1}'`
+echo "CELL INDEX: $CELL_INDEX"
+
+# running docker container
+docker run --rm -v $PWD:/mint mintproject/pihm2cycles:1.2 cycle_reinit $CELL_INDEX /mint/$INPUTS2 /mint/$INPUTS3 /mint/$OUTPUTS1
+checkExitCode
+

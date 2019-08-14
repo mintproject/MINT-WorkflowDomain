@@ -1,0 +1,51 @@
+name: pihm_to_cycles_soil
+version: ''
+wings:
+  inputs:
+  - role: pihm-cropland
+    prefix: -i1
+    isParam: false
+    type: dcdom:PIHMCropland
+    dimensionality: 0
+  - role: pihm-modelinfo
+    prefix: -i2
+    isParam: false
+    type: dcdom:PIHMModelInfo
+    dimensionality: 0
+  - role: pihm-gis-soil
+    prefix: -i3
+    isParam: false
+    type: dcdom:PIHMGISSoil
+    dimensionality: 0
+  outputs:
+  - role: cycles-soil
+    prefix: -o1
+    isParam: false
+    type: dcdom:CyclesSoil
+    dimensionality: 0
+  rules:
+  - '[ backwardPIHMInputsDataHaveSameRegion: (?c rdf:type acdom:pihmClass) (?c ac:hasInput
+    ?in2) (?c ac:hasInput ?in3) noValue(?in2 dcdom:region) noValue(?in3 dcdom:region)
+    uriConcat(?c ''_region'' ?location) -> (?in2 dcdom:region ?location) (?in3 dcdom:region
+    ?location) print(''Setting domain of ?in2 and ?in3 to ?location because both inputs
+    to PIHM should be from the same region'') ]'
+  inheritedRules: []
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: PIHMToCycles
+  data:
+    PIHMCropland:
+      files:
+      - data/placeholder.tif
+    PIHMModelInfo:
+      files:
+      - data/placeholder.tif
+    PIHMGISSoil:
+      files:
+      - data/placeholder.tif
+    CyclesSoil:
+      files:
+      - data/placeholder.tif

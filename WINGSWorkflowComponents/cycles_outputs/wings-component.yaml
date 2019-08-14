@@ -1,0 +1,38 @@
+name: cycles_outputs
+version: ''
+wings:
+  inputs:
+  - role: cycles_weatherOutput
+    prefix: -i2
+    isParam: false
+    type: dcdom:CyclesWeatherOutput
+    dimensionality: 0
+  - role: cycles_season
+    prefix: -i1
+    isParam: false
+    type: dcdom:CyclesSeason
+    dimensionality: 0
+  outputs:
+  - role: cycles_outputs
+    prefix: -o1
+    isParam: false
+    type: dcdom:CyclesOutputs
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: Cycles
+  data:
+    CyclesWeatherOutput:
+      files:
+      - data/placeholder.tif
+    CyclesSeason:
+      files:
+      - data/placeholder.tif
+    CyclesOutputs:
+      files:
+      - data/placeholder.tif

@@ -1,0 +1,291 @@
+name: weather_generator
+version: ''
+wings:
+  inputs:
+  - role: max_month
+    prefix: -p7
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 8
+  - role: min_month
+    prefix: -p6
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 6
+  - role: level
+    prefix: -p8
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '0.6'
+  - role: monthly-weather
+    prefix: -i1
+    isParam: false
+    type: dcdom:FLDAS
+    dimensionality: 0
+  - role: min_lat
+    prefix: -p4
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 6.700375
+  - role: daily-weather
+    prefix: -i2
+    isParam: false
+    type: dcdom:FLDAS
+    dimensionality: 0
+  - role: flagP
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: Rainf_f_tavg
+  - role: min_lon
+    prefix: -p2
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 24.15234
+  - role: max_lat
+    prefix: -p5
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 9.335303
+  - role: max_lon
+    prefix: -p3
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 27.74012
+  outputs:
+  - role: fldas-wgen
+    prefix: -o1
+    isParam: false
+    type: dcdom:WGenWeather
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  documentation: '<p style="box-sizing: border-box; margin-bottom: 16px; margin-top:
+    0px; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system,
+    BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple
+    Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size:
+    16px; text-size-adjust: auto;"><span style="box-sizing: border-box; font-weight:
+    600;">Python code to generate weather from location climatology</span></p><p style="box-sizing:
+    border-box; margin-bottom: 16px; margin-top: 0px; caret-color: rgb(36, 41, 46);
+    color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe
+    UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe
+    UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust:
+    auto;">This code is written for the MINT project. In short, the aim is to analyze
+    the current climatology, select a year based on a criteria (e.g., 60% more rain
+    than average), and use a weather generator to create possible rendition of the
+    weather conditions.</p><p style="box-sizing: border-box; margin-bottom: 16px;
+    margin-top: 0px; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family:
+    -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif,
+    &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;
+    font-size: 16px; text-size-adjust: auto;">This Python routine creates data transformation
+    wrappers around<span class="Apple-converted-space">&nbsp;</span><a href="https://github.com/ARVE-Research/gwgen"
+    style="box-sizing: border-box; background-color: transparent; color: rgb(3, 102,
+    214); text-decoration-line: none;">GWGEN</a>: A global weather generator for daily
+    data.</p><p style="box-sizing: border-box; margin-bottom: 16px; margin-top: 0px;
+    caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system,
+    BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple
+    Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size:
+    16px; text-size-adjust: auto;">Specifically, the package analyzes monthly climatology
+    to determine a baseline for a user-defined change in one of the climate variables
+    (e.g., precipitation) and generates weather for a season similar to baseline climatology.</p><h2
+    style="box-sizing: border-box; margin-bottom: 16px; margin-top: 24px; line-height:
+    1.25; border-bottom: 1px solid rgb(234, 236, 239); padding-bottom: 0.3em; caret-color:
+    rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont,
+    &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;,
+    &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; text-size-adjust: auto;"><a
+    name="user-content-quickstart" style="box-sizing: border-box; background-color:
+    transparent; color: inherit;">Quickstart Guide</a></h2><p style="box-sizing: border-box;
+    margin-bottom: 16px; margin-top: 0px; caret-color: rgb(36, 41, 46); color: rgb(36,
+    41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;,
+    Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;,
+    &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust: auto;">The routine
+    is implemented from the command line in three steps (components):</p><ol style="box-sizing:
+    border-box; margin-bottom: 16px; margin-top: 0px; padding-left: 2em; caret-color:
+    rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont,
+    &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;,
+    &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust:
+    auto;"><li style="box-sizing: border-box;">Establish climatology from FLDAS_to_WGEN.py
+    -&gt; Python</li><li style="box-sizing: border-box; margin-top: 0.25em;">Run the
+    weather generator -&gt; Fortran. Instructions to install the Fortran code can
+    be found<span class="Apple-converted-space">&nbsp;</span><a href="https://github.com/ARVE-Research/gwgen"
+    style="box-sizing: border-box; background-color: transparent; color: rgb(3, 102,
+    214); text-decoration-line: none;">here</a>.</li><li style="box-sizing: border-box;
+    margin-top: 0.25em;">Infer daily data and repackage according to the FLDAS format
+    using WGEN_to_FLDAS.py</li></ol><p style="box-sizing: border-box; margin-bottom:
+    16px; margin-top: 0px; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family:
+    -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif,
+    &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;
+    font-size: 16px; text-size-adjust: auto;">The three steps are detailed below:</p><p
+    style="box-sizing: border-box; margin-bottom: 16px; margin-top: 0px; caret-color:
+    rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont,
+    &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;,
+    &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust:
+    auto;"><span style="box-sizing: border-box; font-weight: 600;">Step 1:</span></p><p
+    style="box-sizing: border-box; margin-bottom: 16px; margin-top: 0px; caret-color:
+    rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont,
+    &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;,
+    &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust:
+    auto;"><code style="box-sizing: border-box; font-family: SFMono-Regular, Consolas,
+    &quot;Liberation Mono&quot;, Menlo, Courier, monospace; font-size: 13.600000381469727px;
+    background-color: rgba(27, 31, 35, 0.0470588); border-top-left-radius: 3px; border-top-right-radius:
+    3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; margin:
+    0px; padding: 0.2em 0.4em;">python FLDAS_to_WGEN.py path_monthly path_daily flagP
+    min_lon max_lon min_lat max_lat min_month max_month level</code></p><p style="box-sizing:
+    border-box; margin-bottom: 16px; margin-top: 0px; caret-color: rgb(36, 41, 46);
+    color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe
+    UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe
+    UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust:
+    auto;">where:</p><ul style="box-sizing: border-box; margin-bottom: 16px; margin-top:
+    0px; padding-left: 2em; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46);
+    font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica,
+    Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;,
+    &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust: auto;"><li style="box-sizing:
+    border-box;">path_monthly (str): The path to the directory containing the monthly
+    netCDF files</li><li style="box-sizing: border-box; margin-top: 0.25em;">path_daily
+    (str): The path to the directory containing the daily netCDF files</li><li style="box-sizing:
+    border-box; margin-top: 0.25em;">flagP (str): Name of the variable of interest
+    as declared in the file</li><li style="box-sizing: border-box; margin-top: 0.25em;">min_lon
+    (float): Minimum longitude for the bounding box</li><li style="box-sizing: border-box;
+    margin-top: 0.25em;">max_lon (float): Maximum longitude for the bounding box</li><li
+    style="box-sizing: border-box; margin-top: 0.25em;">min_lat (float): Minimum latitude
+    for the bounding box</li><li style="box-sizing: border-box; margin-top: 0.25em;">max_lat
+    (float): Maximum latitude for the bounding box</li><li style="box-sizing: border-box;
+    margin-top: 0.25em;">min_month (int): The first month of the season of interest</li><li
+    style="box-sizing: border-box; margin-top: 0.25em;">max_month (int): The last
+    month of the season of interest</li><li style="box-sizing: border-box; margin-top:
+    0.25em;">level: Event to be considered (e.g., +2sigma is 97.5% of the underlying
+    distribution). Should be between 0 and 1.</li></ul><p style="box-sizing: border-box;
+    margin-bottom: 16px; margin-top: 0px; caret-color: rgb(36, 41, 46); color: rgb(36,
+    41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;,
+    Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;,
+    &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust: auto;">Returns
+    a .csv file for use to the WGEN.</p><p style="box-sizing: border-box; margin-bottom:
+    16px; margin-top: 0px; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family:
+    -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif,
+    &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;
+    font-size: 16px; text-size-adjust: auto;"><em style="box-sizing: border-box;">Example:</em></p><p
+    style="box-sizing: border-box; margin-bottom: 16px; margin-top: 0px; caret-color:
+    rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont,
+    &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;,
+    &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust:
+    auto;"><code style="box-sizing: border-box; font-family: SFMono-Regular, Consolas,
+    &quot;Liberation Mono&quot;, Menlo, Courier, monospace; font-size: 13.600000381469727px;
+    background-color: rgba(27, 31, 35, 0.0470588); border-top-left-radius: 3px; border-top-right-radius:
+    3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; margin:
+    0px; padding: 0.2em 0.4em;">python FLDAS_to_WGEN.py ''/Users/deborahkhider/Documents/MINT/Climate/MonthlyDatasets''
+    ''/Users/deborahkhider/Documents/MINT/Climate/Scenarios/FLDAS_NOAH01_A_EA_D.001''
+    Rainf_f_tavg 32 33 13 14 6 8 0.6</code></p><p style="box-sizing: border-box; margin-bottom:
+    16px; margin-top: 0px; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family:
+    -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif,
+    &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;
+    font-size: 16px; text-size-adjust: auto;"><span style="box-sizing: border-box;
+    font-weight: 600;">Step 2:</span></p><p style="box-sizing: border-box; margin-bottom:
+    16px; margin-top: 0px; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family:
+    -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif,
+    &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;
+    font-size: 16px; text-size-adjust: auto;">This requires a Fortran compiler:</p><p
+    style="box-sizing: border-box; margin-bottom: 16px; margin-top: 0px; caret-color:
+    rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont,
+    &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;,
+    &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust:
+    auto;"><code style="box-sizing: border-box; font-family: SFMono-Regular, Consolas,
+    &quot;Liberation Mono&quot;, Menlo, Courier, monospace; font-size: 13.600000381469727px;
+    background-color: rgba(27, 31, 35, 0.0470588); border-top-left-radius: 3px; border-top-right-radius:
+    3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; margin:
+    0px; padding: 0.2em 0.4em;">./weathergen &lt;input-file.csv&gt; &lt;output-file.csv&gt;</code></p><p
+    style="box-sizing: border-box; margin-bottom: 16px; margin-top: 0px; caret-color:
+    rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont,
+    &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;,
+    &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust:
+    auto;">Where:</p><ul style="box-sizing: border-box; margin-bottom: 16px; margin-top:
+    0px; padding-left: 2em; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46);
+    font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica,
+    Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;,
+    &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust: auto;"><li style="box-sizing:
+    border-box;">input-file.csv is generated from Step 1</li><li style="box-sizing:
+    border-box; margin-top: 0.25em;">output-file.csv doesn''t have to be an existing
+    file in the directory.</li></ul><p style="box-sizing: border-box; margin-bottom:
+    16px; margin-top: 0px; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family:
+    -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif,
+    &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;
+    font-size: 16px; text-size-adjust: auto;"><span style="box-sizing: border-box;
+    font-weight: 600;">Step 3:</span></p><p style="box-sizing: border-box; margin-bottom:
+    16px; margin-top: 0px; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family:
+    -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif,
+    &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;
+    font-size: 16px; text-size-adjust: auto;">This steps moves the data into a FLDAS-like
+    netCDF file (same variable name).</p><p style="box-sizing: border-box; margin-bottom:
+    16px; margin-top: 0px; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family:
+    -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif,
+    &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;
+    font-size: 16px; text-size-adjust: auto;">Two caveats:</p><ol style="box-sizing:
+    border-box; margin-bottom: 16px; margin-top: 0px; padding-left: 2em; caret-color:
+    rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont,
+    &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;,
+    &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust:
+    auto;"><li style="box-sizing: border-box;">not all variables are generated and
+    are ignored for the purpose of the weather generator.</li><li style="box-sizing:
+    border-box; margin-top: 0.25em;">Only data corresponding to the subset of the
+    geographical region is stored in the file.</li></ol><p style="box-sizing: border-box;
+    margin-bottom: 16px; margin-top: 0px; caret-color: rgb(36, 41, 46); color: rgb(36,
+    41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;,
+    Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;,
+    &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust: auto;"><code style="box-sizing:
+    border-box; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;,
+    Menlo, Courier, monospace; font-size: 13.600000381469727px; background-color:
+    rgba(27, 31, 35, 0.0470588); border-top-left-radius: 3px; border-top-right-radius:
+    3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; margin:
+    0px; padding: 0.2em 0.4em;">python WGEN_to_FLDAS.py wgen_out wgen_in path_out
+    file_prefix</code></p><p style="box-sizing: border-box; margin-bottom: 16px; margin-top:
+    0px; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system,
+    BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple
+    Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size:
+    16px; text-size-adjust: auto;">where:</p><ul style="box-sizing: border-box; margin-bottom:
+    16px; margin-top: 0px; padding-left: 2em; caret-color: rgb(36, 41, 46); color:
+    rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;,
+    Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;,
+    &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust: auto;"><li style="box-sizing:
+    border-box;">wgen_out: The csv file output from the weather generator</li><li
+    style="box-sizing: border-box; margin-top: 0.25em;">wgen_in: The csv file input
+    to the weather generator</li><li style="box-sizing: border-box; margin-top: 0.25em;">path_out:
+    an existing directory in which to write out the netCDF files</li><li style="box-sizing:
+    border-box; margin-top: 0.25em;">file_prefix: A prefix for the netcdf files</li></ul><p
+    style="box-sizing: border-box; margin-bottom: 16px; margin-top: 0px; caret-color:
+    rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont,
+    &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;,
+    &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust:
+    auto;"><em style="box-sizing: border-box;">Example:</em></p><p style="box-sizing:
+    border-box; margin-bottom: 16px; margin-top: 0px; caret-color: rgb(36, 41, 46);
+    color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe
+    UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe
+    UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust:
+    auto;"><code style="box-sizing: border-box; font-family: SFMono-Regular, Consolas,
+    &quot;Liberation Mono&quot;, Menlo, Courier, monospace; font-size: 13.600000381469727px;
+    background-color: rgba(27, 31, 35, 0.0470588); border-top-left-radius: 3px; border-top-right-radius:
+    3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; margin:
+    0px; padding: 0.2em 0.4em;">python WGEN_to_FLDAS.py ''/Users/deborahkhider/Documents/GitHub/simplewg/WGEN_out.csv''
+    ''/Users/deborahkhider/Documents/GitHub/simplewg/FLDAS_WGEN.csv'' ''/Users/deborahkhider/Documents/MINT/Climate/Scenarios/FLDAS_WGEN''
+    ''FLDAS_NOAH01_A_EA_D.A''</code></p>'
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: WeatherGenerator
+  files:
+  - src\*
+  data:
+    FLDAS:
+      files:
+      - data/placeholder.tif
+    WGenWeather:
+      files:
+      - data/placeholder.tif

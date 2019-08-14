@@ -1,0 +1,58 @@
+name: pihm_forcing_to_cycles_weather
+version: ''
+wings:
+  inputs:
+  - role: pihm-forc
+    prefix: -i1
+    isParam: false
+    type: dcdom:PIHMForcing
+    dimensionality: 0
+  - role: pihm-att
+    prefix: -i2
+    isParam: false
+    type: dcdom:PIHMAttribute
+    dimensionality: 0
+  - role: end-date
+    prefix: -p2
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '2017-12-31'
+  - role: pihm-cropland
+    prefix: -i3
+    isParam: false
+    type: dcdom:PIHMCropland
+    dimensionality: 0
+  - role: start-date
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '2017-01-01'
+  outputs:
+  - role: cycles-weather
+    prefix: -o1
+    isParam: false
+    type: dcdom:CyclesWeather
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: PIHMToCycles
+  data:
+    PIHMForcing:
+      files:
+      - data/placeholder.tif
+    PIHMAttribute:
+      files:
+      - data/placeholder.tif
+    PIHMCropland:
+      files:
+      - data/placeholder.tif
+    CyclesWeather:
+      files:
+      - data/placeholder.tif

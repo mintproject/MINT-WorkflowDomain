@@ -1,0 +1,62 @@
+name: pihm_flooding_netcdf
+version: ''
+wings:
+  inputs:
+  - role: pihm-modelinfo
+    prefix: -i1
+    isParam: false
+    type: dcdom:PIHMModelInfo
+    dimensionality: 0
+  - role: flooding-threshold
+    prefix: -p3
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 0.1
+  - role: pihm-surf
+    prefix: -i2
+    isParam: false
+    type: dcdom:PIHMSurfaceWater
+    dimensionality: 0
+  - role: output-start-date-range
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '2017-05-01'
+  - role: output-end-date-range
+    prefix: -p2
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '2017-08-31'
+  - role: grid-space
+    prefix: -p4
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 0.05
+  outputs:
+  - role: pihm-flooding-netcdf
+    prefix: -o1
+    isParam: false
+    type: dcdom:PIHMFloodingNetCDF
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: PIHMFlooding
+  data:
+    PIHMModelInfo:
+      files:
+      - data/placeholder.tif
+    PIHMSurfaceWater:
+      files:
+      - data/placeholder.tif
+    PIHMFloodingNetCDF:
+      files:
+      - data/placeholder.tif

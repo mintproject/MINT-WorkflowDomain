@@ -1,0 +1,27 @@
+name: cycles_to_crop_merge_multiple_points
+version: ''
+wings:
+  inputs:
+  - role: crop_yields
+    prefix: -i1
+    isParam: false
+    type: dcdom:CropYield
+    dimensionality: 1
+  outputs:
+  - role: crop_yield_merged
+    prefix: -o1
+    isParam: false
+    type: dcdom:CropYield
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: CyclesToCrop
+  data:
+    CropYield:
+      files:
+      - data/placeholder.tif

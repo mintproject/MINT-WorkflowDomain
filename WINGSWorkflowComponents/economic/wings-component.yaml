@@ -1,0 +1,62 @@
+name: economic
+version: ''
+wings:
+  inputs:
+  - role: crop-yield
+    prefix: -i1
+    isParam: false
+    type: dcdom:CropYield
+    dimensionality: 0
+  - role: economic-calib
+    prefix: -i2
+    isParam: false
+    type: dcdom:EconomicCalibData
+    dimensionality: 0
+  - role: economic-sim
+    prefix: -i4
+    isParam: false
+    type: dcdom:EconomicSimData
+    dimensionality: 0
+  - role: economic-data
+    prefix: -i3
+    isParam: false
+    type: dcdom:EconomicData
+    dimensionality: 0
+  - role: economic-subsidies
+    prefix: -i5
+    isParam: false
+    type: dcdom:EconomicSubsidies
+    dimensionality: 0
+  outputs:
+  - role: economic-land-use
+    prefix: -o1
+    isParam: false
+    type: dcdom:EconomicLandUse
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: Economic
+  data:
+    CropYield:
+      files:
+      - data/placeholder.tif
+    EconomicCalibData:
+      files:
+      - data/placeholder.tif
+    EconomicSimData:
+      files:
+      - data/placeholder.tif
+    EconomicData:
+      files:
+      - data/placeholder.tif
+    EconomicSubsidies:
+      files:
+      - data/placeholder.tif
+    EconomicLandUse:
+      files:
+      - data/placeholder.tif

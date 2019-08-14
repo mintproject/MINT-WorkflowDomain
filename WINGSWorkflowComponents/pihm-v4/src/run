@@ -1,0 +1,225 @@
+#!/bin/bash
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 12 3 1 "$@"
+
+# Project Name
+PROJECT_NAME=$PARAMS3
+
+
+set -x
+
+CWD=$PWD
+UUID=`mktemp --directory --dry-run -t "XXXXX"`
+UUID=`basename ${UUID}`
+
+
+# Inputs
+mkdir --parents ${UUID}/{soil,weather}
+mv $INPUTS1 ${UUID}/elevation.tif
+
+mv $INPUTS2 ${UUID}/stm.shp
+mv $INPUTS3 ${UUID}/stm.shx
+mv $INPUTS4 ${UUID}/stm.dbf
+mv $INPUTS5 ${UUID}/stm.prj
+
+mv $INPUTS6 ${UUID}/wbd.shp
+mv $INPUTS7 ${UUID}/wbd.shx
+mv $INPUTS8 ${UUID}/wbd.dbf
+mv $INPUTS9 ${UUID}/wbd.prj
+
+mv $INPUTS10 ${UUID}/LCType.tif
+
+tar zxvf ${INPUTS11} --directory ${UUID}/soil
+tar zxvf ${INPUTS12} --directory ${UUID}/weather
+
+
+START_YEAR=`date --date=${PARAMS1} +%Y`
+END_YEAR=`date --date=${PARAMS2} +%Y`
+
+
+cat > ${UUID}.txt <<EOF
+"prjname" "${PROJECT_NAME}"
+"startyear" "${START_YEAR}"
+"endyear" "${END_YEAR}"
+"dir.out" "${CWD}/output"
+"fr.dem" "${CWD}/${UUID}/elevation.tif"
+"fsp.wbd" "${CWD}/${UUID}/wbd.shp"
+"fsp.stm" "${CWD}/${UUID}/stm.shp"
+"fr.landuse" "${CWD}/${UUID}/LCType.tif"
+"dir.soil" "${CWD}/${UUID}/soil"
+"dir.fldas" "${CWD}/${UUID}/weather/FLDAS_NOAH01_A_EA_D.001"
+"NumCells" "1000"
+"weather.res" "0.1"
+EOF
+
+set -e
+
+# Step 1
+# Image/Rawdata_Elevation.png
+# PIHMgis/dem.tif
+Rscript Step1_RawDataProcessng.R ${CWD}/${UUID}.txt
+
+# Step 2
+# Image/Rawdata_Subset.png
+# Image/Rawdata_Soil/CLYPPT_M_sl1_250m_PCS.tif.png
+# Image/Rawdata_Soil/SNDPPT_M_sl1_250m_PCS.tif.png
+# Image/Rawdata_Soil/SLTPPT_M_sl1_250m_PCS.tif.png
+# Image/Rawdata_Soil/ORCDRC_M_sl1_250m_PCS.tif.png
+# Image/Rawdata_Soil/BLDFIE_M_sl1_250m_PCS.tif.png
+# Image/Rawdata_Soil/CLYPPT_M_sl7_250m_PCS.tif.png
+# Image/Rawdata_Soil/SNDPPT_M_sl7_250m_PCS.tif.png
+# Image/Rawdata_Soil/SLTPPT_M_sl7_250m_PCS.tif.png
+# Image/Rawdata_Soil/ORCDRC_M_sl7_250m_PCS.tif.png
+# Image/Rawdata_Soil/BLDFIE_M_sl7_250m_PCS.tif.png
+# Image/Landuse_PCS.tif.png
+# Image/Rawdata_FLDAS.png
+# Image/Rawdata_FLDAS_location.png
+# Image/Rawdata_FLDAS_TS.png
+# PIHMgis/wbd.{shp,shx,dbf,prj}
+# PIHMgis/wbd_buf.{shp,shx,dbf,prj}
+# PIHMgis/wbd_gcs.{shp,shx,dbf,prj}
+# PIHMgis/stm.{shp,shx,dbf,prj}
+# PIHMgis/soil/CLYPPT_M_sl1_250m.tif
+# PIHMgis/soil/CLYPPT_M_sl1_250m_PCS.tif
+# PIHMgis/soil/SNDPPT_M_sl1_250m.tif
+# PIHMgis/soil/SNDPPT_M_sl1_250m_PCS.tif
+# PIHMgis/soil/SLTPPT_M_sl1_250m.tif
+# PIHMgis/soil/SLTPPT_M_sl1_250m_PCS.tif
+# PIHMgis/soil/ORCDRC_M_sl1_250m.tif
+# PIHMgis/soil/ORCDRC_M_sl1_250m_PCS.tif
+# PIHMgis/soil/BLDFIE_M_sl1_250m.tif
+# PIHMgis/soil/BLDFIE_M_sl1_250m_PCS.tif
+# PIHMgis/soil/CLYPPT_M_sl7_250m.tif
+# PIHMgis/soil/CLYPPT_M_sl7_250m_PCS.tif
+# PIHMgis/soil/SNDPPT_M_sl7_250m.tif
+# PIHMgis/soil/SNDPPT_M_sl7_250m_PCS.tif
+# PIHMgis/soil/SLTPPT_M_sl7_250m.tif
+# PIHMgis/soil/SLTPPT_M_sl7_250m_PCS.tif
+# PIHMgis/soil/ORCDRC_M_sl7_250m.tif
+# PIHMgis/soil/ORCDRC_M_sl7_250m_PCS.tif
+# PIHMgis/soil/BLDFIE_M_sl7_250m.tif
+# PIHMgis/soil/BLDFIE_M_sl7_250m_PCS.tif
+# PIHMgis/Soil_sl1.RDS
+# PIHMgis/Soil_sl7.RDS
+# PIHMgis/Landuse.tif
+# PIHMgis/Landuse_PCS.tif
+# PIHMgis/Landuse_nlcd.tif
+# PIHMgis/LanduseTable.csv
+# PIHMgis/FLDAS_GCS.{shp,shx,dbf,prj}
+# PIHMgis/FLDAS.{shp,shx,dbf,prj}
+# PIHMgis/Example-2017.RDS
+# forcing/*.csv
+Rscript Step2_DataSubset.R ${CWD}/${UUID}.txt
+
+# Step 3
+# Image/PIHMgis_data.png
+# Image/PIHMgis_domain.png
+# input/Example/fig/data_0.png
+# input/Example/fig/data_1.png
+# input/Example/fig/data_2.png
+# input/Example/fig/data_lairl.png
+# input/Example/gis/domain.{shp,shx,dbf,prj}
+# input/Example/gis/river.{shp,shx,dbf,prj}
+# input/Example/gis/seg.{shp,shx,dbf,prj}
+# input/Example/Example.tsd.forc
+# input/Example/Example.tsd.lai
+# input/Example/Example.tsd.rl
+# input/Example/Example.tsd.mf
+# input/Example/Example.sp.mesh
+# input/Example/Example.sp.riv
+# input/Example/Example.cfg.ic
+# input/Example/Example.sp.att
+# input/Example/Example.sp.rivchn
+# input/Example/Example.para.lc
+# input/Example/Example.para.soil
+# input/Example/Example.para.geol
+# input/Example/Example.cfg.para
+# input/Example/Example.cfg.calib
+Rscript Step3_PIHMgis.R ${CWD}/${UUID}.txt
+
+# Step 4
+# output/Example.out/Example.prj
+# output/Example.out/Example.eleysnow.dat
+# output/Example.out/Example.eleysurf.dat
+# output/Example.out/Example.eleyunsat.dat
+# output/Example.out/Example.eleywf.dat
+# output/Example.out/Example.eleygw.dat
+# output/Example.out/Example.elevprcp.dat
+# output/Example.out/Example.elevnetprcp.dat
+# output/Example.out/Example.elevetp.dat
+# output/Example.out/Example.eleveta.dat
+# output/Example.out/Example.elevrech.dat
+# output/Example.out/Example.eleqsub.dat
+# output/Example.out/Example.eleqsurf.dat
+# output/Example.out/Example.elevinfil.dat
+# output/Example.out/Example.elevetic.dat
+# output/Example.out/Example.elevettr.dat
+# output/Example.out/Example.elevetev.dat
+# output/Example.out/Example.rivqup.dat
+# output/Example.out/Example.rivqdown.dat
+# output/Example.out/Example.rivqsub.dat
+# output/Example.out/Example.rivqsurf.dat
+# output/Example.out/Example.rivystage.dat
+# output/Example.out/Example.cfg.ic.bak
+# output/Example.out/Example.flood.csv
+# output/Example.out/Debug_Table_Element.csv
+# output/Example.out/Debug_Table_River.csv
+# output/Example.out/Example.cfg.calib.bak
+# output/Example.out/Example.update.ic
+cd ${CWD}/output
+
+START_DATE=`date --date=${PARAMS1} +"%s"`
+END_DATE=`date --date=${PARAMS2} +"%s"`
+NUM_DAYS=$(( (${END_DATE} - ${START_DATE}) / (60 * 60 * 24) ))
+sed --in-place -e "s/END.*/END\t${NUM_DAYS}/" input/${PROJECT_NAME}/${PROJECT_NAME}.cfg.para
+
+# TODO: Remove
+## sed --in-place -e "s/PRCP.*/PRCP	1.1/" input/${PROJECT_NAME}/${PROJECT_NAME}.cfg.calib
+## sed --in-place -e "s/SFCTMP.*/SFCTMP	-1/"  input/${PROJECT_NAME}/${PROJECT_NAME}.cfg.calib
+# TODO: Remove
+
+set +e
+export LD_LIBRARY_PATH=/usr/local/sundials/lib
+time /usr/bin/pihm++ ${PROJECT_NAME} 2>&1
+EC=$?
+if [[ $EC -ne 0 && $EC -ne 19 ]]; then
+    echo "PIHM Failed with Exitcode ${EC}"
+    exit $EC
+fi
+
+set -e
+cd ${CWD}
+
+# Step 5
+# output/Example.out/PIHManalysis/BasicPlot/pongo_rivystage.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_rivqsurf.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_rivqsub.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_rivqdown.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_eleyunsat.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_eleysurf.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_eleygw.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_elevrech.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_elevprcp.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_elevinfil.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_elevettr.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_elevetp.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_elevetic.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_elevetev.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_eleyunsat.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_eleysurf.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_eleygw.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_elevrech.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_elevprcp.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_elevinfil.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_elevettr.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_elevetp.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_elevetic.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_elevetev.png
+Rscript Step5_ResultVisualization.R ${CWD}/${UUID}.txt
+
+# Outputs
+cd ${CWD}
+OUT_DIR="output"
+tar zcvf $OUTPUTS1 ${OUT_DIR}

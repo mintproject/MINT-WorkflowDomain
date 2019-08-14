@@ -1,0 +1,149 @@
+name: cycles_v2
+version: ''
+wings:
+  inputs:
+  - role: cycles_soil
+    prefix: -i2
+    isParam: false
+    type: dcdom:CyclesSoil
+    dimensionality: 0
+  - role: cycles_weather
+    prefix: -i1
+    isParam: false
+    type: dcdom:CyclesWeather
+    dimensionality: 0
+  - role: cycles_reinit
+    prefix: -i6
+    isParam: false
+    type: dcdom:CyclesREINIT
+    dimensionality: 0
+  - role: cycles_ctrl
+    prefix: -i3
+    isParam: false
+    type: dcdom:CyclesCtrl
+    dimensionality: 0
+  - role: cycles_crops
+    prefix: -i4
+    isParam: false
+    type: dcdom:CyclesCrops
+    dimensionality: 0
+  - role: cycles_operation
+    prefix: -i5
+    isParam: false
+    type: dcdom:CyclesOperation
+    dimensionality: 0
+  - role: unique_id
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: ''
+  - role: crop_name
+    prefix: -p2
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: ''
+  outputs:
+  - role: cycles_soilProfile
+    prefix: -o1
+    isParam: false
+    type: dcdom:CyclesAnnualSoilProfile
+    dimensionality: 0
+  - role: cycles_crop
+    prefix: -o3
+    isParam: false
+    type: dcdom:CyclesCropOutput
+    dimensionality: 0
+  - role: cycles_water
+    prefix: -o8
+    isParam: false
+    type: dcdom:CyclesWaterOutput
+    dimensionality: 0
+  - role: cycles_som
+    prefix: -o2
+    isParam: false
+    type: dcdom:CyclesAnnualSOM
+    dimensionality: 0
+  - role: cycles_summary
+    prefix: -o6
+    isParam: false
+    type: dcdom:CyclesSummary
+    dimensionality: 0
+  - role: cycles_nitrogen
+    prefix: -o4
+    isParam: false
+    type: dcdom:CyclesNitrogen
+    dimensionality: 0
+  - role: cycles_weatherOutput
+    prefix: -o7
+    isParam: false
+    type: dcdom:CyclesWeatherOutput
+    dimensionality: 0
+  - role: cycles_season
+    prefix: -o5
+    isParam: false
+    type: dcdom:CyclesSeason
+    dimensionality: 0
+  - role: cycles_outputs
+    prefix: -o9
+    isParam: false
+    type: dcdom:CyclesOutputs
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  documentation: ''
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: Cycles
+  files:
+  - src\*
+  data:
+    CyclesSoil:
+      files:
+      - data/placeholder.tif
+    CyclesWeather:
+      files:
+      - data/placeholder.tif
+    CyclesREINIT:
+      files:
+      - data/placeholder.tif
+    CyclesCtrl:
+      files:
+      - data/placeholder.tif
+    CyclesCrops:
+      files:
+      - data/placeholder.tif
+    CyclesOperation:
+      files:
+      - data/placeholder.tif
+    CyclesAnnualSoilProfile:
+      files:
+      - data/placeholder.tif
+    CyclesCropOutput:
+      files:
+      - data/placeholder.tif
+    CyclesWaterOutput:
+      files:
+      - data/placeholder.tif
+    CyclesAnnualSOM:
+      files:
+      - data/placeholder.tif
+    CyclesSummary:
+      files:
+      - data/placeholder.tif
+    CyclesNitrogen:
+      files:
+      - data/placeholder.tif
+    CyclesWeatherOutput:
+      files:
+      - data/placeholder.tif
+    CyclesSeason:
+      files:
+      - data/placeholder.tif
+    CyclesOutputs:
+      files:
+      - data/placeholder.tif

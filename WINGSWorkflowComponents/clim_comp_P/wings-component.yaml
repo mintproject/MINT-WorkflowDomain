@@ -1,0 +1,161 @@
+name: clim_comp_P
+version: ''
+wings:
+  inputs:
+  - role: min_month
+    prefix: -p7
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 6
+  - role: flagP
+    prefix: -p2
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: Rainf_f_tavg
+  - role: dataset_source
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: FLDAS
+  - role: year
+    prefix: -p9
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 2017
+  - role: min_lat
+    prefix: -p5
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 6.700375
+  - role: min_lon
+    prefix: -p3
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 24.15234
+  - role: max_lat
+    prefix: -p6
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 9.335303
+  - role: max_lon
+    prefix: -p4
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 27.74012
+  - role: weather
+    prefix: -i1
+    isParam: false
+    type: dcdom:FLDAS
+    dimensionality: 0
+  - role: max_month
+    prefix: -p8
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#integer
+    dimensionality: 0
+    paramDefaultValue: 8
+  outputs:
+  - role: summary
+    prefix: -o1
+    isParam: false
+    type: dcdom:ClimCompSummary
+    dimensionality: 0
+  - role: climatology
+    prefix: -o2
+    isParam: false
+    type: dcdom:ClimCompClimatology
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  documentation: '<span style="box-sizing: border-box; font-weight: 600; caret-color:
+    rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont,
+    &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;,
+    &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust:
+    auto;">Python code for comparing the seasonal prediction with the average climatology</span><div><span
+    style="box-sizing: border-box; font-weight: 600; caret-color: rgb(36, 41, 46);
+    color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe
+    UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe
+    UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust:
+    auto;"><br></span></div><div><span style="box-sizing: border-box; font-weight:
+    600; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system,
+    BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple
+    Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size:
+    16px; text-size-adjust: auto;"><span style="font-family: -apple-system, BlinkMacSystemFont,
+    &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;,
+    &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-weight: normal;
+    text-size-adjust: auto;">CompClim is a simple Python routine to calculate climatology
+    from various datasets stored in netCDF format.</span><br></span></div><div><span
+    style="box-sizing: border-box; font-weight: 600; caret-color: rgb(36, 41, 46);
+    color: rgb(36, 41, 46); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe
+    UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe
+    UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; text-size-adjust:
+    auto;"><span style="font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe
+    UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe
+    UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-weight: normal; text-size-adjust:
+    auto;"><br></span></span></div><div><span style="box-sizing: border-box; font-weight:
+    600; caret-color: rgb(36, 41, 46); color: rgb(36, 41, 46); font-family: -apple-system,
+    BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple
+    Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size:
+    16px; text-size-adjust: auto;"><span style="font-family: -apple-system, BlinkMacSystemFont,
+    &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;,
+    &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-weight: normal;
+    text-size-adjust: auto;"><p style="box-sizing: border-box; margin-bottom: 16px;
+    margin-top: 0px; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;,
+    Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;,
+    &quot;Segoe UI Symbol&quot;; text-size-adjust: auto;">This routine is meant to
+    be executed from the command line:</p><p style="box-sizing: border-box; margin-bottom:
+    16px; margin-top: 0px; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe
+    UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe
+    UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; text-size-adjust: auto;"><code style="box-sizing:
+    border-box; font-family: SFMono-Regular, Consolas, &quot;Liberation Mono&quot;,
+    Menlo, Courier, monospace; font-size: 13.600000381469727px; background-color:
+    rgba(27, 31, 35, 0.0470588); border-top-left-radius: 3px; border-top-right-radius:
+    3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; margin:
+    0px; padding: 0.2em 0.4em;">python ClimComp.py path dataset_source flagP min_lon
+    max_lon min_lat max_lat min_month max_month year</code></p><p style="box-sizing:
+    border-box; margin-bottom: 16px; margin-top: 0px; font-family: -apple-system,
+    BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple
+    Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; text-size-adjust:
+    auto;">where:</p><ul style="box-sizing: border-box; margin-bottom: 16px; margin-top:
+    0px; padding-left: 2em; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe
+    UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe
+    UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; text-size-adjust: auto;"><li style="box-sizing:
+    border-box;">dataset_source (str): The source of the dataset.Possible values include
+    ''FLDAS''</li><li style="box-sizing: border-box; margin-top: 0.25em;">path (str):
+    The path to the directory containing the netCDF files</li><li style="box-sizing:
+    border-box; margin-top: 0.25em;">flagP (str): Name of the variable of interest
+    as declared in the file</li><li style="box-sizing: border-box; margin-top: 0.25em;">min_lon
+    (float): Minimum longitude for the bounding box</li><li style="box-sizing: border-box;
+    margin-top: 0.25em;">max_lon (float): Maximum longitude for the bounding box</li><li
+    style="box-sizing: border-box; margin-top: 0.25em;">min_lat (float): Minimum latitude
+    for the bounding box</li><li style="box-sizing: border-box; margin-top: 0.25em;">max_lat
+    (float): Maximum latitude for the bounding box</li><li style="box-sizing: border-box;
+    margin-top: 0.25em;">min_month (int): The first month of the season of interest</li><li
+    style="box-sizing: border-box; margin-top: 0.25em;">max_month (int): The last
+    month of the season of interest</li><li style="box-sizing: border-box; margin-top:
+    0.25em;">year (int): The year of interest for the comparison</li></ul></span></span></div>'
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: ClimComp
+  files:
+  - src\*
+  data:
+    FLDAS:
+      files:
+      - data/placeholder.tif
+    ClimCompSummary:
+      files:
+      - data/placeholder.tif
+    ClimCompClimatology:
+      files:
+      - data/placeholder.tif

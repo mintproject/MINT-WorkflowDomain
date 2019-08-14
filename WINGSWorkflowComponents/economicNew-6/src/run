@@ -1,0 +1,36 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 4 15 2 "$@"
+
+set -x
+
+
+# Inputs
+mv $INPUTS1 cyclesdata.csv
+mv $INPUTS2 calibdata.csv
+mv $INPUTS3 price.csv
+mv $INPUTS4 productioncost.csv
+./all-crops-update-sims.py price.csv productioncost.csv $PARAMS1 $PARAMS2 $PARAMS3 $PARAMS4 $PARAMS5 $PARAMS6 $PARAMS7 $PARAMS8 $PARAMS9 $PARAMS10 $PARAMS11 $PARAMS12 $PARAMS13 $PARAMS14 $PARAMS15
+
+
+# Economic Model
+gams MINT_v6.gms
+EC=$?
+if [ $EC -ne 0 ]; then
+    cat MINT_V6.lst 1>&2
+	exit $EC
+fi
+
+
+# Outputs
+mv MINT_simulation_output.txt $OUTPUTS1
+mv MINT_calibration_output.txt $OUTPUTS2
