@@ -1,5 +1,11 @@
 import csv
-from yaml import load
+from yaml import load, dump
+from pathlib import Path
+import os
+try:
+    from yaml import CLoader as Loader
+except ImportError:
+    from yaml import Loader
 
 def read_model_csv(csv_path):
     with open(csv_path, mode='r') as csv_file:
@@ -16,14 +22,17 @@ def read_model_csv(csv_path):
 def yaml_file(component_dir, model_catalog_uri):
     yaml_data = {}
     yaml_file = "wings-component.yml"
+    component_dir = Path.cwd() / Path(component_dir)
     try:
-        spec = load((component_dir / "wings-component.yml").open(), Loader=Loader)
+        spec = load(( component_dir / yaml_file).open(), Loader=Loader)
     except FileNotFoundError:
         yaml_file = "wings-component.yaml"
         spec = load((component_dir / yaml_file).open(), Loader=Loader)
+    if not spec:
+        return 
     spec["wings"]["source"] = model_catalog_uri
-    stream = open(os.path.join(compoent_dir, yaml_file), 'w+')
-    yaml.dump(spec, stream, sort_keys=False)
+    stream = open(os.path.join(component_dir, yaml_file), 'w+')
+    dump(spec, stream, sort_keys=False)
 
 csv_path="model.csv"
 components = read_model_csv(csv_path)
