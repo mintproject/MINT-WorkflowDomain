@@ -1,0 +1,46 @@
+#!/bin/bash
+
+unset http_proxy
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 6 2 9 "$@"
+
+# create Cycles input folder and move base files
+mkdir -p input
+mv $INPUTS1 input/
+mv $INPUTS2 input/
+mv $INPUTS3 input/
+mv $INPUTS4 input/
+mv $INPUTS5 input/
+mv $INPUTS6 input/cycles.reinit
+
+# run cycles
+Cycles -V
+
+Cycles $PARAMS1
+checkExitCode
+
+# IMPORTANT: temporary hack for saving input/output data into local folder
+mkdir $PARAMS1
+cp -R input/ $PARAMS1/
+cp -R output/ $PARAMS1/
+zip -r $OUTPUTS9 $PARAMS1/
+
+# moving and renaming output data
+mv output/$PARAMS1/annualSoilProfileC.dat $OUTPUTS1
+mv output/$PARAMS1/annualSOM.dat $OUTPUTS2
+mv output/$PARAMS1/$PARAMS2.dat $OUTPUTS3
+mv output/$PARAMS1/N.dat $OUTPUTS4
+mv output/$PARAMS1/season.dat $OUTPUTS5
+mv output/$PARAMS1/summary.dat $OUTPUTS6
+mv output/$PARAMS1/weather.dat $OUTPUTS7
+mv output/$PARAMS1/water.dat $OUTPUTS8
+

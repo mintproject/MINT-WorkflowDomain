@@ -1,0 +1,169 @@
+name: cycles
+version: '2.0.0'
+wings:
+  inputs:
+  - role: cycles_soil
+    prefix: -i2
+    isParam: false
+    type: dcdom:CyclesSoil
+    dimensionality: 0
+  - role: cycles_weather
+    prefix: -i1
+    isParam: false
+    type: dcdom:CyclesWeather
+    dimensionality: 0
+  - role: cycles_reinit
+    prefix: -i6
+    isParam: false
+    type: dcdom:CyclesREINIT
+    dimensionality: 0
+  - role: cycles_ctrl
+    prefix: -i3
+    isParam: false
+    type: dcdom:CyclesCtrl
+    dimensionality: 0
+  - role: cycles_crops
+    prefix: -i4
+    isParam: false
+    type: dcdom:CyclesCrops
+    dimensionality: 0
+  - role: cycles_operation
+    prefix: -i5
+    isParam: false
+    type: dcdom:CyclesOperation
+    dimensionality: 0
+  - role: crop_name
+    prefix: -p3
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: 'Maize'
+  - role: end_year
+    prefix: -p2
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#int
+    dimensionality: 0
+    paramDefaultValue: 2000
+  - role: start_year
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#int
+    dimensionality: 0
+    paramDefaultValue: 2017
+  - role: start_planting_day
+    prefix: -p4
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#int
+    dimensionality: 0
+    paramDefaultValue: 100
+  - role: end_planting_day
+    prefix: -p5
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#int
+    dimensionality: 0
+    paramDefaultValue: 149
+  - role: nitrogen_rate
+    prefix: -p6
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 0
+  - role: fertilizer_rate
+    prefix: -p7
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 0
+  - role: weed_fraction
+    prefix: -p8
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 0
+  outputs:
+  - role: cycles_soilProfile
+    prefix: -o1
+    isParam: false
+    type: dcdom:CyclesAnnualSoilProfile
+    dimensionality: 0
+  - role: cycles_crop
+    prefix: -o3
+    isParam: false
+    type: dcdom:CyclesCropOutput
+    dimensionality: 0
+  - role: cycles_water
+    prefix: -o8
+    isParam: false
+    type: dcdom:CyclesWaterOutput
+    dimensionality: 0
+  - role: cycles_som
+    prefix: -o2
+    isParam: false
+    type: dcdom:CyclesAnnualSOM
+    dimensionality: 0
+  - role: cycles_summary
+    prefix: -o6
+    isParam: false
+    type: dcdom:CyclesSummary
+    dimensionality: 0
+  - role: cycles_nitrogen
+    prefix: -o4
+    isParam: false
+    type: dcdom:CyclesNitrogen
+    dimensionality: 0
+  - role: cycles_weatherOutput
+    prefix: -o7
+    isParam: false
+    type: dcdom:CyclesWeatherOutput
+    dimensionality: 0
+  - role: cycles_season
+    prefix: -o5
+    isParam: false
+    type: dcdom:CyclesSeason
+    dimensionality: 0
+  - role: cycles_outputs
+    prefix: -o9
+    isParam: false
+    type: dcdom:CyclesOutputs
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  documentation: ''
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: Cycles
+  files:
+  - src\*
+  data:
+    CyclesSoil:
+    CyclesWeather:
+      
+    CyclesREINIT:
+      
+    CyclesCtrl:
+      
+    CyclesCrops:
+      
+    CyclesOperation:
+      
+    CyclesAnnualSoilProfile:
+      
+    CyclesCropOutput:
+      
+    CyclesWaterOutput:
+      
+    CyclesAnnualSOM:
+      
+    CyclesSummary:
+      
+    CyclesNitrogen:
+      
+    CyclesWeatherOutput:
+      
+    CyclesSeason:
+      
+    CyclesOutputs:
+      
