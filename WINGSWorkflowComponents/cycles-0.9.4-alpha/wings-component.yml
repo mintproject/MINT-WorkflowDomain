@@ -31,11 +31,6 @@ wings:
       isParam: false
       type: dcdom:CyclesCrops
       dimensionality: 0
-    - role: cycles_reinit
-      prefix: "-i4"
-      isParam: false
-      type: dcdom:CyclesREINIT
-      dimensionality: 0
     - role: start_year
       prefix: "-p1"
       isParam: true
@@ -181,17 +176,16 @@ wings:
 
       strConcat('sy_' ?syv '_ey_' ?eyv '_cn_' ?cnv '_spd_' ?spdv '_epd_' ?epdv '_fr_' ?frv '_wf_' ?wfv '_uf_' ?ufv ?combined)
       md5hash(?combined ?md5hash)
-      -> print(?combined ?md5hash)
 
-      (?csp dcdom:md5hash ?md5hash)
-      (?csom dcdom:md5hash ?md5hash)
-      (?ccp dcdom:md5hash ?md5hash)
-      (?cnit dcdom:md5hash ?md5hash)
-      (?cs dcdom:md5hash ?md5hash)
-      (?csum dcdom:md5hash ?md5hash)
-      (?cwo dcdom:md5hash ?md5hash)
-      (?cw dcdom:md5hash ?md5hash)
-      (?cout dcdom:md5hash ?md5hash)
+      -> (?csp dcdom:md5hash ?md5hash)
+         (?csom dcdom:md5hash ?md5hash)
+         (?ccp dcdom:md5hash ?md5hash)
+         (?cnit dcdom:md5hash ?md5hash)
+         (?cs dcdom:md5hash ?md5hash)
+         (?csum dcdom:md5hash ?md5hash)
+         (?cwo dcdom:md5hash ?md5hash)
+         (?cw dcdom:md5hash ?md5hash)
+         (?cout dcdom:md5hash ?md5hash)
     ]
   documentation: |
     Cycles Model
@@ -203,7 +197,6 @@ wings:
     CyclesCrops:
       files:
         - data/crops.crop
-    CyclesREINIT:
     CyclesAnnualSoilProfile:
       format: "cycles_soilProfile-[md5hash]"
       metadataProperties:
