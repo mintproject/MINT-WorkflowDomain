@@ -60,7 +60,7 @@ wings:
       isParam: true
       type: xsd:integer
       dimensionality: 0
-      paramDefaultValue: 149
+      paramDefaultValue: 0
     - role: fertilizer_rate
       prefix: "-p6"
       isParam: true
