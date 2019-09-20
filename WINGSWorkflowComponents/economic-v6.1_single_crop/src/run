@@ -32,5 +32,7 @@ fi
 
 
 # Outputs
-mv MINT_simulation_output.txt $OUTPUTS1
-mv MINT_calibration_output.txt $OUTPUTS2
+mv MINT_v6.1_onecrop_simulation_output.txt $OUTPUTS1
+mv MINT_v6.1_onecrop_calibration_output.txt $OUTPUTS2
+
+
