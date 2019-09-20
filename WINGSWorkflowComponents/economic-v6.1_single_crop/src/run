@@ -15,10 +15,10 @@ set -x
 
 
 # Inputs
-mv $INPUTS1 cyclesdata.csv
-mv $INPUTS2 calibdata.csv
-mv $INPUTS3 price.csv
-mv $INPUTS4 productioncost.csv
+mv $INPUTS1 cyclesdata_v6.1_onecrop.csv
+mv $INPUTS2 calibdata_v6.1_onecrop.csv
+mv $INPUTS3 price_v6.1_onecrop.csv
+mv $INPUTS4 productioncost_v6.1_onecrop.csv
 ./all-crops-update-sims-maize.py price_v6.1_onecrop.csv productioncost_v6.1_onecrop.csv $PARAMS1 $PARAMS2 $PARAMS3 
 
 
