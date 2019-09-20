@@ -1,0 +1,94 @@
+name: economic-calib-1crop
+version: 6.1.0
+description: Economic model (v6.1)
+keywords:
+ - economic
+ - crop production
+author: 
+  - Kelly Cobourn
+contributors:
+  - name: Zeya Zhang
+    email: zzeya7@vt.edu
+container: Dockerfile
+repository:
+  type : git
+  url : https://github.com/npm/cli.git
+wings:
+  componentType: Economic
+  files:
+    - src/*
+  inputs:
+    - role: cycles-data
+      prefix: "-i1"
+      isParam: false
+      type: dcdom:economic-cycles-data
+      dimensionality: 0
+      testValue: file:cyclesdata_v6.1_onecrop.csv
+    - role: land-input
+      prefix: "-i2"
+      isParam: false
+      type: dcdom:economic-land-input
+      dimensionality: 0
+      testValue: file:calibdata_v6.1_onecrop.csv
+    - role: price
+      prefix: "-i3"
+      isParam: false
+      type: dcdom:economic-price
+      dimensionality: 0
+      testValue: file:price_v6.1_onecrop.csv
+    - role: production-cost
+      prefix: "-i4"
+      isParam: false
+      type: dcdom:economic-production-cost
+      dimensionality: 0
+      testValue: file:productioncost_v6.1_onecrop.csv
+    - role: maize-crop-price-adjustment
+      prefix: "-p1"
+      isParam: true
+      type: xsd:integer
+      dimensionality: 0
+      paramDefaultValue: 0
+    - role: maize-land-cost-adjustment
+      prefix: "-p2"
+      isParam: true
+      type: xsd:integer
+      dimensionality: 0
+      paramDefaultValue: 0
+    - role: maize-fertilizer-cost-adjustment
+      prefix: "-p3"
+      isParam: true
+      type: xsd:integer
+      dimensionality: 0
+      paramDefaultValue: 0
+  outputs:
+    - role: economic-land-use
+      prefix: "-o1"
+      isParam: false
+      type: dcdom:EconomicLandUse
+      dimensionality: 0
+    - role: calibration-output
+      prefix: "-o2"
+      isParam: false
+      type: dcdom:EconomicCalibration
+      dimensionality: 0
+    
+  data:
+    economic-cycles-data:
+      files:
+        - data/cyclesdata_v6.1_onecrop.csv
+    economic-land-input:
+      files:
+        - data/calibdata_v6.1_onecrop.csv
+    economic-price:
+      files:
+        - data/price_v6.1_onecrop.csv
+    economic-production-cost:
+      files:
+        - data/productioncost_v6.1_onecrop.csv
+    EconomicLandUse:
+      format: "[__ID]-[combined-adjustment-suffix].csv"
+      metadataProperties:
+        land-cost-adjustment: int
+        crop-price-adjustment: int
+        fertilizer-cost-adjustment: int
+        combined-adjustment-suffix: string
