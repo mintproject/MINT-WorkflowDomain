@@ -1,0 +1,121 @@
+name: MODFLOW2005
+version: 1.0.0
+description: Modflow is a popular open-source groundwater flow model distributed by the U.S. Geological survey
+author:
+  - Modflow Team
+license: Apache-2.0
+homepage: https://www.usgs.gov/software/modflow-2005-usgs-three-dimensional-finite-difference-ground-water-model
+contributors:
+  - name: Daniel Garijo
+    email: dgarijo@isi.edu
+  - name: Daniel Hardesty Lewis
+    email: dhl@tacc.utexas.edu
+wings:
+  inputs:
+  - role: bas6
+    prefix: -i1
+    isParam: false
+    type: dcdom:MODFLOWBas6
+    dimensionality: 0
+  - role: dis
+    prefix: -i2
+    isParam: false
+    type: dcdom:MODFLOWdis
+    dimensionality: 0
+  - role: bcf6
+    prefix: -i3
+    isParam: false
+    type: dcdom:MODFLOWbcf6
+    dimensionality: 0
+  - role: oc
+    prefix: -i4
+    isParam: false
+    type: dcdom:MODFLOWoc
+    dimensionality: 0
+  - role: wel
+    prefix: -i5
+    isParam: false
+    type: dcdom:MODFLOWwel
+    dimensionality: 0
+  - role: drn
+    prefix: -i6
+    isParam: false
+    type: dcdom:MODFLOWdrn
+    dimensionality: 0
+  - role: rch
+    prefix: -i7
+    isParam: false
+    type: dcdom:MODFLOWrch
+    dimensionality: 0
+  - role: hfb6
+    prefix: -i8
+    isParam: false
+    type: dcdom:MODFLOWhfb6
+    dimensionality: 0
+  - role: sip
+    prefix: -i9
+    isParam: false
+    type: dcdom:MODFLOWsip
+    dimensionality: 0 
+  outputs:
+  - role: lst
+    prefix: -o1
+    isParam: false
+    type: dcdom:MODFLOWlst
+    dimensionality: 0
+  - role: cbb
+    prefix: -o2
+    isParam: false
+    type: dcdom:MODFLOWcbb
+    dimensionality: 0
+  - role: hds
+    prefix: -o3
+    isParam: false
+    type: dcdom:MODFLOWhds
+    dimensionality: 0
+  - role: ddn
+    prefix: -o4
+    isParam: false
+    type: dcdom:MODFLOWddn
+    dimensionality: 0
+  documentation: Modflow 2005 model
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: Modflow2005
+  files:
+  - src\*
+  data:
+    MODFLOWBas6:
+      files:
+      - data/BARTON_SPRINGS_2001_2010AVERAGE.ba6
+    MODFLOWdis:
+      files:
+      - data/BARTON_SPRINGS_2001_2010AVERAGE.dis
+    MODFLOWbcf6:
+      files:
+      - data/BARTON_SPRINGS_2001_2010AVERAGE.bc6
+    MODFLOWoc:
+      files:
+      - data/BARTON_SPRINGS_2001_2010AVERAGE.oc
+    MODFLOWwel:
+      files:
+      - data/BARTON_SPRINGS_2001_2010AVERAGE.wel
+    MODFLOWdrn:
+      files:
+      - data/BARTON_SPRINGS_2001_2010AVERAGE.drn
+    MODFLOWrch:
+      files:
+      - data/BARTON_SPRINGS_2001_2010AVERAGE.rch
+    MODFLOWhfb6:
+      files:
+      - data/BARTON_SPRINGS_2001_2010AVERAGE.hf6
+    MODFLOWsip:
+      files:
+      - data/BARTON_SPRINGS_2001_2010AVERAGE.sip
+    MODFLOWlst:
+    MODFLOWcbb:
+    MODFLOWhds:
+    MODFLOWddn:
