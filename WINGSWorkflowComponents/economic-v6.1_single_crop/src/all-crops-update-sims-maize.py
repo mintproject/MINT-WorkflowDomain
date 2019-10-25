@@ -10,7 +10,7 @@ from pathlib import Path
 
 def _generate_sim_price(p, sim_price):
 	i = Path(p)
-	o = Path("price_v6.1_onecrop.csv")
+	o = Path("simprice_onecrop.csv")
 
 	with i.open("r") as r, o.open("w",newline = '') as w:
 		r = csv.reader(r)
@@ -31,7 +31,7 @@ def _generate_sim_price(p, sim_price):
 
 def _generate_sim_production_cost(pc, sim_production_c1, sim_production_c2):
 	i = Path(pc)
-	o = Path("productioncost_v6.1_onecrop.csv")
+	o = Path("simproductioncost_onecrop.csv")
 
 	with i.open("r") as r, o.open("w",newline = '') as w:
 		r = csv.reader(r)
