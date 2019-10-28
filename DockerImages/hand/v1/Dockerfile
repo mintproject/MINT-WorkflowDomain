@@ -18,3 +18,6 @@ RUN git clone --branch v${TAUDEM_VERSION} https://github.com/dtarb/TauDEM && \
 
 
 RUN Rscript -e 'install.packages("rgdal"); install.packages("raster"); install.packages("shapefiles"); install.packages("optparse");'
+
+ADD find_inlets.cpp .
+RUN g++ -I /usr/include/gdal find_inlets.cpp -lgdal -o /usr/local/bin/find_inlets
