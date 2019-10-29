@@ -1,0 +1,46 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 1 0 1 "$@"
+
+set -x
+
+mkdir temp
+
+#creation of a temp folder to have control on the unzipped folder.
+cp $INPUTS1 temp/input.zip
+cd temp
+
+#unzip input
+unzip input.zip
+
+#There may be __MACOS files, filter them
+TMP=$(ls -d [A-Za-z]*/)
+
+cd $TMP
+#The information about the file is in _path_info
+config=$(ls *_path_info.cfg)
+folderOut=$(cat $config | grep out_directory | cut -d "|" -f 2)
+folderInput=$(cat $config | grep in_directory | cut -d "|" -f 2)
+prefix=$(cat $config | grep case_prefix | cut -d "|" -f 2)
+out=$(eval echo $folderOut)
+echo $out
+echo $folderInput
+echo $prefix
+
+# Create a folder for the model output with the information in _path_info
+mkdir -p $out
+
+#Run Topoflow
+python3 -m topoflow --cfg_directory $folderInput --cfg_prefix $prefix
+
+#zip outputs
+tar -czvf $OUTPUTS1 $out 

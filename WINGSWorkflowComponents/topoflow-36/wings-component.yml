@@ -1,0 +1,33 @@
+name: topoflow
+version: 3.6.0
+description: Topoflow
+keywords:
+ - hydrology
+author: 
+  - Daniel Garijo
+  - Scott Peckham
+  - Maximiliano Osorio
+container: Dockerfile
+wings:
+  componentType: Hydrological
+  files:
+    - src/*
+  inputs:
+    - role: aggregated-inputs
+      prefix: "-i1"
+      isParam: false
+      type: dcdom:TopoflowAggregatedInput
+      dimensionality: 0
+      testValue: file:Baro_Gam_1min_Input.zip
+  outputs:
+    - role: aggregated-outputs
+      prefix: "-o1"
+      isParam: false
+      type: dcdom:TopoflowAggregatedOutputs
+      dimensionality: 0
+    
+  data:
+    TopoflowAggregatedInput:
+      files:
+        - data/Baro_Gam_1min_Input.zip
+    TopoflowAggregatedOutputs:
