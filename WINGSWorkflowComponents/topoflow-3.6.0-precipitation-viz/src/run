@@ -66,7 +66,7 @@ sed -i "${line_p_type_parameter}s/Time_Series/Grid_Sequence/g" $meteorology_file
 mkdir -p $out
 
 #Run Topoflow
-python3 -m topoflow --cfg_directory $folderInput --cfg_prefix $prefix
+python -m topoflow --cfg_directory $folderInput --cfg_prefix $prefix
 #check exit code
 checkExitCode
 
