@@ -24,7 +24,7 @@ wings:
       isParam: false
       type: dcdom:TopoflowPrecipitationRate
       dimensionality: 0
-      testValue: file:climate.zip
+      testValue: file:climate.01.rts.zip
   outputs:
     - role: aggregated-outputs
       prefix: "-o1"
@@ -37,5 +37,5 @@ wings:
         - data/Baro_Gam_1min_Input.zip
     TopoflowPrecipitationRate:
       files:
-        - data/climate.zip
+        - data/climate.01.rts.zip
     TopoflowAggregatedOutputs:
