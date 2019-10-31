@@ -20,7 +20,7 @@ unzip $INPUTS2 -d $CLIMATE_FOLDER
 
 number_expected=1
 number_files=$(ls -1q ${CLIMATE_FOLDER}/*.rts | wc -l)
-if [ "$number_files" -neq "number_expected" ];then
+if [ "$number_files" -neq "$number_expected" ];then
   echo "The zipfile must contains $number_expected file with .rts extension";
   exit 1
 fi
