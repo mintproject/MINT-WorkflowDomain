@@ -66,13 +66,13 @@ sed -i "${line_p_type_parameter}s/Time_Series/Grid_Sequence/g" $meteorology_file
 mkdir -p $out
 
 #Run Topoflow
-python -m topoflow --cfg_directory $folderInput --cfg_prefix $prefix
+/opt/conda/bin/python3  -m topoflow --cfg_directory $folderInput --cfg_prefix $prefix
 #check exit code
 checkExitCode
 
-for nc_file $(ls *.nc); do
+for $nc_file in $(ls *.nc); do
     echo "Generating visualization for ${nc_file}"
-    python /usr/bin/build_viz.py  Test1_2D-Q.nc [6,8]
+    python /usr/bin/build_viz.py  Test1_2D-Q.nc [2,4]
 done
 
 popd
