@@ -1,0 +1,345 @@
+name: pihm
+version: 4.1.0
+schemaVersion: 0.0.1
+wings:
+  inputs:
+  - role: pihm-input
+    prefix: -i1
+    isParam: false
+    type: dcdom:targz
+    dimensionality: 0
+  - role: start-date
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '2017-01-01'
+  - role: end-date
+    prefix: -p2
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '2017-12-31'
+  - role: region-name
+    prefix: -p3
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: pongo
+  - role: TS_PRCP
+    prefix: -p24
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: TS_SFCTMP
+    prefix: -p26
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 0.0
+  - role: ET_ETP
+    prefix: -p27
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: SOIL_KINF
+    prefix: -p11
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: SOIL_KMACSATV
+    prefix: -p12
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: SOIL_ALPHA
+    prefix: -p14
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: SOIL_BETA
+    prefix: -p15
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: GEOL_KMACSATH
+    prefix: -p6
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: GEOL_DMAC
+    prefix: -p10
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: GEOL_THETAS
+    prefix: -p8
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: LC_VEGFRAC
+    prefix: -p17
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: LC_DROOT
+    prefix: -p20
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: GEOL_KSATH
+    prefix: -p4
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: GEOL_KSATV
+    prefix: -p5
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: GEOL_MACVF
+    prefix: -p7
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: GEOL_THETAR
+    prefix: -p9
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: SOIL_DINF
+    prefix: -p13
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: SOIL_MACHF
+    prefix: -p16
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: LC_ALBEDO
+    prefix: -p18
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: LC_ROUGH
+    prefix: -p19
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: LC_ISMAX
+    prefix: -p21
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: LC_IMPAF
+    prefix: -p22
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: LC_SOILDGD
+    prefix: -p23
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: TS_LAI
+    prefix: -p25
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: ET_IC
+    prefix: -p28
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: ET_TR
+    prefix: -p29
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: ET_SOIL
+    prefix: -p30
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: RIV_ROUGH
+    prefix: -p31
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: RIV_KH
+    prefix: -p32
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: RIV_SINU
+    prefix: -p33
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: RIV_CWR
+    prefix: -p34
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: RIV_BEDTHICK
+    prefix: -p35
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 1.0
+  - role: RIV_BSLOPE
+    prefix: -p36
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 0.0
+  - role: RIV_DPTH
+    prefix: -p37
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 0.0
+  - role: RIV_WDTH
+    prefix: -p38
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 0.0
+  - role: IC_GW
+    prefix: -p39
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 0.0
+  - role: IC_RIV
+    prefix: -p40
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 0.0
+  - role: AQ_DEPTH
+    prefix: -p41
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 0.0
+  outputs:
+  - role: pihm-output
+    prefix: -o1
+    isParam: false
+    type: dcdom:targz
+    dimensionality: 0
+  rules:
+  - '[ regionPrefix: (?c rdf:type acdom:PIHMClass) (?c ac:hasInput ?start) (?start
+    ac:hasArgumentID ''start-date'') (?start ac:hasValue ?startv) (?c ac:hasInput
+    ?end) (?end ac:hasArgumentID ''end-date'') (?end ac:hasValue ?endv) (?c ac:hasInput
+    ?region) (?region ac:hasArgumentID ''region-name'') (?region ac:hasValue ?regionv)
+    (?c ac:hasInput ?GEOL_KSATH) (?GEOL_KSATH ac:hasArgumentID ''GEOL_KSATH'') (?GEOL_KSATH
+    ac:hasValue ?GEOL_KSATHv) (?c ac:hasInput ?GEOL_KSATV) (?GEOL_KSATV ac:hasArgumentID
+    ''GEOL_KSATV'') (?GEOL_KSATV ac:hasValue ?GEOL_KSATVv) (?c ac:hasInput ?GEOL_KMACSATH)
+    (?GEOL_KMACSATH ac:hasArgumentID ''GEOL_KMACSATH'') (?GEOL_KMACSATH ac:hasValue
+    ?GEOL_KMACSATHv) (?c ac:hasInput ?GEOL_MACVF) (?GEOL_MACVF ac:hasArgumentID ''GEOL_MACVF'')
+    (?GEOL_MACVF ac:hasValue ?GEOL_MACVFv) (?c ac:hasInput ?GEOL_THETAS) (?GEOL_THETAS
+    ac:hasArgumentID ''GEOL_THETAS'') (?GEOL_THETAS ac:hasValue ?GEOL_THETASv) (?c
+    ac:hasInput ?GEOL_THETAR) (?GEOL_THETAR ac:hasArgumentID ''GEOL_THETAR'') (?GEOL_THETAR
+    ac:hasValue ?GEOL_THETARv) (?c ac:hasInput ?GEOL_DMAC) (?GEOL_DMAC ac:hasArgumentID
+    ''GEOL_DMAC'') (?GEOL_DMAC ac:hasValue ?GEOL_DMACv) (?c ac:hasInput ?SOIL_KINF)
+    (?SOIL_KINF ac:hasArgumentID ''SOIL_KINF'') (?SOIL_KINF ac:hasValue ?SOIL_KINFv)
+    (?c ac:hasInput ?SOIL_KMACSATV) (?SOIL_KMACSATV ac:hasArgumentID ''SOIL_KMACSATV'')
+    (?SOIL_KMACSATV ac:hasValue ?SOIL_KMACSATVv) (?c ac:hasInput ?SOIL_DINF) (?SOIL_DINF
+    ac:hasArgumentID ''SOIL_DINF'') (?SOIL_DINF ac:hasValue ?SOIL_DINFv) (?c ac:hasInput
+    ?SOIL_ALPHA) (?SOIL_ALPHA ac:hasArgumentID ''SOIL_ALPHA'') (?SOIL_ALPHA ac:hasValue
+    ?SOIL_ALPHAv) (?c ac:hasInput ?SOIL_BETA) (?SOIL_BETA ac:hasArgumentID ''SOIL_BETA'')
+    (?SOIL_BETA ac:hasValue ?SOIL_BETAv) (?c ac:hasInput ?SOIL_MACHF) (?SOIL_MACHF
+    ac:hasArgumentID ''SOIL_MACHF'') (?SOIL_MACHF ac:hasValue ?SOIL_MACHFv) (?c ac:hasInput
+    ?LC_VEGFRAC) (?LC_VEGFRAC ac:hasArgumentID ''LC_VEGFRAC'') (?LC_VEGFRAC ac:hasValue
+    ?LC_VEGFRACv) (?c ac:hasInput ?LC_ALBEDO) (?LC_ALBEDO ac:hasArgumentID ''LC_ALBEDO'')
+    (?LC_ALBEDO ac:hasValue ?LC_ALBEDOv) (?c ac:hasInput ?LC_ROUGH) (?LC_ROUGH ac:hasArgumentID
+    ''LC_ROUGH'') (?LC_ROUGH ac:hasValue ?LC_ROUGHv) (?c ac:hasInput ?LC_DROOT) (?LC_DROOT
+    ac:hasArgumentID ''LC_DROOT'') (?LC_DROOT ac:hasValue ?LC_DROOTv) (?c ac:hasInput
+    ?LC_ISMAX) (?LC_ISMAX ac:hasArgumentID ''LC_ISMAX'') (?LC_ISMAX ac:hasValue ?LC_ISMAXv)
+    (?c ac:hasInput ?LC_IMPAF) (?LC_IMPAF ac:hasArgumentID ''LC_IMPAF'') (?LC_IMPAF
+    ac:hasValue ?LC_IMPAFv) (?c ac:hasInput ?LC_SOILDGD) (?LC_SOILDGD ac:hasArgumentID
+    ''LC_SOILDGD'') (?LC_SOILDGD ac:hasValue ?LC_SOILDGDv) (?c ac:hasInput ?TS_PRCP)
+    (?TS_PRCP ac:hasArgumentID ''TS_PRCP'') (?TS_PRCP ac:hasValue ?TS_PRCPv) (?c ac:hasInput
+    ?TS_LAI) (?TS_LAI ac:hasArgumentID ''TS_LAI'') (?TS_LAI ac:hasValue ?TS_LAIv)
+    (?c ac:hasInput ?TS_SFCTMP) (?TS_SFCTMP ac:hasArgumentID ''TS_SFCTMP'') (?TS_SFCTMP
+    ac:hasValue ?TS_SFCTMPv) (?c ac:hasInput ?ET_ETP) (?ET_ETP ac:hasArgumentID ''ET_ETP'')
+    (?ET_ETP ac:hasValue ?ET_ETPv) (?c ac:hasInput ?ET_IC) (?ET_IC ac:hasArgumentID
+    ''ET_IC'') (?ET_IC ac:hasValue ?ET_ICv) (?c ac:hasInput ?ET_TR) (?ET_TR ac:hasArgumentID
+    ''ET_TR'') (?ET_TR ac:hasValue ?ET_TRv) (?c ac:hasInput ?ET_SOIL) (?ET_SOIL ac:hasArgumentID
+    ''ET_SOIL'') (?ET_SOIL ac:hasValue ?ET_SOILv) (?c ac:hasInput ?RIV_ROUGH) (?RIV_ROUGH
+    ac:hasArgumentID ''RIV_ROUGH'') (?RIV_ROUGH ac:hasValue ?RIV_ROUGHv) (?c ac:hasInput
+    ?RIV_KH) (?RIV_KH ac:hasArgumentID ''RIV_KH'') (?RIV_KH ac:hasValue ?RIV_KHv)
+    (?c ac:hasInput ?RIV_SINU) (?RIV_SINU ac:hasArgumentID ''RIV_SINU'') (?RIV_SINU
+    ac:hasValue ?RIV_SINUv) (?c ac:hasInput ?RIV_CWR) (?RIV_CWR ac:hasArgumentID ''RIV_CWR'')
+    (?RIV_CWR ac:hasValue ?RIV_CWRv) (?c ac:hasInput ?RIV_BEDTHICK) (?RIV_BEDTHICK
+    ac:hasArgumentID ''RIV_BEDTHICK'') (?RIV_BEDTHICK ac:hasValue ?RIV_BEDTHICKv)
+    (?c ac:hasInput ?RIV_BSLOPE) (?RIV_BSLOPE ac:hasArgumentID ''RIV_BSLOPE'') (?RIV_BSLOPE
+    ac:hasValue ?RIV_BSLOPEv) (?c ac:hasInput ?RIV_DPTH) (?RIV_DPTH ac:hasArgumentID
+    ''RIV_DPTH'') (?RIV_DPTH ac:hasValue ?RIV_DPTHv) (?c ac:hasInput ?RIV_WDTH) (?RIV_WDTH
+    ac:hasArgumentID ''RIV_WDTH'') (?RIV_WDTH ac:hasValue ?RIV_WDTHv) (?c ac:hasInput
+    ?IC_GW) (?IC_GW ac:hasArgumentID ''IC_GW'') (?IC_GW ac:hasValue ?IC_GWv) (?c ac:hasInput
+    ?IC_RIV) (?IC_RIV ac:hasArgumentID ''IC_RIV'') (?IC_RIV ac:hasValue ?IC_RIVv)
+    (?c ac:hasInput ?AQ_DEPTH) (?AQ_DEPTH ac:hasArgumentID ''AQ_DEPTH'') (?AQ_DEPTH
+    ac:hasValue ?AQ_DEPTHv) (?c ac:hasOutput ?op) (?op ac:hasArgumentID ''pihm-output'')
+    strConcat(''start_date_'' ?startv ''_end_date_'' ?endv ''_region_'' ?regionv ''_GEOL_KSATH_''
+    ?GEOL_KSATHv ''_GEOL_KSATV_'' ?GEOL_KSATVv ''_GEOL_KMACSATH_'' ?GEOL_KMACSATHv
+    ''_GEOL_MACVF_'' ?GEOL_MACVFv ''_GEOL_THETAS_'' ?GEOL_THETASv ''_GEOL_THETAR_''
+    ?GEOL_THETARv ''_GEOL_DMAC_'' ?GEOL_DMACv ''_SOIL_KINF_'' ?SOIL_KINFv ''_SOIL_KMACSATV_''
+    ?SOIL_KMACSATVv ''_SOIL_DINF_'' ?SOIL_DINFv ''_SOIL_ALPHA_'' ?SOIL_ALPHAv ''_SOIL_BETA_''
+    ?SOIL_BETAv ''_SOIL_MACHF_'' ?SOIL_MACHFv ''_LC_VEGFRAC_'' ?LC_VEGFRACv ''_LC_ALBEDO_''
+    ?LC_ALBEDOv ''_LC_ROUGH_'' ?LC_ROUGHv ''_LC_DROOT_'' ?LC_DROOTv ''_LC_ISMAX_''
+    ?LC_ISMAXv ''_LC_IMPAF_'' ?LC_IMPAFv ''_LC_SOILDGD_'' ?LC_SOILDGDv ''_TS_PRCP_''
+    ?TS_PRCPv ''_TS_LAI_'' ?TS_LAIv ''_TS_SFCTMP_'' ?TS_SFCTMPv ''_ET_ETP_'' ?ET_ETPv
+    ''_ET_IC_'' ?ET_ICv ''_ET_TR_'' ?ET_TRv ''_ET_SOIL_'' ?ET_SOILv ''_RIV_ROUGH_''
+    ?RIV_ROUGHv ''_RIV_KH_'' ?RIV_KHv ''_RIV_SINU_'' ?RIV_SINUv ''_RIV_CWR_'' ?RIV_CWRv
+    ''_RIV_BEDTHICK_'' ?RIV_BEDTHICKv ''_RIV_BSLOPE_'' ?RIV_BSLOPEv ''_RIV_DPTH_''
+    ?RIV_DPTHv ''_RIV_WDTH_'' ?RIV_WDTHv ''_IC_GW_'' ?IC_GWv ''_IC_RIV_'' ?IC_RIVv
+    ''_AQ_DEPTH_'' ?AQ_DEPTHv ?combined) strConcat(''output-'' ?regionv ?extregionv)
+    md5hash(?combined ?md5hash) -> print(?extregionv ?combined ?md5hash) (?op dcdom:region
+    ?extregionv) (?op dcdom:checksum ?md5hash) ]'
+  inheritedRules: []
+  documentation: Penn State Integrated Hydrologic Modeling System
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: PIHM
+  files:
+  - src\*
+  data:
+    targz:
+      files: []

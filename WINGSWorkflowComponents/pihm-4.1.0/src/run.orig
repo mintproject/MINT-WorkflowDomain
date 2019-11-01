@@ -1,0 +1,183 @@
+#!/bin/bash
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 1 15 1 "$@"
+
+# Params
+START_YEAR=`date --date=${PARAMS1} +%Y`
+END_YEAR=`date --date=${PARAMS2} +%Y`
+PROJECT_NAME=${PARAMS3}
+
+set -x
+
+CWD=$PWD
+UUID=`mktemp --directory --dry-run -t "XXXXX"`
+UUID=`basename ${UUID}`
+
+
+# Inputs
+tar zxf ${INPUTS1}
+
+
+cat > ${UUID}.txt <<EOF
+"prjname" "${PROJECT_NAME}"
+"startyear" "${START_YEAR}"
+"endyear" "${END_YEAR}"
+"dir.out" "${CWD}/output"
+"fr.dem" "${CWD}/${UUID}/not-needed"
+"fsp.wbd" "${CWD}/${UUID}/not-needed"
+"fsp.stm" "${CWD}/${UUID}/not-needed"
+"fr.landuse" "${CWD}/${UUID}/not-needed"
+"dir.soil" "${CWD}/${UUID}/not-needed"
+"dir.fldas" "${CWD}/${UUID}/weather/not-needed"
+"NumCells" "1000"
+"weather.res" "0.1"
+EOF
+
+# Step 4
+# output/Example.out/Example.prj
+# output/Example.out/Example.eleysnow.dat
+# output/Example.out/Example.eleysurf.dat
+# output/Example.out/Example.eleyunsat.dat
+# output/Example.out/Example.eleywf.dat
+# output/Example.out/Example.eleygw.dat
+# output/Example.out/Example.elevprcp.dat
+# output/Example.out/Example.elevnetprcp.dat
+# output/Example.out/Example.elevetp.dat
+# output/Example.out/Example.eleveta.dat
+# output/Example.out/Example.elevrech.dat
+# output/Example.out/Example.eleqsub.dat
+# output/Example.out/Example.eleqsurf.dat
+# output/Example.out/Example.elevinfil.dat
+# output/Example.out/Example.elevetic.dat
+# output/Example.out/Example.elevettr.dat
+# output/Example.out/Example.elevetev.dat
+# output/Example.out/Example.rivqup.dat
+# output/Example.out/Example.rivqdown.dat
+# output/Example.out/Example.rivqsub.dat
+# output/Example.out/Example.rivqsurf.dat
+# output/Example.out/Example.rivystage.dat
+# output/Example.out/Example.cfg.ic.bak
+# output/Example.out/Example.flood.csv
+# output/Example.out/Debug_Table_Element.csv
+# output/Example.out/Debug_Table_River.csv
+# output/Example.out/Example.cfg.calib.bak
+# output/Example.out/Example.update.ic
+cd ${CWD}/output
+
+# TODO: Remove
+## START_DATE=`date --date=${PARAMS1} +"%s"`
+## END_DATE=`date --date=${PARAMS2} +"%s"`
+## NUM_DAYS=$(( ( ( ${END_DATE} - ${START_DATE} ) / ( 60 * 60 * 24 ) ) ))
+## sed --in-place -e "s/END.*/END	${NUM_DAYS}/" input/${PROJECT_NAME}/${PROJECT_NAME}.cfg.para
+# TODO: Remove
+
+# Start: Perturb Calibration File
+TS_PRCP=${PARAMS4}
+TS_SFCTMP=${PARAMS5}
+ET_ETP=${PARAMS6}
+SOIL_KINF=${PARAMS7}
+SOIL_KMACSATV=${PARAMS8}
+SOIL_ALPHA=${PARAMS9}
+SOIL_BETA=${PARAMS10}
+GEOL_KMACSATH=${PARAMS11}
+GEOL_DMAC=${PARAMS12}
+GEOL_THETAS=${PARAMS13}
+LC_VEGFRAC=${PARAMS14}
+LC_DROOT=${PARAMS15}
+
+sed --in-place \
+    -e "s/TS_PRCP.*/TS_PRCP	${TS_PRCP}/" \
+    -e "s/TS_SFCTMP\+.*/TS_SFCTMP+	${TS_SFCTMP}/" \
+    -e "s/ET_ETP.*/ET_ETP	${ET_ETP}/" \
+    -e "s/SOIL_KINF.*/SOIL_KINF	${SOIL_KINF}/" \
+    -e "s/SOIL_KMACSATV.*/SOIL_KMACSATV	${SOIL_KMACSATV}/" \
+    -e "s/SOIL_ALPHA.*/SOIL_ALPHA	${SOIL_ALPHA}/" \
+    -e "s/SOIL_BETA.*/SOIL_BETA	${SOIL_BETA}/" \
+    -e "s/GEOL_KMACSATH.*/GEOL_KMACSATH	${GEOL_KMACSATH}/" \
+    -e "s/GEOL_DMAC.*/GEOL_DMAC	${GEOL_DMAC}/" \
+    -e "s/GEOL_THETAS.*/GEOL_THETAS	${GEOL_THETAS}/" \
+    -e "s/LC_VEGFRAC.*/LC_VEGFRAC	${LC_VEGFRAC}/" \
+    -e "s/LC_DROOT.*/LC_DROOT	${LC_DROOT}/" \
+    input/${PROJECT_NAME}/${PROJECT_NAME}.cfg.calib
+
+cp input/${PROJECT_NAME}/${PROJECT_NAME}.cfg.calib output/${PROJECT_NAME}.cfg.calib
+
+echo "Modified Calib File: Start"
+cat input/${PROJECT_NAME}/${PROJECT_NAME}.cfg.calib 1>&2
+echo "Modified Calib File: End"
+# End: Perturb Calibration File
+
+set +e
+export LD_LIBRARY_PATH=/usr/local/sundials/lib
+time /usr/bin/pihm++ ${PROJECT_NAME} 2>&1 | tee output/${PROJECT_NAME}.log
+EC=$?
+if [[ $EC -ne 0 && $EC -ne 19 ]]; then
+    echo "PIHM Failed with Exitcode ${EC}"
+    exit $EC
+fi
+
+set -e
+cd ${CWD}
+
+# Step 5
+# output/Example.out/PIHManalysis/WaterBalance.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_rivystage.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_rivqsurf.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_rivqsub.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_rivqdown.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_eleyunsat.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_eleysurf.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_eleygw.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_elevrech.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_elevprcp.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_elevinfil.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_elevettr.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_elevetp.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_elevetic.png
+# output/Example.out/PIHManalysis/BasicPlot/pongo_elevetev.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_eleyunsat.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_eleysurf.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_eleygw.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_elevrech.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_elevprcp.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_elevinfil.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_elevettr.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_elevetp.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_elevetic.png
+# output/Example.out/PIHManalysis/BasicPlot/Map.pongo_elevetev.png
+# output/Example.out/Flood_GW.tif
+# output/Example.out/Flood_GW2000-01.png
+# output/Example.out/Flood_GW2000-02.png
+# output/Example.out/Flood_GW2000-03.png
+# output/Example.out/Flood_GW2000-04.png
+# output/Example.out/Flood_GW2000-05.png
+# output/Example.out/Flood_GW2000-06.png
+# output/Example.out/Flood_GW2000-07.png
+# output/Example.out/Flood_GW2000-08.png
+# output/Example.out/Flood_GW2000-09.png
+# output/Example.out/Flood_GW2000-10.png
+# output/Example.out/Flood_GW2000-11.png
+# output/Example.out/Flood_GW2000-12.png
+# output/Example.out/Flood_surf.tif
+# output/Example.out/Flood_surf2000-01.png
+# output/Example.out/Flood_surf2000-02.png
+# output/Example.out/Flood_surf2000-03.png
+# output/Example.out/Flood_surf2000-04.png
+# output/Example.out/Flood_surf2000-05.png
+# output/Example.out/Flood_surf2000-06.png
+# output/Example.out/Flood_surf2000-07.png
+# output/Example.out/Flood_surf2000-08.png
+# output/Example.out/Flood_surf2000-09.png
+# output/Example.out/Flood_surf2000-10.png
+# output/Example.out/Flood_surf2000-11.png
+# output/Example.out/Flood_surf2000-12.png
+Rscript Step5_ResultVisualization.R ${CWD}/${UUID}.txt
+Rscript Step5_WaterBalance.R ${CWD}/${UUID}.txt
+Rscript Step5.1_FloodAnimation.R ${CWD}/${UUID}.txt
+
+# Outputs
+cd ${CWD}
+OUT_DIR="output/output"
+tar zcvf ${CWD}/$OUTPUTS1 ${OUT_DIR}
