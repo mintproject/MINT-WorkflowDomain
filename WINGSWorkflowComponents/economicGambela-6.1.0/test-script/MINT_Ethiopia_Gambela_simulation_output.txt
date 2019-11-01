@@ -1,3 +1,0 @@
-"year","region","crop","fert_subsidy (%)","land area (ha)","production (kg)","yield (kg/ha)","Nuse (kg)","Nfert (kg/ha)"
-"2014","gambella","maize",50.00,4657.65,10090655.75,2166.47,37128.00,7.97
-"2014","gambella","sorghum",50.00,3005.42,7073353.60,2353.53,57138.94,19.01
