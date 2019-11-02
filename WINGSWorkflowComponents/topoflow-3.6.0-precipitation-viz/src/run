@@ -66,12 +66,18 @@ sed -i "${line_p_type_parameter}s/Time_Series/Grid_Sequence/g" $meteorology_file
 mkdir -p $out
 
 #Run Topoflow
-python3 -m topoflow --cfg_directory $folderInput --cfg_prefix $prefix
+/opt/conda/bin/python3  -m topoflow --cfg_directory $folderInput --cfg_prefix $prefix
 #check exit code
 checkExitCode
 
+for nc_file in ls *2D*.nc; do
+    echo "Generating visualization for ${nc_file}"
+    python /usr/bin/build_viz.py $nc_file [6,8]
+done
+
+zip -r outputs.zip $out
+OUTPUT_PATH=$(readlink -f outputs.zip)
 popd
 popd
 
-zip -r outputs.zip $out
-mv outputs.zip $OUTPUTS1
+mv $OUTPUT_PATH $OUTPUTS1
