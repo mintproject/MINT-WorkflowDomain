@@ -16,16 +16,16 @@ set -x
 #extract zip rate
 CLIMATE_FOLDER="rate"
 mkdir $CLIMATE_FOLDER
-unzip $INPUTS2 -d $CLIMATE_FOLDER
+tar -xzvf $INPUTS2 -C $CLIMATE_FOLDER
 
 number_expected=1
-number_files=$(ls -1q ${CLIMATE_FOLDER}/*.rts | wc -l)
+number_files=$(ls -1q ${CLIMATE_FOLDER}/*/*.rts | wc -l)
 if [ "$number_files" -neq "$number_expected" ];then
-  echo "The zipfile must contains $number_expected file with .rts extension";
+  echo "The tar.gz file must contains $number_expected file with .rts extension";
   exit 1
 fi
 
-RATE_FILE_PATH=$(readlink -f $(ls ${CLIMATE_FOLDER}/*.rts))
+RATE_FILE_PATH=$(readlink -f $(ls ${CLIMATE_FOLDER}/*/*.rts))
 RATE_FILE_NAME=$(basename -- ${RATE_FILE_PATH})
 
 #creation of a temp folder to have control on the unzipped folder.
@@ -75,3 +75,4 @@ popd
 
 zip -r outputs.zip $out
 mv outputs.zip $OUTPUTS1
+

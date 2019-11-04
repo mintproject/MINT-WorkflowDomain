@@ -10,7 +10,10 @@ keywords:
  - Drainage network
 homepage: http://hydrology.usu.edu/taudem/taudem5/
 license: Free Software
-author: "David Tarboton <dtarb@usu.edu> (http://hydrology.usu.edu/dtarb/)"
+author: 
+  - name: David Tarboton
+    email: dtarb@usu.edu
+    url: http://hydrology.usu.edu/dtarb/)
 container: Dockerfile
 repository:
   type : git
@@ -24,9 +27,9 @@ wings:
     - role: input-dem
       prefix: "-i1"
       isParam: false
-      type: dcdom:raster-dem
+      type: dcdom:rasterDem
       dimensionality: 0
-      testValue: file:dem.tif
+      testValue: file:Basin1_DEM.tif
     - role: stream-threshold
       prefix: "-p1"
       isParam: true
@@ -37,7 +40,7 @@ wings:
     - role: distance-down
       prefix: "-o1"
       isParam: false
-      type: dcdom:raster-distancedown
+      type: dcdom:rasterDistancedown
       dimensionality: 0
   documentation: |
     The Height Above the Nearest Drainage, or HAND, is a model that normalizes topography according to the local relative heights found along a given drainage network. The threshold determines the height of the stream.
@@ -47,13 +50,13 @@ wings:
     need64bit: false
     softwareIds: []
   data:
-    raster-dem:
+    rasterDem:
       files:
-        - data/dd.tif
-    raster-distancedown:
+        - data/Basin1_DEM.tif
+        - data/Basin2_DEM.tif
+    rasterDistancedown:
       files:
-        - data/dd.tif
-      
+        - data/dd.tif  
     # EconomicLandUse:
       # format: "[__ID]-[combined-adjustment-suffix].csv"
       # metadataProperties:
