@@ -21,4 +21,5 @@ RUN Rscript -e 'install.packages("rgdal"); install.packages("raster"); install.p
 
 ADD find_inlets.cpp .
 RUN g++ -I /usr/include/gdal find_inlets.cpp -lgdal -o /usr/local/bin/find_inlets
+ADD requirements.txt .
 RUN pip install -r requirements.txt 
