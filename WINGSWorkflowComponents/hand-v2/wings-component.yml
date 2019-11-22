@@ -30,12 +30,6 @@ wings:
       type: dcdom:rasterDem
       dimensionality: 0
       testValue: file:Basin1_DEM.tif
-    - role: stream-threshold
-      prefix: "-p1"
-      isParam: true
-      type: xsd:integer
-      dimensionality: 0
-      paramDefaultValue: 100
   outputs:
     - role: distance-down
       prefix: "-o1"
