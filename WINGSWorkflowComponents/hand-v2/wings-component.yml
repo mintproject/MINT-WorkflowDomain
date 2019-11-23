@@ -1,0 +1,61 @@
+name: HAND
+version: 2.0.0
+description: The Height Above the Nearest Drainage, or HAND, is a model that normalizes topography according to the local relative heights found along a given drainage network. This model's output shows a high correlation with the depth of the water table in a region, this provides an accurate spacial representation of soil water environments. HAND takes in a Digital Elevation Map of a given region as input data. With this it will output the normalized draining potential, or relative vertical flowpath-distances to the nearest drainages.
+keywords:
+ - Relative height
+ - Normalization of topography
+ - Gravitational potential
+ - Draining potential
+ - Flow path
+ - Drainage network
+homepage: http://hydrology.usu.edu/taudem/taudem5/
+license: Free Software
+author:
+  - name: David Tarboton
+    email: dtarb@usu.edu
+    url: http://hydrology.usu.edu/dtarb/)
+container: Dockerfile
+repository:
+  type : git
+  url : https://github.com/dtarb/TauDEM
+wings:
+  source: https://w3id.org/okn/i/mint/hand_v2_simple
+  componentType: Hydrological
+  files:
+    - src/*
+  inputs:
+    - role: input-dem
+      prefix: "-i1"
+      isParam: false
+      type: dcdom:rasterDem
+      dimensionality: 0
+      testValue: file:Basin1_DEM.tif
+  outputs:
+    - role: distance-down
+      prefix: "-o1"
+      isParam: false
+      type: dcdom:rasterDistancedown
+      dimensionality: 0
+  documentation: |
+    The Height Above the Nearest Drainage, or HAND, is a model that normalizes topography according to the local relative heights found along a given drainage network. The threshold determines the height of the stream.
+  requirement:
+    storageGB: 0
+    memoryGB: 0
+    need64bit: false
+    softwareIds: []
+  data:
+    rasterDem:
+      files:
+        - data/Basin1_DEM.tif
+        - data/Basin2_DEM.tif
+    rasterDistancedown:
+      files:
+        - data/dd.tif  
+    # EconomicLandUse:
+      # format: "[__ID]-[combined-adjustment-suffix].csv"
+      # metadataProperties:
+        # land-cost-adjustment: int
+        # crop-price-adjustment: int
+        # fertilizer-cost-adjustment: int
+        # combined-adjustment-suffix: string
+
