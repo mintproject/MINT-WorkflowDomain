@@ -1,13 +1,13 @@
 FROM mintproject/base-ubuntu18
 
-ENV TAUDEM_VERSION 5.3.8
+ENV TAUDEM_VERSION Develop
 
 
 # ------
 # TauDEM
 # ------
 
-RUN git clone --branch v${TAUDEM_VERSION} https://github.com/dtarb/TauDEM && \
+RUN git clone --branch ${TAUDEM_VERSION} https://github.com/dtarb/TauDEM && \
     cd TauDEM/src && \
     mkdir build && \
     cd build && \
@@ -21,3 +21,4 @@ RUN Rscript -e 'install.packages("rgdal"); install.packages("raster"); install.p
 
 ADD find_inlets.cpp .
 RUN g++ -I /usr/include/gdal find_inlets.cpp -lgdal -o /usr/local/bin/find_inlets
+ENV PATH="/usr/local/taudem/:${PATH}"
