@@ -1,13 +1,10 @@
 FROM mintproject/base-ubuntu18
 
-ENV TAUDEM_VERSION 5.3.8
-
-
 # ------
 # TauDEM
 # ------
 
-RUN git clone --branch v${TAUDEM_VERSION} https://github.com/dtarb/TauDEM && \
+RUN git clone --branch Develop https://github.com/dtarb/TauDEM && \
     cd TauDEM/src && \
     mkdir build && \
     cd build && \
