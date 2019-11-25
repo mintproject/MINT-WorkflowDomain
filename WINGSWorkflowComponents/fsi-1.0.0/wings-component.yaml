@@ -1,0 +1,66 @@
+name: fsi
+version: 1.0.0
+schemaVersion: 0.0.1
+wings:
+  inputs:
+  - role: glofas_data
+    prefix: -i1
+    isParam: false
+    type: dcdom:GloFas
+    dimensionality: 0
+  - role: min_long
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 23.0
+  - role: max_long
+    prefix: -p2
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 48.0
+  - role: min_lat
+    prefix: -p3
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 3.0
+  - role: max_lat
+    prefix: -p4
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 15.0
+  - role: simulation_year
+    prefix: -p5
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#string
+    dimensionality: 0
+    paramDefaultValue: '2017.0'
+  outputs:
+  - role: floodIndex
+    prefix: -o1
+    isParam: false
+    type: dcdom:FloodIndex
+    dimensionality: 0
+  - role: flood_index_movie
+    prefix: -o2
+    isParam: false
+    type: dcdom:Movie
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: FSI
+  data:
+    GloFas:
+      files: []
+    FloodIndex:
+      files: []
+    Movie:
+      files: []

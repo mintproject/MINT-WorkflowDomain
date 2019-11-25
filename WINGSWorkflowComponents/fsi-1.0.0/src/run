@@ -1,0 +1,25 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 1 5 2 "$@"
+
+set -x
+
+
+# Inputs
+#TO TEST
+
+python FloodSeverityIndex.py $INPUTS1 GloFAS_FloodThreshold.nc [$PARAMS1,$PARAMS2,$PARAMS3,$PARAMS4] [$PARAMS5] True
+
+
+# Outputs
+mv results/GloFAS_FloodIndex_all.nc $OUTPUTS1
+mv results/Flooding_index.mp4 $OUTPUTS2
