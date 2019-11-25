@@ -32,6 +32,9 @@ python3 hand-weights.py --shapefile dem_dangle.shp --template demfel.tif --outpu
 aread8 -p demp.tif -ad8 demssa.tif -wg demwg.tif
 threshold -ssa demssa.tif -src demsrc.tif -thresh 22.4
  
-dinfdistdown -ang demang.tif -fel demfel.tif -src demsrc.tif -dd $OUTPUTS1
+
+dinfdistdown -ang demang.tif -fel demfel.tif -src demsrc.tif -dd output.tif
+
+mv output.tif $OUTPUTS1
 
 checkExitCode
