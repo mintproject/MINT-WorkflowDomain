@@ -14,6 +14,9 @@ author:
   - name: David Tarboton
     email: dtarb@usu.edu
     url: http://hydrology.usu.edu/dtarb/)
+contributors:
+  - name: Maximiliano Osorio
+    email: mosorio@isi.edu
 container: Dockerfile
 repository:
   type : git

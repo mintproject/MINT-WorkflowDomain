@@ -1,6 +1,9 @@
 name: fsi
 version: 1.0.0
 schemaVersion: 0.0.1
+contributors:
+  - name: Maximiliano Osorio
+    email: mosorio@isi.edu
 wings:
   inputs:
   - role: glofas_data

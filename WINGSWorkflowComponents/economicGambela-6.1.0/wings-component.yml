@@ -10,6 +10,8 @@ author:
 contributors:
   - name: Zeya Zhang
     email: zzeya7@vt.edu
+  - name: Maximiliano Osorio
+    email: mosorio@isi.edu
 container: Dockerfile
 repository:
   type : git
