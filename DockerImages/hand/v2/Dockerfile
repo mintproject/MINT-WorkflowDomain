@@ -21,4 +21,5 @@ RUN g++ -I /usr/include/gdal find_inlets.cpp -lgdal -o /usr/local/bin/find_inlet
 ADD hand-heads.py  hand-weights.py  requirements.txt ./
 RUN pip3 install -r requirements.txt
 #ENV PATH="/usr/local/taudem/:${PATH}"
-RUN echo PATH='/usr/local/taudem/:${PATH}' > /root/.bashrc
+#RUN echo PATH='/usr/local/taudem/:${PATH}' > /root/.bashrc
+RUN mv /usr/local/taudem/* /usr/local/bin/
