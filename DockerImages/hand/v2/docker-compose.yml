@@ -1,0 +1,7 @@
+version: '3'
+services:
+  dev:
+    image: "mintproject/hand:v2"
+    build:
+      context: .
+      dockerfile: Dockerfile
