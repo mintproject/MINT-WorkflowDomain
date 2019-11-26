@@ -16,8 +16,8 @@ set -x
 
 # Inputs
 #TO TEST
-
-python FloodSeverityIndex.py $INPUTS1 GloFAS_FloodThreshold.nc [$PARAMS1,$PARAMS2,$PARAMS3,$PARAMS4] [$PARAMS5] True
+chmod +x FloodSeverityIndex.py
+./FloodSeverityIndex.py $INPUTS1 GloFAS_FloodThreshold.nc [$PARAMS1,$PARAMS2,$PARAMS3,$PARAMS4] [$PARAMS5] True
 
 
 # Outputs
