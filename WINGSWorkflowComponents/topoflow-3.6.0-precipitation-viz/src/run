@@ -74,7 +74,7 @@ checkExitCode
 
 wget https://raw.githubusercontent.com/mintproject/Topoflow_Viz/0.0.2/topo_viz.py
 chmod +x topo_viz.py
-for nc_file in ls *2D*.nc; do
+for nc_file in $(ls *2D*.nc); do
     /opt/conda/bin/python3 topo_viz.py 15 $nc_file [6,8]
     echo "Generating visualization for ${nc_file}"
 done
