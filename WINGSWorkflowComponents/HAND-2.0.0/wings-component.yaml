@@ -1,0 +1,41 @@
+name: HAND
+version: 2.0.0
+schemaVersion: 0.0.1
+wings:
+  inputs:
+  - role: input-dem
+    prefix: -i1
+    isParam: false
+    type: dcdom:rasterDem
+    dimensionality: 0
+  - role: threshold
+    prefix: -p1
+    isParam: true
+    type: http://www.w3.org/2001/XMLSchema#float
+    dimensionality: 0
+    paramDefaultValue: 23
+  outputs:
+  - role: distance-down
+    prefix: -o1
+    isParam: false
+    type: dcdom:rasterDistancedown
+    dimensionality: 0
+  rules: []
+  inheritedRules: []
+  documentation: The Height Above the Nearest Drainage, or HAND, is a model that normalizes
+    topography according to the local relative heights found along a given drainage
+    network. The threshold determines the height of the stream.
+  requirement:
+    storageGB: 0.0
+    memoryGB: 0.0
+    need64bit: false
+    softwareIds: []
+  componentType: Hydrological
+  source: https://w3id.org/okn/i/mint/hand_v2_simple
+  files:
+  - src\*
+  data:
+    rasterDem:
+      files: []
+    rasterDistancedown:
+      files: []
