@@ -72,12 +72,24 @@ mkdir -p $out
 #check exit code
 checkExitCode
 
-wget https://raw.githubusercontent.com/mintproject/Topoflow_Viz/0.0.2/topo_viz.py
-chmod +x topo_viz.py
-for nc_file in $(ls *2D*.nc); do
-    /opt/conda/bin/python3 topo_viz.py 15 $nc_file [6,8]
+wget https://raw.githubusercontent.com/mintproject/Topoflow_Viz/master/topo_viz.py
+ls -lR .
+
+
+#for nc_file in $(find $out -name *0D*.nc); do
+#    /opt/conda/bin/python3 topo_viz.py $nc_file
+#    echo "/opt/conda/bin/python3 topo_viz.py $nc_file"
+#done
+
+
+for nc_file in $(find $out -name *2D*.nc); do
+    /opt/conda/bin/python3 topo_viz.py $nc_file
+    echo "/opt/conda/bin/python3 topo_viz.py $nc_file"
+    mv ${out}/*_Movie.mp4 $nc_file.mp4
     echo "Generating visualization for ${nc_file}"
 done
+
+
 
 zip -r outputs.zip $out
 OUTPUT_PATH=$(readlink -f outputs.zip)
