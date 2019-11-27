@@ -54,19 +54,15 @@ def log_stretch( grid, a=1 ):
     return np.log( (a * grid) + 1 )
 
 
-def makeDirectory(case_prefix):
-    home_dir   = os.path.expanduser("~")
-    test_dir   = home_dir + '/TF_Output'
-    output_dir = test_dir + '/' + case_prefix
+def makeDirectory(output_dir, case_prefix):
     png_dir    = output_dir + '/' + 'png_files'
 
-    if not(os.path.exists( test_dir )):   os.mkdir( test_dir )
     if not(os.path.exists( output_dir )): os.mkdir( output_dir)
     if not(os.path.exists( png_dir )):    os.mkdir( png_dir)
     
     os.chdir( output_dir )
     
-    return png_dir, output_dir, test_dir
+    return png_dir
 
 def makeGridMovie(nc_file, png_dir, case_prefix):
     
@@ -166,12 +162,13 @@ def tsPlot(nc_file, output_dir, case_prefix):
     
 if __name__ == "__main__":
     nc_file = sys.argv[1]
+    output_dir = sys.argv[2]
     file_name = nc_file.split('/')[-1]
     case_prefix = file_name.split('_')[0]
-    png_dir, output_dir, test_dir = makeDirectory(case_prefix)
+    png_dir  = makeDirectory(output_dir, case_prefix)
     if '2D' in nc_file:
         print("generate 2d image")
-        makeGridMovie(nc_file, png_dir,case_prefix)
+        makeGridMovie(nc_file, png_dir, case_prefix)
     else:
         print("generate normal")
         tsPlot(nc_file, output_dir,case_prefix)

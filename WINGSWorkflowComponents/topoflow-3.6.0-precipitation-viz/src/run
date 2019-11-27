@@ -13,14 +13,24 @@ BASEDIR=`dirname $0`
 
 set -x
 
+CURDIR=`pwd`
+
+#make temp dir
+TMPDIR=$CURDIR/temp
+mkdir $TMPDIR
+
 #extract zip rate
-CLIMATE_FOLDER="rate"
+CLIMATE_FOLDER=$CURDIR/rate
 mkdir $CLIMATE_FOLDER
 tar -xzvf $INPUTS2 -C $CLIMATE_FOLDER
 
+#make outputdir
+OUTDIR=$CURDIR/outputs
+mkdir $OUTDIR
+
 number_expected=1
 number_files=$(ls -1q ${CLIMATE_FOLDER}/*/*.rts | wc -l)
-if [ "$number_files" -neq "$number_expected" ];then
+if [ "$number_files" -ne "$number_expected" ];then
   echo "The tar.gz file must contains $number_expected file with .rts extension";
   exit 1
 fi
@@ -29,51 +39,53 @@ RATE_FILE_PATH=$(readlink -f $(ls ${CLIMATE_FOLDER}/*/*.rts))
 RATE_FILE_NAME=$(basename -- ${RATE_FILE_PATH})
 
 #creation of a temp folder to have control on the unzipped folder.
-mkdir temp
-cp $INPUTS1 temp/input.zip
-pushd temp
-#unzip input
-unzip input.zip
+unzip $INPUTS1 -d $TMPDIR
 
 #There may be __MACOS files, filter them
-TMP=$(ls -d [A-Za-z]*/)
+REGIONDIR=$(ls -d $TMPDIR/[A-Za-z]*/)
 
-pushd $TMP
 #copy climate file
-cp $RATE_FILE_PATH .
+cp $RATE_FILE_PATH $REGIONDIR/
+
 #The information about the file is in _path_info
-config=$(ls *_path_info.cfg)
+echo ls $REGIONDIR/*_path_info.cfg
+config=$(ls $REGIONDIR/*_path_info.cfg)
+
+#Replace currentdir(.) and homedir(~) with temporary paths
+sed -i "s+\.+$REGIONDIR+g" $config
+sed -i "s+~+$OUTDIR+g" $config
+
+# Extract the input and output folders from config
 folderOut=$(cat $config | grep out_directory | cut -d "|" -f 2 |  tr -d ' ')
 folderInput=$(cat $config | grep in_directory | cut -d "|" -f 2 | tr -d ' ')
-folderInput="."
-echo "overwrite folder input to $folderInput"
+
 prefix=$(cat $config | grep case_prefix | cut -d "|" -f 2 | tr -d ' ')
+
 out=$(eval echo $folderOut)
-echo $out
+echo $folderOut
 echo $folderInput
 echo $prefix
 
 #meteorology config file
-meteorology_file="${prefix}_meteorology.cfg"
+meteorology_file="$REGIONDIR/${prefix}_meteorology.cfg"
 
 #edit p parameter
 line_p_parameter=$(grep -n "^P " $meteorology_file | cut -d : -f 1)
-sed -i "${line_p_parameter}s/\[case_prefix\]_rain_rates.txt/${RATE_FILE_NAME}/g" $meteorology_file
+sed -i "${line_p_parameter}s+\[case_prefix\]_rain_rates.txt+${RATE_FILE_NAME}+g" $meteorology_file
 
 #edit p_type
 line_p_type_parameter=$(grep -n "^P_type " $meteorology_file | cut -d : -f 1)
 sed -i "${line_p_type_parameter}s/Time_Series/Grid_Sequence/g" $meteorology_file
 
 # Create a folder for the model output with the information in _path_info
-mkdir -p $out
+mkdir -p $folderOut
 
 #Run Topoflow
 /opt/conda/bin/python3  -m topoflow --cfg_directory $folderInput --cfg_prefix $prefix
+
 #check exit code
 checkExitCode
 
-wget https://raw.githubusercontent.com/mintproject/Topoflow_Viz/master/topo_viz.py
-ls -lR .
 
 
 #for nc_file in $(find $out -name *0D*.nc); do
@@ -82,10 +94,11 @@ ls -lR .
 #done
 
 
-for nc_file in $(find $out -name *2D*.nc); do
-    /opt/conda/bin/python3 topo_viz.py $nc_file
-    echo "/opt/conda/bin/python3 topo_viz.py $nc_file"
-    mv ${out}/*_Movie.mp4 $nc_file.mp4
+IFS=$'\n'
+for nc_file in $(find $folderOut -name *2D*.nc); do
+    echo ** Executing ** /opt/conda/bin/python3 topo_viz.py $nc_file $folderOut
+    /opt/conda/bin/python3 topo_viz.py $nc_file $folderOut
+    mv ${out}/*_Movie.mp4 ${nc_file}.mp4
     echo "Generating visualization for ${nc_file}"
 done
 
@@ -93,7 +106,5 @@ done
 
 zip -r outputs.zip $out
 OUTPUT_PATH=$(readlink -f outputs.zip)
-popd
-popd
 
 mv $OUTPUT_PATH $OUTPUTS1
