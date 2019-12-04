@@ -29,13 +29,14 @@ OUTDIR=$CURDIR/outputs
 mkdir $OUTDIR
 
 number_expected=1
-number_files=$(ls -1q ${CLIMATE_FOLDER}/*/*.rts | wc -l)
+files=$(find ${CLIMATE_FOLDER} -name "*.rts" -type f)
+number_files=$(echo $files | wc -l)
 if [ "$number_files" -ne "$number_expected" ];then
   echo "The tar.gz file must contains $number_expected file with .rts extension";
   exit 1
 fi
 
-RATE_FILE_PATH=$(readlink -f $(ls ${CLIMATE_FOLDER}/*/*.rts))
+RATE_FILE_PATH=$(readlink -f $files)
 RATE_FILE_NAME=$(basename -- ${RATE_FILE_PATH})
 
 #creation of a temp folder to have control on the unzipped folder.
