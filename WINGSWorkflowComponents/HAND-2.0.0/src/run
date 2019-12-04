@@ -10,7 +10,7 @@ fi
 
 BASEDIR=`dirname $0`
 
-. $BASEDIR/io.sh 1 1 1 "$@"
+. $BASEDIR/io.sh 1 1 2 "$@"
 
 set -x
 
@@ -34,6 +34,9 @@ threshold -ssa demssa.tif -src demsrc.tif -thresh $PARAMS1
  
 dinfdistdown -ang demang.tif -fel demfel.tif -src demsrc.tif -dd output.tif
 
+python3 hand-vis.py -d output.tif --cmap viridis --bins 5 --output output.png
+
 mv output.tif $OUTPUTS1
+mv output.png $OUTPUTS2
 
 checkExitCode

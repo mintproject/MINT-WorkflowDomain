@@ -20,6 +20,11 @@ wings:
     isParam: false
     type: dcdom:rasterDistancedown
     dimensionality: 0
+  - role: distance-down-image
+    prefix: -o2
+    isParam: false
+    type: dcdom:distanceDownImage
+    dimensionality: 0
   rules: []
   inheritedRules: []
   documentation: The Height Above the Nearest Drainage, or HAND, is a model that normalizes
@@ -38,4 +43,6 @@ wings:
     rasterDem:
       files: []
     rasterDistancedown:
+      files: []
+    distanceDownImage:
       files: []
