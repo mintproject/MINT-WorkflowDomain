@@ -60,6 +60,9 @@ sed -i "s+~+$OUTDIR+g" $config
 folderOut=$(cat $config | grep out_directory | cut -d "|" -f 2 |  tr -d ' ')
 folderInput=$(cat $config | grep in_directory | cut -d "|" -f 2 | tr -d ' ')
 
+#replace any folder input with the region dir directory
+sed -i "s+$folderInput+$REGIONDIR+g" $config
+
 prefix=$(cat $config | grep case_prefix | cut -d "|" -f 2 | tr -d ' ')
 
 out=$(eval echo $folderOut)
@@ -82,7 +85,7 @@ sed -i "${line_p_type_parameter}s/Time_Series/Grid_Sequence/g" $meteorology_file
 mkdir -p $folderOut
 
 #Run Topoflow
-/opt/conda/bin/python3  -m topoflow --cfg_directory $folderInput --cfg_prefix $prefix
+/opt/conda/bin/python3  -m topoflow --cfg_directory $REGIONDIR --cfg_prefix $prefix
 
 #check exit code
 checkExitCode
