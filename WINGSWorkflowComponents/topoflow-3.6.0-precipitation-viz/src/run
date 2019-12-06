@@ -18,16 +18,16 @@ CURDIR=`pwd`
 
 #make temp dir
 TMPDIR=$CURDIR/temp
-mkdir $TMPDIR
+mkdir -p $TMPDIR
 
 #extract zip rate
 CLIMATE_FOLDER=$CURDIR/rate
-mkdir $CLIMATE_FOLDER
+mkdir -p $CLIMATE_FOLDER
 tar -xzvf $INPUTS2 -C $CLIMATE_FOLDER
 
 #make outputdir
 OUTDIR=$CURDIR/outputs
-mkdir $OUTDIR
+mkdir -p $OUTDIR
 
 number_expected=1
 files=$(find ${CLIMATE_FOLDER} -name "*.rts" -type f)
@@ -77,7 +77,9 @@ meteorology_file="$REGIONDIR/${prefix}_meteorology.cfg"
 #edit p parameter
 pOld=$(cat $meteorology_file | grep -n "^P " | cut -d "|" -f 2 | tr -d ' ')
 line_p_parameter=$(grep -n "^P " $meteorology_file | cut -d : -f 1)
-sed -i "s+${pOld}+${RATE_FILE_NAME}+g" $meteorology_file
+sed "${line_p_parameter}d" -i $meteorology_file
+sed -e "${line_p_parameter}iP                   | ${RATE_FILE_NAME}  | string  | precipitation rate [mm/hr]" -i $meteorology_file
+
 
 #edit p_type
 line_p_type_parameter=$(grep -n "^P_type " $meteorology_file | cut -d : -f 1)
@@ -101,7 +103,7 @@ checkExitCode
 
 
 IFS=$'\n'
-for nc_file in $(find $folderOut -name *2D*.nc); do
+for nc_file in $(find $folderOut -name *2D*flood*.nc); do
     echo ** Executing ** /opt/conda/bin/python3 topo_viz.py $nc_file $folderOut
     /opt/conda/bin/python3 topo_viz.py $nc_file $folderOut
     mv ${out}/*_Movie.mp4 ${nc_file}.mp4
