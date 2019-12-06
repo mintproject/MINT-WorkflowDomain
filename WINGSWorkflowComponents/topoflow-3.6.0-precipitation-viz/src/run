@@ -64,6 +64,11 @@ folderInput=$(cat $config | grep in_directory | cut -d "|" -f 2 | tr -d ' ')
 #replace any folder input with the region dir directory
 sed -i "s+$folderInput+$REGIONDIR+g" $config
 
+#replace dir output
+
+sed -i "s+$folderOut+$OUTDIR+g" $config
+
+#replace prefix
 prefix=$(cat $config | grep case_prefix | cut -d "|" -f 2 | tr -d ' ')
 
 out=$(eval echo $folderOut)
@@ -80,7 +85,6 @@ line_p_parameter=$(grep -n "^P " $meteorology_file | cut -d : -f 1)
 sed "${line_p_parameter}d" -i $meteorology_file
 sed -e "${line_p_parameter}iP                   | ${RATE_FILE_NAME}  | string  | precipitation rate [mm/hr]" -i $meteorology_file
 
-
 #edit p_type
 line_p_type_parameter=$(grep -n "^P_type " $meteorology_file | cut -d : -f 1)
 sed -i "${line_p_type_parameter}s/Time_Series/Grid_Sequence/g" $meteorology_file
@@ -93,14 +97,6 @@ mkdir -p $folderOut
 
 #check exit code
 checkExitCode
-
-
-
-#for nc_file in $(find $out -name *0D*.nc); do
-#    /opt/conda/bin/python3 topo_viz.py $nc_file
-#    echo "/opt/conda/bin/python3 topo_viz.py $nc_file"
-#done
-
 
 IFS=$'\n'
 for nc_file in $(find $folderOut -name *2D*flood*.nc); do
