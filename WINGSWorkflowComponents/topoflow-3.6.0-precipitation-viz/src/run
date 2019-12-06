@@ -65,16 +65,16 @@ folderInput=$(cat $config | grep in_directory | cut -d "|" -f 2 | tr -d ' ')
 sed -i "s+$folderInput+$REGIONDIR+g" $config
 
 #replace dir output
-
-sed -i "s+$folderOut+$OUTDIR+g" $config
+line_output=$(grep -n "^out_directory " $config | cut -d : -f 1)
+sed "${line_output}d" -i $config
+sed -e "${line_output}iout_directory | ${OUTDIR} | string | output directory" -i $config
 
 #replace prefix
 prefix=$(cat $config | grep case_prefix | cut -d "|" -f 2 | tr -d ' ')
 
-out=$(eval echo $folderOut)
-echo $folderOut
 echo $folderInput
 echo $prefix
+echo $OUTDIR
 
 #meteorology config file
 meteorology_file="$REGIONDIR/${prefix}_meteorology.cfg"
@@ -89,8 +89,6 @@ sed -e "${line_p_parameter}iP                   | ${RATE_FILE_NAME}  | string  |
 line_p_type_parameter=$(grep -n "^P_type " $meteorology_file | cut -d : -f 1)
 sed -i "${line_p_type_parameter}s/Time_Series/Grid_Sequence/g" $meteorology_file
 
-# Create a folder for the model output with the information in _path_info
-mkdir -p $folderOut
 
 #Run Topoflow
 /opt/conda/bin/python3  -m topoflow --cfg_directory $REGIONDIR --cfg_prefix $prefix
@@ -99,16 +97,12 @@ mkdir -p $folderOut
 checkExitCode
 
 IFS=$'\n'
-for nc_file in $(find $folderOut -name *2D*flood*.nc); do
-    echo ** Executing ** /opt/conda/bin/python3 topo_viz.py $nc_file $folderOut
-    /opt/conda/bin/python3 topo_viz.py $nc_file $folderOut
-    mv ${out}/*_Movie.mp4 ${nc_file}.mp4
+for nc_file in $(find $OUTDIR -name *2D*flood*.nc); do
+    /opt/conda/bin/python3 topo_viz.py $nc_file $OUTDIR
     echo "Generating visualization for ${nc_file}"
 done
 
-
-
-zip -r outputs.zip $out
+zip -r outputs.zip $OUTDIR
 OUTPUT_PATH=$(readlink -f outputs.zip)
 
 mv $OUTPUT_PATH $OUTPUTS1
