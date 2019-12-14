@@ -26,7 +26,7 @@ threshold -ssa demssa.tif -src demsrc.tif -thresh 38.7
  
 streamnet -fel demfel.tif -p demp.tif -ad8 demad8.tif -src demsrc.tif -ord demord.tif -tree demtree.dat -coord demcoord.dat -net demnet.shp -w demw.tif
  
-python3 hand-heads.py --network demnet.shp --output dem_dangle.shp
+python3 hand-heads.py --network demnet.shp --output dem_dangle.shp &>/dev/null
 python3 hand-weights.py --shapefile dem_dangle.shp --template demfel.tif --output demwg.tif
  
 aread8 -p demp.tif -ad8 demssa.tif -wg demwg.tif
