@@ -11,29 +11,31 @@ fi
 
 BASEDIR=`dirname $0`
 
-. $BASEDIR/io.sh 3 8 9 "$@"
+. $BASEDIR/io.sh 2 8 9 "$@"
 
 # create Cycles input folder and copy base files
 mkdir -p input
 cp $INPUTS1 input/
 cp $INPUTS2 input/
-cp $INPUTS3 input/
+pushd input
+unzip -d $INPUTS1
+weather=$(find . -name *.weather)
+soil=$(find . -name *.soil)
+popd
+#backup the input that we are going to use in the future
+cp -r input/ input_future/
 
 # run cycles baseline
-python3 cycles-wrapper.py --start-year $PARAMS1 --end-year $PARAMS2 --baseline True --crop $PARAMS3 --start-planting-date 100 --end-planting-date 0 --fertilizer-rate 156.25 --weed-fraction $PARAMS7 --forcing $PARAMS8 --weather-file $INPUTS1 $INPUTS3 $INPUTS2
+python3 cycles-wrapper.py --start-year $PARAMS1 --end-year $PARAMS2 --baseline True --crop $PARAMS3 --start-planting-date 100 --end-planting-date 0 --fertilizer-rate 156.25 --weed-fraction $PARAMS7 --forcing $PARAMS8 --weather-file $weather $INPUTS2 $soil
 checkExitCode
 
 # clean up folders and prepare input folder for cycles run
-rm -rf input
-mkdir -p input
-mv $INPUTS1 input/
-mv $INPUTS2 input/
-mv $INPUTS3 input/
+mv input_future input
 mv output/cycles-run/reinit.dat input/cycles.reinit
 rm -rf output
 
 # # run cycles
-python3 cycles-wrapper.py --start-year $PARAMS1 --end-year $PARAMS2 --baseline False --crop $PARAMS3 --start-planting-date $PARAMS4 --end-planting-date $PARAMS5 --fertilizer-rate $PARAMS6 --weed-fraction $PARAMS7 --forcing $PARAMS8 --reinit-file cycles.reinit --weather-file $INPUTS1 $INPUTS3 $INPUTS2
+python3 cycles-wrapper.py --start-year $PARAMS1 --end-year $PARAMS2 --baseline False --crop $PARAMS3 --start-planting-date $PARAMS4 --end-planting-date $PARAMS5 --fertilizer-rate $PARAMS6 --weed-fraction $PARAMS7 --forcing $PARAMS8 --reinit-file cycles.reinit --weather-file $weather $INPUTS2 $soil
 checkExitCode
 
 # IMPORTANT: temporary hack for saving input/output data into local folder
