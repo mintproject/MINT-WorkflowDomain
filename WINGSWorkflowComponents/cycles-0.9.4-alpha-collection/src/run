@@ -15,12 +15,15 @@ BASEDIR=`dirname $0`
 
 # create Cycles input folder and copy base files
 mkdir -p input
-cp $INPUTS1 input/
+#copy the crop file to the input directory
 cp $INPUTS2 input/
+#extract the zipfile into the input directory
+unzip $INPUTS1 -d input
+
+#obtain the file of weather and soil file
 pushd input
-unzip $INPUTS1
-weather=$(find . -name *.weather)
-soil=$(find . -name *.soil)
+weather=$(find . -name *.weather -printf "%f\n")
+soil=$(find . -name *.soil -printf "%f\n")
 popd
 #backup the input that we are going to use in the future
 cp -r input/ input_future/
