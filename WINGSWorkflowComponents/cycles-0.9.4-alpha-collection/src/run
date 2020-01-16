@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -xe
 unset http_proxy
 
 checkExitCode() {
@@ -18,7 +18,7 @@ mkdir -p input
 cp $INPUTS1 input/
 cp $INPUTS2 input/
 pushd input
-unzip -d $INPUTS1
+unzip $INPUTS1
 weather=$(find . -name *.weather)
 soil=$(find . -name *.soil)
 popd
