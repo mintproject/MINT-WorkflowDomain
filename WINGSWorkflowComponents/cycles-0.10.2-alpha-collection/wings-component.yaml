@@ -1,5 +1,5 @@
 name: cycles
-version: 0.9.4-alpha-collection
+version: 0.10.2-alpha-collection
 description: Cycles is an agroecosystem simulation model. It is a multi-year, multi-crop, multi-soil-layered, one-dimensional, daily or sub-daily time step platform that simulates water, carbon and nitrogen balance of the soil-crop system subject to climate conditions and a large array of management forcings. It belongs to the family of mechanistic or process-based models.
 author:
   - Armen Kemanian
