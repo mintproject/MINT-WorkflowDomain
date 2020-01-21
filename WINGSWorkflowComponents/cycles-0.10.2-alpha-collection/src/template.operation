@@ -52,6 +52,7 @@ PLANTING
 YEAR                $year_count
 DOY                 $start_planting_date
 END_DOY             $end_planting_date
+MAX_SMC             -999
 MIN_SMC             0.15
 MIN_SOIL_TEMP       10
 CROP                $crop_name
