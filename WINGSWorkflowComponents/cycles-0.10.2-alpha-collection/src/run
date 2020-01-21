@@ -18,7 +18,7 @@ mkdir -p input
 #copy the crop file to the input directory
 cp $INPUTS2 input/
 #extract the zipfile into the input directory
-unzip '$INPUTS1' -d input
+unzip "$INPUTS1" -d input
 
 #obtain the file of weather and soil file
 pushd input
