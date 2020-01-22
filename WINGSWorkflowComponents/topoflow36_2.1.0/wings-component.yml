@@ -1,0 +1,65 @@
+name: topoflow36
+version: 2.1.0
+description: Topoflow
+keywords:
+ - hydrology
+author:
+  - Daniel Garijo
+  - Scott Peckham
+  - Maximiliano Osorio
+container: Dockerfile
+wings:
+  componentType: Hydrological
+  files:
+    - src/*
+  inputs:
+    - role: aggregated-inputs
+      prefix: "-i1"
+      isParam: false
+      type: dcdom:TopoflowAggregatedInput
+      dimensionality: 0
+      testValue: file:Baro_Gam_1min_Input.zip
+    - role: precipitation-rates
+      prefix: "-i2"
+      isParam: false
+      type: dcdom:TopoflowPrecipitationRate
+      dimensionality: 0
+      testValue: file:climate.01.rts.zip
+    - role: start_date
+      prefix: -p1
+      isParam: true
+      type: http://www.w3.org/2001/XMLSchema#string
+      dimensionality: 0
+      paramDefaultValue: 2014-08-01
+    - role: end_date
+      prefix: -p2
+      isParam: true
+      type: http://www.w3.org/2001/XMLSchema#string
+      dimensionality: 0
+      paramDefaultValue: 2014-09-01
+    - role: T_stop_model
+      prefix: -p3
+      isParam: true
+      type: http://www.w3.org/2001/XMLSchema#float
+      dimensionality: 0
+      paramDefaultValue: 1000
+    - role: n_steps
+      prefix: -p4
+      isParam: true
+      type: http://www.w3.org/2001/XMLSchema#int
+      dimensionality: 0
+      paramDefaultValue: 5000
+      outputs:
+    - role: aggregated-outputs
+      prefix: "-o1"
+      isParam: false
+      type: dcdom:TopoflowAggregatedOutputs
+      dimensionality: 0
+  data:
+    TopoflowAggregatedInput:
+      files:
+        - data/Baro_Gam_1min_Input.zip
+    TopoflowPrecipitationRate:
+      files:
+        - data/climate.01.rts.zip
+    TopoflowAggregatedOutputs:
