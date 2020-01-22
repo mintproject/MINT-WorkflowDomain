@@ -1,0 +1,131 @@
+#!/bin/bash
+set -xe
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 2 4 1 "$@"
+
+set -x
+
+replace_file() {
+    arg_key=$1
+    file=$2
+    arg_value=$3
+
+    line_time=$(grep -n "^${arg_key}" ${file} | cut -d : -f 1)
+    sed "${line_time}d" -i ${file}
+    sed -e "${line_time}i${arg_key} | ${arg_value} | ${4} | ${5}" -i ${file}
+}
+
+CURDIR=`pwd`
+
+start_date=$PARAMS1
+end_date=$PARAMS2
+t_stop_model=$PARAMS3
+n_steps=$PARAMS4
+
+#make temp dir
+TMPDIR=$CURDIR/temp
+mkdir -p $TMPDIR
+
+#extract zip rate
+CLIMATE_FOLDER=$CURDIR/rate
+mkdir -p $CLIMATE_FOLDER
+tar -xzvf $INPUTS2 -C $CLIMATE_FOLDER
+
+#make outputdir
+OUTDIR=$CURDIR/outputs
+mkdir -p $OUTDIR
+
+number_expected=1
+files=$(find ${CLIMATE_FOLDER} -name "*.rts" -type f)
+number_files=$(echo $files | wc -l)
+if [ "$number_files" -ne "$number_expected" ];then
+  echo "The tar.gz file must contains $number_expected file with .rts extension";
+  exit 1
+fi
+
+RATE_FILE_PATH=$(readlink -f $files)
+RATE_FILE_NAME=$(basename -- ${RATE_FILE_PATH})
+
+#creation of a temp folder to have control on the unzipped folder.
+unzip $INPUTS1 -d $TMPDIR
+
+#There may be __MACOS files, filter them
+REGIONDIR=$(ls -d $TMPDIR/[A-Za-z]*/)
+
+#copy climate file
+cp $RATE_FILE_PATH $REGIONDIR/
+
+#The information about the file is in _path_info
+echo ls $REGIONDIR/*_path_info.cfg
+config=$(ls $REGIONDIR/*_path_info.cfg)
+
+#Replace currentdir(.) and homedir(~) with temporary paths
+sed -i "s+\.+$REGIONDIR+g" $config
+sed -i "s+~+$OUTDIR+g" $config
+
+# Extract the input and output folders from config
+folderOut=$(cat $config | grep out_directory | cut -d "|" -f 2 |  tr -d ' ')
+folderInput=$(cat $config | grep in_directory | cut -d "|" -f 2 | tr -d ' ')
+
+#replace any folder input with the region dir directory
+sed -i "s+$folderInput+$REGIONDIR+g" $config
+
+#replace _test_info.cfg
+time_config=$(ls $REGIONDIR/*_time_info.cfg)
+replace_file "start_date" ${start_date} "string" "start date for model run (meteorology)"
+replace_file "end_date" ${end_date} "string" "end date for model run (meteorology)"
+
+#replace n_steps
+topoflow_config=$(ls $REGIONDIR/*_topoflow.cfg)
+replace_file "T_stop_model" $file $t_stop_model "float" "Value for Until_model_time method [minutes]"
+replace_file "n_steps" $file $n_steps "int" "Value for Until_n_steps method"
+
+#replace dir output
+replace_file "out_directory" $config ${OUTDIR} "string" "output directory"
+
+#replace prefix
+prefix=$(cat $config | grep case_prefix | cut -d "|" -f 2 | tr -d ' ')
+
+echo $folderInput
+echo $prefix
+echo $OUTDIR
+
+#meteorology config file
+meteorology_file="$REGIONDIR/${prefix}_meteorology.cfg"
+
+#edit p parameter
+pOld=$(cat $meteorology_file | grep -n "^P " | cut -d "|" -f 2 | tr -d ' ')
+line_p_parameter=$(grep -n "^P " $meteorology_file | cut -d : -f 1)
+sed "${line_p_parameter}d" -i $meteorology_file
+sed -e "${line_p_parameter}iP                   | ${RATE_FILE_NAME}  | string  | precipitation rate [mm/hr]" -i $meteorology_file
+
+#edit p_type
+line_p_type_parameter=$(grep -n "^P_type " $meteorology_file | cut -d : -f 1)
+sed -i "${line_p_type_parameter}s/Time_Series/Grid_Sequence/g" $meteorology_file
+
+
+#Run Topoflow
+/opt/conda/bin/python3  -m topoflow --cfg_directory $REGIONDIR --cfg_prefix $prefix
+
+#check exit code
+checkExitCode
+
+IFS=$'\n'
+for nc_file in $(find $OUTDIR -name *2D*flood*.nc); do
+    /opt/conda/bin/python3 topo_viz.py $nc_file $OUTDIR
+    echo "Generating visualization for ${nc_file}"
+done
+
+zip -r outputs.zip $OUTDIR
+OUTPUT_PATH=$(readlink -f outputs.zip)
+
+mv $OUTPUT_PATH $OUTPUTS1
