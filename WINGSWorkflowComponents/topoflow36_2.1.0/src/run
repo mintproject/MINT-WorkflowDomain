@@ -1,5 +1,4 @@
 #!/bin/bash
-set -xe
 
 checkExitCode() {
 if [ $? -ne 0 ]; then
@@ -12,12 +11,15 @@ BASEDIR=`dirname $0`
 
 . $BASEDIR/io.sh 2 4 1 "$@"
 
-set -x
+set -xe
 
 replace_file() {
     arg_key=$1
     file=$2
     arg_value=$3
+		echo "arg_key: $arg_key"
+		echo "file: $file"
+		echo "arg_value: $arg_value"
 
     line_time=$(grep -n "^${arg_key}" ${file} | cut -d : -f 1)
     sed "${line_time}d" -i ${file}
@@ -81,8 +83,8 @@ sed -i "s+$folderInput+$REGIONDIR+g" $config
 
 #replace _test_info.cfg
 time_config=$(ls $REGIONDIR/*_time_info.cfg)
-replace_file "start_date" ${start_date} "string" "start date for model run (meteorology)"
-replace_file "end_date" ${end_date} "string" "end date for model run (meteorology)"
+replace_file "start_date" $time_config ${start_date} "string" "start date for model run (meteorology)"
+replace_file "end_date" $time_config ${end_date} "string" "end date for model run (meteorology)"
 
 #replace n_steps
 topoflow_config=$(ls $REGIONDIR/*_topoflow.cfg)
