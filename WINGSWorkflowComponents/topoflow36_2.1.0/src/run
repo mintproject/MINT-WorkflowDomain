@@ -13,11 +13,6 @@ BASEDIR=`dirname $0`
 
 set -xe
 
-convert_date_to_topoflow_format(){
-    new_date=$(date -d'$1' +%Y-%m-%d)
-    return $new_date
-}
-
 replace_file() {
     arg_key=$1
     file=$2
@@ -32,9 +27,8 @@ replace_file() {
 }
 
 CURDIR=`pwd`
-
-start_date=$(convert_date_to_topoflow_format $PARAMS1)
-end_date=$(convert_date_to_topoflow_format $PARAMS2)
+start_date=$(date -d"$PARAMS1" +%Y-%m-%d)
+end_date=$(date -d"$PARAMS2" +%Y-%m-%d)
 t_stop_model=$PARAMS3
 n_steps=$PARAMS4
 
