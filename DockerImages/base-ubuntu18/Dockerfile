@@ -3,6 +3,11 @@ FROM ubuntu:18.04
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && \
     apt-get upgrade -y --allow-unauthenticated && \
+    apt-get install -y gnupg2 \
+        ca-certificates && \
+    echo "deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/" >> /etc/apt/sources.list && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
+    apt-get update && \
     apt-get install -y --allow-unauthenticated \
         build-essential \
         cmake \
