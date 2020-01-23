@@ -88,8 +88,8 @@ replace_file "end_date" $time_config ${end_date} "string" "end date for model ru
 
 #replace n_steps
 topoflow_config=$(ls $REGIONDIR/*_topoflow.cfg)
-replace_file "T_stop_model" $file $t_stop_model "float" "Value for Until_model_time method [minutes]"
-replace_file "n_steps" $file $n_steps "int" "Value for Until_n_steps method"
+replace_file "T_stop_model" $topoflow_config $t_stop_model "float" "Value for Until_model_time method [minutes]"
+replace_file "n_steps" $topoflow_config $n_steps "int" "Value for Until_n_steps method"
 
 #replace dir output
 replace_file "out_directory" $config ${OUTDIR} "string" "output directory"
