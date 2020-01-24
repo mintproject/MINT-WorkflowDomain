@@ -29,9 +29,16 @@ replace_file() {
 CURDIR=`pwd`
 start_date=$(date -d"$PARAMS1" +%Y-%m-%d)
 end_date=$(date -d"$PARAMS2" +%Y-%m-%d)
-t_stop_model=$PARAMS3
-n_steps=$PARAMS4
-dt=$PARAMS5
+dt_meteo=$PARAMS3
+dt_global=$PARAMS4
+
+
+#Calculate t_stop_model
+MPHR=60    # Minutes per hour.
+start_date_epoch=$(date +%s -d"$PARAMS1")
+end_date_epoch=$(date -d"$PARAMS1" +%s)
+t_stop_model=$(( ($end_date_epoch - $start_date_epoch) / $MPHR ))
+
 
 #make temp dir
 TMPDIR=$CURDIR/temp
@@ -89,7 +96,11 @@ replace_file "end_date" $time_config ${end_date} "string" "end date for model ru
 #replace n_steps
 topoflow_config=$(ls $REGIONDIR/*_topoflow.cfg)
 replace_file "T_stop_model" $topoflow_config $t_stop_model "float" "Value for Until_model_time method [minutes]"
-replace_file "n_steps" $topoflow_config $n_steps "int" "Value for Until_n_steps method"
+
+#repalce dt
+#dt                  | 2         | float     | TopoFlow driver timestep [sec] (Must match Channel comp.)
+replace_file "dt" $topoflow_config $dt_global "float" "TopoFlow driver timestep [sec] (Must match Channel comp.)" 
+
 
 #replace dir output
 replace_file "out_directory" $config ${OUTDIR} "string" "output directory"
@@ -103,7 +114,10 @@ echo $OUTDIR
 
 #meteorology config file
 meteorology_file="$REGIONDIR/${prefix}_meteorology.cfg"
-replace_file "dt" $meteorology_file ${dt} "float" "meteorology time step [sec]"
+replace_file "dt_meteo" $meteorology_file ${dt_meteo} "float" "meteorology time step [sec]"
+
+
+
 
 #edit p parameter
 pOld=$(cat $meteorology_file | grep -n "^P " | cut -d "|" -f 2 | tr -d ' ')
