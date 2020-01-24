@@ -21,7 +21,7 @@ replace_file() {
 		echo "file: $file"
 		echo "arg_value: $arg_value"
 
-    line_time=$(grep -n "^${arg_key}" ${file} | cut -d : -f 1)
+    line_time=$(grep -n "^${arg_key}" ${file} && cut -d : -f 1)
     sed "${line_time}d" -i ${file}
     sed -e "${line_time}i${arg_key} | ${arg_value} | ${4} | ${5}" -i ${file}
 }
@@ -113,7 +113,7 @@ echo $OUTDIR
 
 #meteorology config file
 meteorology_file="$REGIONDIR/${prefix}_meteorology.cfg"
-replace_file "dt_meteo" $meteorology_file ${dt_meteo} "float" "meteorology time step [sec]"
+replace_file "dt" $meteorology_file ${dt_meteo} "float" "meteorology time step [sec]"
 
 
 
