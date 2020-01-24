@@ -31,6 +31,7 @@ start_date=$(date -d"$PARAMS1" +%Y-%m-%d)
 end_date=$(date -d"$PARAMS2" +%Y-%m-%d)
 t_stop_model=$PARAMS3
 n_steps=$PARAMS4
+dt=$PARAMS5
 
 #make temp dir
 TMPDIR=$CURDIR/temp
@@ -102,6 +103,7 @@ echo $OUTDIR
 
 #meteorology config file
 meteorology_file="$REGIONDIR/${prefix}_meteorology.cfg"
+replace_file "dt" $meteorology_file ${dt} "float" "meteorology time step [sec]"
 
 #edit p parameter
 pOld=$(cat $meteorology_file | grep -n "^P " | cut -d "|" -f 2 | tr -d ' ')
