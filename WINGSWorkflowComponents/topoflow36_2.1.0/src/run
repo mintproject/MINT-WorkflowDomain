@@ -35,7 +35,7 @@ dt_meteo=$PARAMS4
 #Calculate t_stop_model
 MPHR=60    # Minutes per hour.
 start_date_epoch=$(date +%s -d"$PARAMS1")
-end_date_epoch=$(date -d"$PARAMS1" +%s)
+end_date_epoch=$(date -d"$PARAMS2" +%s)
 t_stop_model=$(( ($end_date_epoch - $start_date_epoch) / $MPHR ))
 
 
