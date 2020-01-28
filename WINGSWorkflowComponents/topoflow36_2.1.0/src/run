@@ -17,13 +17,17 @@ replace_file() {
     arg_key=$1
     file=$2
     arg_value=$3
-		echo "arg_key: $arg_key"
-		echo "file: $file"
-		echo "arg_value: $arg_value"
-
-    line_time=$(grep -n "^${arg_key}" ${file} && cut -d : -f 1)
+    echo "arg_key: $arg_key"
+    echo "file: $file"
+    echo "arg_value: $arg_value"
+    line_time=$(grep -n "^${arg_key}" ${file} | cut -d : -f 1)
+    total_lines=$(wc -l ${file} | cut -f 1 -d ' ')
     sed "${line_time}d" -i ${file}
-    sed -e "${line_time}i${arg_key} | ${arg_value} | ${4} | ${5}" -i ${file}
+    if [ $line_time -ge $total_lines ];then
+       echo "${arg_key} | ${arg_value} | ${4} | ${5}" >> ${file};
+    else
+       sed -e "${line_time}i${arg_key} | ${arg_value} | ${4} | ${5}" -i ${file};
+    fi
 }
 
 CURDIR=`pwd`
