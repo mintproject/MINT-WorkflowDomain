@@ -8,6 +8,8 @@ Created on Tue Nov 19 13:57:38 2019
 Calculate flood sevrity index based on volumetric flow threshold.
 Returns one file for every  year.
 """
+import matplotlib
+matplotlib.use('Agg')
 
 import xarray as xr
 import numpy as np
