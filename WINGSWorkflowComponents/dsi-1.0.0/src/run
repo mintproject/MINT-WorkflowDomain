@@ -1,0 +1,25 @@
+#!/bin/bash
+
+checkExitCode() {
+if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1;
+fi
+}
+
+BASEDIR=`dirname $0`
+
+. $BASEDIR/io.sh 1 14 2 "$@"
+
+set -x
+
+# Inputs
+#Example: python WM_climate_indices.py GLDAS GLDAS2.1_TP_2000_2018.nc /Users/deborahkhider/Desktop/ SPI [23,48,3,15] gamma monthly 6 2008 2017 2000 2017 True
+/opt/conda/bin/python3 WM_climate_indices.py $PARAMS1 $INPUTS1 $BASEDIR $PARAMS2 [$PARAMS3,$PARAMS4,$PARAMS5,$PARAMS6] $PARAMS7 $PARAMS8 $PARAMS9 $PARAMS10 $PARAMS11 $PARAMS12 $PARAMS13 $PARAMS14
+
+
+# Outputs: Move file and netcdf to results.
+find . -type f -name "*.nc" -exec mv -t $OUTPUTS1 {} +
+find . -type f -name "*.mp4" -exec mv -t $OUTPUTS2 {} +
+#mv $BASEDIR/results/GloFAS_FloodIndex_all.nc $OUTPUTS1
+#mv $BASEDIR/results/Flooding_index.mp4 $OUTPUTS2
