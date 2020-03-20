@@ -19,7 +19,7 @@ set -x
 
 
 # Outputs: Move file and netcdf to results.
-find . -type f -name "*.nc" -exec mv -t $OUTPUTS1 {} +
-find . -type f -name "*.mp4" -exec mv -t $OUTPUTS2 {} +
+find . -type f -name "*.nc" -exec mv {} $OUTPUTS1 \;
+find . -type f -name "*.mp4" -exec mv {} $OUTPUTS2 \;
 #mv $BASEDIR/results/GloFAS_FloodIndex_all.nc $OUTPUTS1
 #mv $BASEDIR/results/Flooding_index.mp4 $OUTPUTS2
