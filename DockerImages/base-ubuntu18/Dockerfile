@@ -18,6 +18,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         libfreetype6-dev \
         libgdal-dev \
         libgdal-dev \
+        libgit2-devel \
         libpng-dev \
         libssl-dev \
         libsundials-dev \
