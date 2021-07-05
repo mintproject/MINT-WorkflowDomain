@@ -17,7 +17,7 @@ DAILY_SOIL_CARBON_OUT   1
 DAILY_SOIL_LYR_CN_OUT   1
 ANNUAL_SOIL_OUT         1
 ANNUAL_PROFILE_OUT      1
-SEASON_OUT              1
+ANNUAL_NFLUX_OUT        1
 ## OTHER INPUT FILES ##
 CROP_FILE               $crop_file
 OPERATION_FILE          $operation_file
