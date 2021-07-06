@@ -55,5 +55,5 @@ mv output/cycles-run/$PARAMS3.dat $OUTPUTS3
 mv output/cycles-run/N.dat $OUTPUTS4
 mv output/cycles-run/season.dat $OUTPUTS5
 mv output/cycles-run/summary.dat $OUTPUTS6
-mv output/cycles-run/weather.dat $OUTPUTS7
+mv output/cycles-run/environ.dat $OUTPUTS7
 mv output/cycles-run/water.dat $OUTPUTS8
