@@ -678,4 +678,16 @@ INITIAL_PARTITIONING_TO_SHOOT               0.45        # (100%)
 FINAL_PARTITIONING_TO_SHOOT                 0.95        # (100%)
 RADIATION_USE_EFFICIENCY                    1.2         # (g/MJ solar radiation)
 TRANSPIRATION_USE_EFFICIENCY                4.5         # (g/kg)
-MAXIMUM_HARV
+MAXIMUM_HARVEST_INDEX                       0.4
+MINIMUM_HARVEST_INDEX                       0.15
+HARVEST_INDEX                               3
+THERMAL_TIME_TO_EMERGENCE                   70          # (degree C day)
+N_MAX_CONCENTRATION                         0.07        # (g/g)
+N_DILUTION_SLOPE                            0.4
+KC                                          1
+ANNUAL                                      1
+LEGUME                                      1
+C3                                          1
+LWP_STRESS_ONSET                            -900       # (J/kg)
+LWP_WILTING_POINT                           -1600      # (J/kg)
+TRANSPIRATION_MAX                           7          # (mm/day)
