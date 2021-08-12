@@ -561,3 +561,121 @@ LWP_STRESS_ONSET                            -800       # (J/kg)
 LWP_WILTING_POINT                           -1600       # (J/kg)
 TRANSPIRATION_MAX                           8           # (mm/day)
 
+####################################################
+# CROP DESCRIPTION - Spring Lentil                 #
+####################################################
+NAME                                        SpringLentil
+FLOWERING_TT                                900         # (degree C day)
+MATURITY_TT                                 1350        # (degree C day)
+MAXIMUM_SOIL_COVERAGE                       100         # (%)
+MAXIMUM_ROOTING_DEPTH                       1.25        # (m)
+AVERAGE_EXPECTED_YIELD                      1
+MAXIMUM_EXPECTED_YIELD                      1
+MINIMUM_EXPECTED_YIELD                      1
+COMMERCIAL_YIELD_MOISTURE                   0
+STANDING_RESIDUE_AT_HARVEST                 40          # (%)
+RESIDUE_REMOVED                             0           # (%)
+CLIPPING_BIOMASS_THRESHOLD_UPPER            999         # (Mg/ha)
+CLIPPING_BIOMASS_THRESHOLD_LOWER            0.5         # (Mg/ha)
+HARVEST_TIMING                              -999        # (%)
+CLIPPING_BIOMASS_DESTINY                    REMOVE
+MIN_TEMPERATURE_FOR_TRANSPIRATION           0           # (degree C)
+THRESHOLD_TEMPERATURE_FOR_TRANSPIRATION     12          # (degree C)
+MIN_TEMPERATURE_FOR_COLD_DAMAGE             -10         # (degree C)
+THRESHOLD_TEMPERATURE_FOR_COLD_DAMAGE       1           # (degree C)
+BASE_TEMPERATURE_FOR_DEVELOPMENT            3           # (degree C)
+OPTIMUM_TEMPERATURE_FOR_DEVELOPEMENT        20          # (degree C)
+MAX_TEMPERATURE_FOR_DEVELOPMENT             35          # (degree C)
+INITIAL_PARTITIONING_TO_SHOOT               0.45        # (100%)
+FINAL_PARTITIONING_TO_SHOOT                 0.95        # (100%)
+RADIATION_USE_EFFICIENCY                    1.0         # (g/MJ solar radiation)
+TRANSPIRATION_USE_EFFICIENCY                4.5         # (g/kg)
+MAXIMUM_HARVEST_INDEX                       0.3
+MINIMUM_HARVEST_INDEX                       0.1
+HARVEST_INDEX                               2.0
+THERMAL_TIME_TO_EMERGENCE                   100         # (degree C day)
+N_MAX_CONCENTRATION                         0.07        # (g/g)
+N_DILUTION_SLOPE                            0.45
+KC                                          1
+ANNUAL                                      1
+LEGUME                                      1
+C3                                          1
+LWP_STRESS_ONSET                            -1000       # (J/kg)
+LWP_WILTING_POINT                           -1800       # (J/kg)
+TRANSPIRATION_MAX                           8           # (mm/day)
+
+####################################################
+# CROP DESCRIPTION - Soybean                       #
+####################################################
+NAME                                        SoybeanMG.5
+FLOWERING_TT                                1250        # (degree C day)
+MATURITY_TT                                 2250        # (degree C day)
+MAXIMUM_SOIL_COVERAGE                       100         # (%)
+MAXIMUM_ROOTING_DEPTH                       1.5         # (m)
+AVERAGE_EXPECTED_YIELD                      1
+MAXIMUM_EXPECTED_YIELD                      1
+MINIMUM_EXPECTED_YIELD                      1
+COMMERCIAL_YIELD_MOISTURE                   0
+STANDING_RESIDUE_AT_HARVEST                 10          # (%)
+RESIDUE_REMOVED                             0           # (%)
+CLIPPING_BIOMASS_THRESHOLD_UPPER            999         # (Mg/ha)
+CLIPPING_BIOMASS_THRESHOLD_LOWER            0.5         # (Mg/ha)
+HARVEST_TIMING                              -999        # (%)
+KILL_AFTER_HARVEST                          1
+CLIPPING_BIOMASS_DESTINY                    RETURN
+MIN_TEMPERATURE_FOR_TRANSPIRATION           3           # (degree C)
+THRESHOLD_TEMPERATURE_FOR_TRANSPIRATION     15          # (degree C)
+MIN_TEMPERATURE_FOR_COLD_DAMAGE             -5          # (degree C)
+THRESHOLD_TEMPERATURE_FOR_COLD_DAMAGE       2           # (degree C)
+BASE_TEMPERATURE_FOR_DEVELOPMENT            5           # (degree C)
+OPTIMUM_TEMPERATURE_FOR_DEVELOPMENT         28          # (degree C)
+MAX_TEMPERATURE_FOR_DEVELOPMENT             43          # (degree C)
+INITIAL_PARTITIONING_TO_SHOOT               0.45        # (100%)
+FINAL_PARTITIONING_TO_SHOOT                 0.95        # (100%)
+RADIATION_USE_EFFICIENCY                    1.3         # (g/MJ solar radiation)
+TRANSPIRATION_USE_EFFICIENCY                4.5         # (g/kg)
+MAXIMUM_HARVEST_INDEX                       0.4
+MINIMUM_HARVEST_INDEX                       0.15
+HARVEST_INDEX                               3
+THERMAL_TIME_TO_EMERGENCE                   70          # (degree C day)
+N_MAX_CONCENTRATION                         0.07        # (g/g)
+N_DILUTION_SLOPE                            0.4
+KC                                          1
+ANNUAL                                      1
+LEGUME                                      1
+C3                                          1
+LWP_STRESS_ONSET                            -1100       # (J/kg)
+LWP_WILTING_POINT                           -1800       # (J/kg)
+TRANSPIRATION_MAX                           8           # (mm/day)
+
+####################################################
+# CROP DESCRIPTION - CommonBean                    #
+####################################################
+NAME                                        CommonBean
+FLOWERING_TT                                500         # (degree C day)
+MATURITY_TT                                 1350        # (degree C day)
+MAXIMUM_SOIL_COVERAGE                       100         # (%)
+MAXIMUM_ROOTING_DEPTH                       0.9         # (m)
+AVERAGE_EXPECTED_YIELD                      1
+MAXIMUM_EXPECTED_YIELD                      1
+MINIMUM_EXPECTED_YIELD                      1
+COMMERCIAL_YIELD_MOISTURE                   0
+STANDING_RESIDUE_AT_HARVEST                 10          # (%)
+RESIDUE_REMOVED                             0           # (%)
+CLIPPING_BIOMASS_THRESHOLD_UPPER            999         # (Mg/ha)
+CLIPPING_BIOMASS_THRESHOLD_LOWER            0.5         # (Mg/ha)
+HARVEST_TIMING                              -999        # (%)
+KILL_AFTER_HARVEST                          1
+CLIPPING_BIOMASS_DESTINY                    RETURN
+MIN_TEMPERATURE_FOR_TRANSPIRATION           5           # (degree C)
+THRESHOLD_TEMPERATURE_FOR_TRANSPIRATION     15          # (degree C)
+MIN_TEMPERATURE_FOR_COLD_DAMAGE             -5          # (degree C)
+THRESHOLD_TEMPERATURE_FOR_COLD_DAMAGE       2           # (degree C)
+BASE_TEMPERATURE_FOR_DEVELOPMENT            5           # (degree C)
+OPTIMUM_TEMPERATURE_FOR_DEVELOPMENT         25          # (degree C)
+MAX_TEMPERATURE_FOR_DEVELOPMENT             40          # (degree C)
+INITIAL_PARTITIONING_TO_SHOOT               0.45        # (100%)
+FINAL_PARTITIONING_TO_SHOOT                 0.95        # (100%)
+RADIATION_USE_EFFICIENCY                    1.2         # (g/MJ solar radiation)
+TRANSPIRATION_USE_EFFICIENCY                4.5         # (g/kg)
+MAXIMUM_HARV
