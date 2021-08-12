@@ -621,14 +621,14 @@ RESIDUE_REMOVED                             0           # (%)
 CLIPPING_BIOMASS_THRESHOLD_UPPER            999         # (Mg/ha)
 CLIPPING_BIOMASS_THRESHOLD_LOWER            0.5         # (Mg/ha)
 HARVEST_TIMING                              -999        # (%)
-KILL_AFTER_HARVEST                          1
+#KILL_AFTER_HARVEST                          1
 CLIPPING_BIOMASS_DESTINY                    RETURN
 MIN_TEMPERATURE_FOR_TRANSPIRATION           3           # (degree C)
 THRESHOLD_TEMPERATURE_FOR_TRANSPIRATION     15          # (degree C)
 MIN_TEMPERATURE_FOR_COLD_DAMAGE             -5          # (degree C)
 THRESHOLD_TEMPERATURE_FOR_COLD_DAMAGE       2           # (degree C)
 BASE_TEMPERATURE_FOR_DEVELOPMENT            5           # (degree C)
-OPTIMUM_TEMPERATURE_FOR_DEVELOPMENT         28          # (degree C)
+OPTIMUM_TEMPERATURE_FOR_DEVELOPEMENT         28          # (degree C)
 MAX_TEMPERATURE_FOR_DEVELOPMENT             43          # (degree C)
 INITIAL_PARTITIONING_TO_SHOOT               0.45        # (100%)
 FINAL_PARTITIONING_TO_SHOOT                 0.95        # (100%)
@@ -665,14 +665,14 @@ RESIDUE_REMOVED                             0           # (%)
 CLIPPING_BIOMASS_THRESHOLD_UPPER            999         # (Mg/ha)
 CLIPPING_BIOMASS_THRESHOLD_LOWER            0.5         # (Mg/ha)
 HARVEST_TIMING                              -999        # (%)
-KILL_AFTER_HARVEST                          1
+#KILL_AFTER_HARVEST                          1
 CLIPPING_BIOMASS_DESTINY                    RETURN
 MIN_TEMPERATURE_FOR_TRANSPIRATION           5           # (degree C)
 THRESHOLD_TEMPERATURE_FOR_TRANSPIRATION     15          # (degree C)
 MIN_TEMPERATURE_FOR_COLD_DAMAGE             -5          # (degree C)
 THRESHOLD_TEMPERATURE_FOR_COLD_DAMAGE       2           # (degree C)
 BASE_TEMPERATURE_FOR_DEVELOPMENT            5           # (degree C)
-OPTIMUM_TEMPERATURE_FOR_DEVELOPMENT         25          # (degree C)
+OPTIMUM_TEMPERATURE_FOR_DEVELOPEMENT         25          # (degree C)
 MAX_TEMPERATURE_FOR_DEVELOPMENT             40          # (degree C)
 INITIAL_PARTITIONING_TO_SHOOT               0.45        # (100%)
 FINAL_PARTITIONING_TO_SHOOT                 0.95        # (100%)
